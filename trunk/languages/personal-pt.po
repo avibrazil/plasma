@@ -1,0 +1,139 @@
+# Portuguese-BRAZIL (pt) translation for WordPress.
+# Copyright (C) 2006 Avi Alkalay, for the Soleil Theme.
+# This file is distributed under the same license as the Soleil Theme for Wordpress.
+# Avi Alkalay <avibrazil gmail com>
+#
+# To compile this file on Linux:
+# 
+# bash$ msgfmt -c -v -o personal-pt.mo personal-pt.po
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress 2.0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-15 17:11-0600\n"
+"PO-Revision-Date: 2006-11-16 18:04-0300\n"
+"Last-Translator: Avi Alkalay <avibrazil gmail com>\n"
+"Language-Team: Avi Alkalay <avibrazil gmail com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+# My blog description
+msgid "Digital Awareness and Flying Spirit"
+msgstr "Consciência Digital e Espírito Voador"
+
+
+# My categories & descriptions
+msgid "Chronicles"
+msgstr "Crônicas"
+
+msgid "Random stories."
+msgstr "Histórias e Estórias."
+
+
+msgid "Community and Society"
+msgstr "Comunidade e Sociedade"
+
+msgid "Politics, community, society, social events, stand up for your rights, etc."
+msgstr "Política, comunidade, sociedade, eventos sociais, luta por direitos, etc."
+
+
+msgid "Essays"
+msgstr "Ensaios"
+
+msgid "Works that I produce, in form of articles or presentations."
+msgstr "Trabalhos que produzo em forma de artigos ou apresentações."
+
+
+msgid "Events"
+msgstr "Eventos"
+
+msgid "Events that I participate, produce or go."
+msgstr "Eventos que eu participo, produzo ou vou."
+
+
+msgid "Metaphysics"
+msgstr "Metafísica"
+
+msgid "Spirituality and the limits of science."
+msgstr "Espiritualidade e limites da ciência."
+
+
+msgid "Music & Podcasts"
+msgstr "Música & Podcasts"
+
+msgid "Things I listen or think about music, and podcasts."
+msgstr "Coisas que ouço ou penso sobre música, e podcasts."
+
+msgid "Travels"
+msgstr "Viagens"
+
+msgid "Places I visited or want to go."
+msgstr "Lugares que visitei ou quero ir."
+
+msgid "Food, drink, wine, recipes, places to eat."
+msgstr "Comida, bebida, vinho, receitas, lugares para comer."
+
+msgid "Blogging experiences, plugins, templates, etc."
+msgstr "Experiências com blogs, plugins, temas, etc."
+
+msgid "Misc"
+msgstr "Miscelânea"
+
+msgid "Posts that fit nowhere."
+msgstr "Coisas que não cabem em lugar nenhum."
+
+msgid "Information Technology for business."
+msgstr "Tecnologia da Informação para negócio."
+
+msgid "Ramblings, essays and tips about Linux and the Open Source universe."
+msgstr "Pensamentos, artigos e dicas sobre Linux e o universo Open Source."
+
+msgid "Podcast: brazilian jazz"
+msgstr "Podcast: jazz Brasil"
+
+msgid "Brazilian jazz, choro, maxixe, fusion, etc."
+msgstr "Música Instrumental Brasileira, choro, maxixe, fusion, etc."
+
+msgid "Podcast: general"
+msgstr "Podcast: geral"
+
+msgid "General wonderful music, all styles, from all parts of the world."
+msgstr "Músicas maravilhosas, todos os estilos, de todas as partes do mundo."
+
+# About the author
+msgid "Avi Alkalay is an Open Standards, Open Source and Linux consultant at IBM Brazil."
+msgstr "Avi Alkalay é consultor de Padrões Abertos, Open Source e Linux na IBM Brasil. "
+
+
+
+
+
+# My links titles
+msgid "Contact"
+msgstr "Contato"
+
+msgid "Blogroll"
+msgstr "Outros Blogs"
+
+msgid "Whats Hot"
+msgstr "Destaque"
+
+msgid "Support Open Computing"
+msgstr "Apóie Padrões Abertos"
+
+msgid "Communities"
+msgstr "Comunidades"
+
+
+# Other stuff on the sidebar
+msgid "Fight Global Warming"
+msgstr "Combata o Aquecimento Global"
+
+msgid "Hi-Fi Music Podcasts"
+msgstr "Podcasts Hi-Fi"
+

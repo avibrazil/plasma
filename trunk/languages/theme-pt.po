@@ -1,0 +1,258 @@
+# Portuguese-BRAZIL (pt) translation for WordPress.
+# Copyright (C) 2006 Avi Alkalay, for the Soleil Theme.
+# This file is distributed under the same license as the Soleil Theme for Wordpress.
+# Avi Alkalay <avibrazil gmail com>
+#
+# To compile this file on Linux:
+# 
+# bash$ msgfmt -c -v -o theme-pt.mo theme-pt.po
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress 2.0.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-11-15 17:11-0600\n"
+"PO-Revision-Date: 2007-01-18 10:40-0300\n"
+"Last-Translator: Avi Alkalay <avibrazil gmail com>\n"
+"Language-Team: Avi Alkalay <avibrazil gmail com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+######
+## 
+## archive.php
+## 
+
+msgid "Page Not Found"
+msgstr "Página Não Encontrada"
+
+msgid "Search results for &raquo; &#8220;%s&#8221;"
+msgstr "Resultados de busca por &raquo; &#8220;%s&#8221;"
+
+msgid "No posts matched your criteria."
+msgstr "Nenhum artigo encontrado."
+
+msgid "The page you are looking for cannot be found on this site. You can use the search box to the right, or go to the "
+msgstr "A página que você procura não pode ser encontrada neste site. Você pode usar a ferramenta de busca a direita, ou vá para a "
+
+msgid "home page"
+msgstr "página principal"
+
+msgid "Search Results"
+msgstr "Resultados da Busca"
+
+msgid "Author Archive"
+msgstr "Arquivos do Autor"
+
+msgid "Blog Archives"
+msgstr "Arquivos do Blog"
+
+msgid "%s category"
+msgstr "Categoria %s"
+
+msgid "&laquo; Previous Entries"
+msgstr "&laquo; Artigos Anteriores"
+
+msgid "Next Entries &raquo;"
+msgstr "Próximos Artigos &raquo;"
+
+msgid "Sorry, but you are looking for something that isn't here."
+msgstr "Desculpe, mas você está procurando por algo que não está aqui."
+
+msgid "Subscribe to this category"
+msgstr "Assine esta categoria"
+
+
+
+######
+## 
+## comments.php
+## 
+
+msgid "This post is password protected. Enter the password to view comments."
+msgstr "Este artigo é protegido por senha. Entre sua senha para ver os comentários."
+
+msgid "Leave a Reply"
+msgstr "Deixe um Comentário"
+
+msgid "You must be"
+msgstr "Você deve estar"
+
+msgid "logged in"
+msgstr "logado"
+
+msgid "to post a comment."
+msgstr "para postar um comentário."
+
+msgid "Logged in as"
+msgstr "Logado como"
+
+msgid "Log out of this account"
+msgstr "Deslogar desta conta"
+
+msgid "Logout &raquo;"
+msgstr "Deslogar &raquo;"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "(required)"
+msgstr "(necessário)"
+
+msgid "E-mail (will not be published)"
+msgstr "E-mail (não será publicado)"
+
+msgid "Website"
+msgstr "Seu site"
+
+msgid "You can use these tags:"
+msgstr "Você pode usar isto:"
+
+msgid "Submit Comment"
+msgstr "Enviar Comentário"
+
+msgid "Enter your password to view comments."
+msgstr "Digite sua senha par ver os comentários."
+
+msgid "No Responses"
+msgstr "Nenhuma Resposta"
+
+msgid "One Response"
+msgstr "Uma Resposta"
+
+msgid "Responses"
+msgstr "Respostas"
+
+msgid "to"
+msgstr "para"
+
+msgid "Comments:"
+msgstr "Comentários:"
+
+msgid "References on the Web (trackbacks and pingbacks):"
+msgstr "Referências na web (trackbacks e pingbacks):"
+
+msgid "Trackback from"
+msgstr "Referência (trackback) de"
+
+msgid "Pingback from"
+msgstr "Referência (pingback) de"
+
+msgid "says"
+msgstr "diz"
+
+msgid "comment permalink"
+msgstr "permalink do comentário"
+
+msgid "Your comment is awaiting moderation."
+msgstr "Seu comentário foi enviado para revisão"
+
+msgid "There are no comments yet. Be the first to post."
+msgstr "Não há comentários ainda. Seja o primeiro."
+
+msgid "Comments are closed."
+msgstr "Comentários estão fechados."
+
+######
+## 
+## functions.php
+## 
+
+
+msgid "Categories"
+msgstr "Categorias"
+
+msgid "Search"
+msgstr "Busca"
+
+msgid "Archives"
+msgstr "Arquivos"
+
+msgid "Select Month"
+msgstr "Selecione o Mês"
+
+msgid "Administration"
+msgstr "Administra&ccedil;&atilde;o"
+
+msgid "Subscription"
+msgstr "Assine este Blog"
+
+msgid "Uncategorized"
+msgstr "Sem categoria"
+
+
+
+######
+## 
+## post.php
+## 
+
+msgid "Comments to: %s"
+msgstr "Comentários para: %s"
+
+msgid "comment"
+msgstr "comentário"
+
+msgid "comments"
+msgstr "comentários"
+
+msgid "Permanent Link: %s"
+msgstr "Link Permanente: %s"
+
+msgid "Read and write comments to this post"
+msgstr "Leia e escreva comentários para este artigo"
+
+msgid "Trackback URL: use this to comment on your own blog"
+msgstr "URL de Referência (trackback): use isto para comentar em seu própio blog"
+
+msgid "About"
+msgstr "Sobre"
+
+msgid "%s: read full post"
+msgstr "%s: leia todo o artigo"
+
+msgid "Read more . . ."
+msgstr "Leia mais . . ."
+
+
+######
+## 
+## search.php
+## 
+
+msgid "Not Found"
+msgstr "Não Encontrado"
+
+msgid "Sorry, no posts were found containing &#8220;%s&#8221;"
+msgstr "Nenhum artigo foi encontrado contendo &#8220;%s&#8221;"
+
+
+######
+## 
+## Others
+## 
+
+msgid "Related Posts"
+msgstr "Artigos Relacionados"
+
+msgid "Recent Posts"
+msgstr "Artigos Recentes"
+
+msgid "View all posts in"
+msgstr "Veja todos os artigos da categoria"
+
+msgid "Subscribe feed for"
+msgstr "Assine feed para"
+
+msgid "Subscribe comments to this post"
+msgstr "Assine comentários para este artigo"
+
+msgid "Subscribe comments to this page"
+msgstr "Assine comentários para esta página"
+
+msgid "View all posts filed under %s"
+msgstr "Veja todos os artigos em %s"
