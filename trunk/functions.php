@@ -108,15 +108,19 @@ abstract class Widget {
 	/** Wether to register with the WP Widget API */
 	public $register=true;
 
-	function __construct($name,$id,$register=true,$class="") {
+	/** Callback function name. Can't be a method because WP's register_sidebar_widget() needs a real function name */
+	public $callbackName;
+
+	function __construct($name,$id, $callbackName, $class="", $register=true) {
 		$this->name=$name;
 		$this->id=$id;
 		$this->class=$class;
 		$this->register=$register;
+		$this->callbackName=$callbackName;
 
 		if ($register) {
 			//print_r($this);
-			register_sidebar_widget($name, 'render', $class);
+			register_sidebar_widget($name, $this->callbackName, $class);
 		}
 	}
 
