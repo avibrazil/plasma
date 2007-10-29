@@ -6,6 +6,19 @@ Template Name: Post module, to render posts everywhere
 $Id$
 */
 
+
+function WidgetSinglePost_render($args) {
+	if (!empty($args)) {
+		// Into a Sidebar/Widget context
+		extract($args);
+		echo $before_widget;
+	} else echo("<div class=\"" . $this->class . "\" id=\"post-" . the_ID() . "\">\n");
+	WidgetSinglePosT::renderPost();
+	if ($after_widget) echo $after_widget . "\n";
+	else echo("</div> <!-- class=post -->\n");
+}
+
+
 class WidgetSinglePost extends Widget {
 	static function renderPost() {?>
 		<div class="post-header">
@@ -51,36 +64,61 @@ class WidgetSinglePost extends Widget {
 
 
 	static public function render($args) {
-		if (!empty($args)) {
-			// Into a Sidebar/Widget context
-			extract($args);
-			echo $before_widget;
-		} else echo("<div class=\"" . $this->class . "\" id=\"post-" . the_ID() . "\">\n");
-		self::renderPost();
-		if ($after_widget) echo $after_widget . "\n";
-		else echo("</div> <!-- class=post -->\n");
+		WidgetSinglePost_render($args);
 	}
+
+	function __construct($register=true) {
+		__construct("Single Post","post",'WidgetSinglePost_render',"",$register);
+	}
+}
+
+
+
+function WidgetMultiPost_render($args) {
+	extract($args);
+
+	echo $before_widget . "\n";
+
+	$options=array();
+	$options['after_widget']="</div> <!-- class=post -->\n";
+
+	while (have_posts()) {
+		the_post();
+		$options['before_widget']="<div class=\"post\" id=\"post-" . the_ID() . "\">\n";
+		WidgetSinglePost::render($options);
+	}
+	echo $after_widget . "\n";
 }
 
 
 class WidgetMultiPost extends Widget {
 	function __construct($register=true) {
-		parent::__construct("Flow of Posts","posts",$register,'WidgetMultiPost');
+		parent::__construct("Flow of Posts","posts",'WidgetMultiPost_render',"", $register);
 	}
 	static public function render($args) {
-		extract($args);
-
-		echo $before_widget . "\n";
-
-		$options=array();
-		$options['after_widget']="</div> <!-- class=post -->\n";
-
-		while (have_posts()) {
-			the_post();
-			$options['before_widget']="<div class=\"post\" id=\"post-" . the_ID() . "\">\n";
-			WidgetSinglePost::render($options);
-		}
-		echo $after_widget . "\n";
+		WidgetMultiPost_render($args);
 	}
 }
+
+
+
+function PanelAsWidget_render($args) {
+	extract($args);
+	echo $before_widget . "\n";
+	
+
+	echo $after_widget . "\n";
+}
+
+
+class PanelAsWidget extends Widget {
+	function __construct($isHorizontal=false,$register=true) {
+		parent::__construct("Panel as Widget","panel","PanelAsWidget_render","",$register);
+	}
+	static public function render($args) {
+		PanelAsWidget_render($args);
+	}
+}
+
+
 ?>
