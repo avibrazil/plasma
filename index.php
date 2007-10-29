@@ -3,13 +3,12 @@
 
 // $Id$
 
+$context=Context::getContext();
 
 get_header();
 
 
-$context=Context::getContext();
-
-($context->panels['header-1'])->render();
+$context->panels['header-1']->render();
 $context->panels['header-2']->render();
 
 $context->panels['main-multipost']->render();

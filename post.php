@@ -6,11 +6,10 @@ Template Name: Post module, to render posts everywhere
 $Id$
 */
 
-
-function widgetPostPage($args=array()) {?>
-	<div class="post" id="post-<?php the_ID(); ?>">
+class WidgetSinglePost extends Widget {
+	static function renderPost() {?>
 		<div class="post-header">
-			<div class="post-categories"><?php the_soleil_category(' || '); ?></div>
+			<div class="post-categories"><?php the_category(' || '); ?></div>
 
 			<div class="post-baloon">
 				<span class="number"><a href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>"><?php comments_number('0','1','%'); ?></a></span><br/><a href="<?php comments_link(); ?>" title="<?php printf(__('Comments to: %s','theme'), the_title('','',0)); ?>"><?php if ($post->comment_count == 1) { _e('comment','theme'); } else { _e('comments','theme');} ?></a>
@@ -47,6 +46,41 @@ function widgetPostPage($args=array()) {?>
 			<?php trackback_rdf(); ?>
 			-->
 		</div> <!-- class=post-content -->
-		<div class="post-info"><?php wp_link_pages(); ?></div>
-	</div> <!-- class=post --><?php
-}?>
+		<div class="post-info"><?php wp_link_pages(); ?></div><?php
+	}
+
+
+	static public function render($args) {
+		if (!empty($args)) {
+			// Into a Sidebar/Widget context
+			extract($args);
+			echo $before_widget;
+		} else echo("<div class=\"" . $this->class . "\" id=\"post-" . the_ID() . "\">\n");
+		self::renderPost();
+		if ($after_widget) echo $after_widget . "\n";
+		else echo("</div> <!-- class=post -->\n");
+	}
+}
+
+
+class WidgetMultiPost extends Widget {
+	function __construct($register=true) {
+		parent::__construct("Flow of Posts","posts",$register,'WidgetMultiPost');
+	}
+	static public function render($args) {
+		extract($args);
+
+		echo $before_widget . "\n";
+
+		$options=array();
+		$options['after_widget']="</div> <!-- class=post -->\n";
+
+		while (have_posts()) {
+			the_post();
+			$options['before_widget']="<div class=\"post\" id=\"post-" . the_ID() . "\">\n";
+			WidgetSinglePost::render($options);
+		}
+		echo $after_widget . "\n";
+	}
+}
+?>

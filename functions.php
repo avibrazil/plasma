@@ -19,6 +19,9 @@ load_plugin_textdomain('theme','wp-content/themes/soleilpro/languages');
 load_plugin_textdomain('personal','wp-content/themes/soleilpro/languages');
 
 
+
+
+
 class Context {
 	private static $instance;
 	public $panels=array();
@@ -32,11 +35,21 @@ class Context {
 }
 
 
+
+
+
+
+
+
+
+
 class Panel {
 	public $isHorizontal=true;
 	public $wp_sidebar;
 
 	function __construct($name,$id=0,$isHorizontal=false) {
+		global $wp_registered_sidebars;
+
 		$this->isHorizontal=$isHorizontal;
 
 		$params['name']=$name;
@@ -52,7 +65,7 @@ class Panel {
 			$params['after_widget']='</div>';
 		}
 
-		$this->wp_sidebar=register_sidebar($params);
+		$this->wp_sidebar=$wp_registered_sidebars[register_sidebar($params)];
 
 		$con=Context::getContext();
 		$con->panels[$this->getId()]=$this;
@@ -61,13 +74,13 @@ class Panel {
 
 	function render() {
 		if ($this->isHorizontal) {
-			echo "<table id=\"$this->wp_sidebar['id']\"><tbody><tr>";
-			dynamic_sidebar($this->wp_sidebar['id']);
-			echo('</tr></tbody></table>');
+			echo "<table class=\"horizontal-panel\" id=\"" . $this->getId() . "\"><tbody><tr>\n";
+			dynamic_sidebar($this->getName());
+			echo("</tr></tbody></table>\n\n");
 		} else {
-			echo "<div id=\"$this->wp_sidebar['id']\">";
-			dynamic_sidebar($this->wp_sidebar['id']);
-			echo('</div>');
+			echo "<div class=\"vertical-panel\" id=\"" . $this->getId() . "\">\n";
+			dynamic_sidebar($this->getName());
+			echo("</div>\n\n");
 		}
 	}
 
@@ -75,9 +88,46 @@ class Panel {
 		return $this->wp_sidebar['id'];
 	}
 
+	function getName() {
+		return $this->wp_sidebar['name'];
+	}
 }
 
+
+
+abstract class Widget {
+	/** Widget name as it should appear in the widget admin interface. */
+	public $name;
+
+	/** Widget id as it should appear in the HTML tag. */
+	public $id;
+
+	/** Widget class for CSS. */
+	public $class;
+
+	/** Wether to register with the WP Widget API */
+	public $register=true;
+
+	function __construct($name,$id,$register=true,$class="") {
+		$this->name=$name;
+		$this->id=$id;
+		$this->class=$class;
+		$this->register=$register;
+
+		if ($register) {
+			//print_r($this);
+			register_sidebar_widget($name, 'render', $class);
+		}
+	}
+
+	static public function render($args=array()) {}
+}
+
+include(TEMPLATEPATH . '/post.php');
+
+
 // Initialize Widgets.
+new WidgetMultiPost();
 
 
 // Initialize Sidebars.

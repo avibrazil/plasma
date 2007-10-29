@@ -9,4 +9,6 @@ Author URI: http://avi.alkalay.net/
 $Id$
 */
 
-
+.horizontal-panel {
+	width: 100%
+}
