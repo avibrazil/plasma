@@ -8,12 +8,14 @@ $Id$
 
 
 function WidgetSinglePost_render($args) {
-	if (!empty($args)) {
+	if (empty($args)) {
+		echo("<div class=\"post\" id=\"post-" . get_the_ID() . "\">\n");
+	} else {
 		// Into a Sidebar/Widget context
 		extract($args);
-		echo $before_widget;
-	} else echo("<div class=\"" . $this->class . "\" id=\"post-" . the_ID() . "\">\n");
-	WidgetSinglePosT::renderPost();
+		echo $before_widget;		
+	}
+	WidgetSinglePost::renderPost();
 	if ($after_widget) echo $after_widget . "\n";
 	else echo("</div> <!-- class=post -->\n");
 }
@@ -67,8 +69,8 @@ class WidgetSinglePost extends Widget {
 		WidgetSinglePost_render($args);
 	}
 
-	function __construct($register=true) {
-		__construct("Single Post","post",'WidgetSinglePost_render',"",$register);
+	function __construct($name,$id,$class="",$register=true) {
+		parent::__construct($name,$id,'WidgetSinglePost_render',$class,$register);
 	}
 }
 
@@ -91,9 +93,12 @@ function WidgetMultiPost_render($args) {
 }
 
 
+
+
+
 class WidgetMultiPost extends Widget {
-	function __construct($register=true) {
-		parent::__construct("Flow of Posts","posts",'WidgetMultiPost_render',"", $register);
+	function __construct($name,$id,$class="",$register=true) {
+		parent::__construct($name,$id,'WidgetMultiPost_render',$class,$register);
 	}
 	static public function render($args) {
 		WidgetMultiPost_render($args);
@@ -102,19 +107,38 @@ class WidgetMultiPost extends Widget {
 
 
 
+
+
+
 function PanelAsWidget_render($args) {
 	extract($args);
 	echo $before_widget . "\n";
-	
+	$con=Context::getContext();
 
+//print_r($con);
+
+	$con->panels[$id]->render();
 	echo $after_widget . "\n";
 }
 
 
+
+
+
 class PanelAsWidget extends Widget {
-	function __construct($isHorizontal=false,$register=true) {
-		parent::__construct("Panel as Widget","panel","PanelAsWidget_render","",$register);
+	public $panel;
+
+	function __construct($name,$id=0,$class="",$register=true) {
+		if (get_class($name) == "Panel") {
+			$this->panel=$name;
+			parent::__construct($this->panel->wp_sidebar['name'],$this->panel->wp_sidebar['id'],"PanelAsWidget_render","",true);
+		} else {
+			parent::__construct($name,$id,"PanelAsWidget_render",$class,$register);
+			$this->panel=new Panel($name,$id,$isHorizontal);
+		}
 	}
+
+
 	static public function render($args) {
 		PanelAsWidget_render($args);
 	}

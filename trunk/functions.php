@@ -25,6 +25,7 @@ load_plugin_textdomain('personal','wp-content/themes/soleilpro/languages');
 class Context {
 	private static $instance;
 	public $panels=array();
+	public $widgets=array();
 
 	private function __construct() { }
 
@@ -42,10 +43,19 @@ class Context {
 
 
 
-
+/**
+ * Panel is a container for Widgets.
+ * It can be vertical - a.k.a. sidebar - or horizontal.
+ */
 class Panel {
+	/** Weather this is a vertical (sidebar) or horizontal panel */
 	public $isHorizontal=true;
-	public $wp_sidebar;
+
+	/** Reference to the real WP Sidebar object */
+	public $wp_sidebar; /* [name], [id], [before_widget], [after_widget], [before_title], [after_title] */
+
+	/** A global array of all panels instantiated */
+	static public $panels=array();
 
 	function __construct($name,$id=0,$isHorizontal=false) {
 		global $wp_registered_sidebars;
@@ -66,6 +76,7 @@ class Panel {
 		}
 
 		$this->wp_sidebar=$wp_registered_sidebars[register_sidebar($params)];
+//		$this->panels[$this->getId()]=$this;
 
 		$con=Context::getContext();
 		$con->panels[$this->getId()]=$this;
@@ -95,12 +106,13 @@ class Panel {
 
 
 
+/**
+ * A Widget is everything that can be placed into a Panel.
+ * Can be text widgets, RSS widgets, etc.
+ */
 abstract class Widget {
-	/** Widget name as it should appear in the widget admin interface. */
-	public $name;
-
-	/** Widget id as it should appear in the HTML tag. */
-	public $id;
+	/** Reference to the real WP Widget object */
+	public $wp_widget; /* [name], [id], [callback], [params] */
 
 	/** Widget class for CSS. */
 	public $class;
@@ -111,17 +123,20 @@ abstract class Widget {
 	/** Callback function name. Can't be a method because WP's register_sidebar_widget() needs a real function name */
 	public $callbackName;
 
-	function __construct($name,$id, $callbackName, $class="", $register=true) {
-		$this->name=$name;
-		$this->id=$id;
-		$this->class=$class;
-		$this->register=$register;
-		$this->callbackName=$callbackName;
+	static public $widgets=array();
 
+	function __construct($name,$id, $callbackName, $class="", $register=true) {
+		global $wp_registered_widgets;
 		if ($register) {
 			//print_r($this);
-			register_sidebar_widget($name, $this->callbackName, $class);
+			wp_register_sidebar_widget($id,$name,$callbackName,$class,0);
 		}
+
+		$this->wp_widget=$wp_registered_widgets[$id];
+//		$this->widgets[$id]=$this;
+
+		$con=Context::getContext();
+		$con->widgets[$id]=$this;
 	}
 
 	static public function render($args=array()) {}
@@ -131,13 +146,11 @@ include(TEMPLATEPATH . '/post.php');
 
 
 // Initialize Widgets.
-new WidgetMultiPost();
+new WidgetMultiPost("Flow of Posts","multipost");
+new PanelAsWidget(new Panel("Sidebar Avi 1","sidebar-1"));
 
 
 // Initialize Sidebars.
-
-new Panel("Sidebar 1","sidebar-1");
-new Panel("Sidebar 2","sidebar-2");
 
 new Panel("Header 1","header-1",true);
 new Panel("Header 2","header-2",true);
