@@ -125,11 +125,14 @@ abstract class Widget {
 
 	static public $widgets=array();
 
-	function __construct($name,$id, $callbackName, $class="", $register=true) {
+	function __construct($name,$id, $callbackName, $class="", $params=array(), $register=true) {
 		global $wp_registered_widgets;
+
+		$params['classname']=$class;
+
 		if ($register) {
 			//print_r($this);
-			wp_register_sidebar_widget($id,$name,$callbackName,$class,0);
+			wp_register_sidebar_widget($id,$name,$callbackName,$params);
 		}
 
 		$this->wp_widget=$wp_registered_widgets[$id];
@@ -142,18 +145,113 @@ abstract class Widget {
 	static public function render($args=array()) {}
 }
 
+
+
+
+
+
+
+
+
+
+
+function PanelAsWidget_render($args,$num=1) {
+	global $wp_registered_widgets;
+	extract($args);
+	$options=get_option('widget_panel');
+
+	echo($before_widget . "\n");
+
+	if (empty($num)) $num=0;
+
+	dynamic_sidebar($options[$num]['panel_name']);
+	
+ echo("<pre>\n");
+// print_r($options);
+// echo("\n");
+// print_r($options[$num]['panel_name']);
+// echo("\n");
+print_r($args);
+//echo("\nwp_registered_widgets follows:\n");
+//print_r($wp_registered_widgets);
+
+//print_r(Context::getContext());
+//print_r(PanelAsWidget::$created);
+
+echo("</pre>\n");
+
+	echo($after_widget . "\n");
+}
+
+
+
+
+
+class PanelAsWidget extends Widget {
+	/** Encapsulated panel of class Panel */
+	public $panel;
+
+	static private $index=1;
+	static public $created=array();
+
+	function __construct($name,$id=0,$register=true) {
+		if (get_class($name) == "Panel") {
+			$this->panel=$name;
+			$params['panel_name']=$this->panel->wp_sidebar['name'];
+
+			parent::__construct($this->panel->wp_sidebar['name'],
+				$this->panel->wp_sidebar['id'],
+				"PanelAsWidget_render",
+				'widget_panel',
+				$params,
+				true);
+		} else {
+			$params['panel_name']=$name;
+			parent::__construct($name,
+				$id,
+				"PanelAsWidget_render",
+				'widget_panel',
+				$params,$register);
+			$this->panel=new Panel($name,$id,$isHorizontal);
+		}
+		PanelAsWidget::$created[PanelAsWidget::$index]=$this;
+		PanelAsWidget::$index++;
+
+		$options=get_option('widget_panel');
+		$options[PanelAsWidget::$index]['panel_name']=$this->panel->getName();
+		update_option('widget_panel',$options);
+	}
+
+
+	static public function render($args,$num=0) {
+		PanelAsWidget_render($args,$num);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
 include(TEMPLATEPATH . '/post.php');
 
 
 // Initialize Widgets.
 new WidgetMultiPost("Flow of Posts","multipost");
 new PanelAsWidget(new Panel("Sidebar Avi 1","sidebar-1"));
+new PanelAsWidget(new Panel("Right","other-sidebar"));
 
 
 // Initialize Sidebars.
 
-new Panel("Header 1","header-1",true);
-new Panel("Header 2","header-2",true);
+//new Panel("Header 1","header-1",true);
+//new Panel("Header 2","header-2",true);
 
 new Panel("Footer 1","footer-1",true);
 new Panel("Footer 2","footer-2",true);
