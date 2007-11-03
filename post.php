@@ -7,22 +7,17 @@ $Id$
 */
 
 
-function WidgetSinglePost_render($args) {
-	if (empty($args)) {
-		echo("<div class=\"post\" id=\"post-" . get_the_ID() . "\">\n");
-	} else {
-		// Into a Sidebar/Widget context
-		extract($args);
-		echo $before_widget;		
-	}
-	WidgetSinglePost::renderPost();
-	if ($after_widget) echo $after_widget . "\n";
-	else echo("</div> <!-- class=post -->\n");
+function WidgetSinglePost_render($args,$num=1) {
+	extract($args);
+
+	echo($before_widget . "\n");
+	WidgetSinglePost::renderPost($args,$num);
+	echo($after_widget . "\n");
 }
 
 
 class WidgetSinglePost extends Widget {
-	static function renderPost() {?>
+	static function renderPost($args,$num=1) {?>
 		<div class="post-header">
 			<div class="post-categories"><?php the_category(' || '); ?></div>
 
@@ -49,13 +44,11 @@ class WidgetSinglePost extends Widget {
 			</div>
 		</div> <!-- class=post-header -->
 
-		<div class="post-content">
-			<?php
+		<div class="post-content"><?php
 			if (is_search()) {
-				the_excerpt();
-				?><p class="readmore"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>"><?php _e("Read more . . .",'theme'); ?></a></p>
-			<?php } else the_content();
-			?>
+				the_excerpt();?>
+				<p class="readmore"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>"><?php _e("Read more . . .",'theme'); ?></a></p><?php
+			} else the_content();?>
 		
 			<!--
 			<?php trackback_rdf(); ?>
@@ -65,28 +58,29 @@ class WidgetSinglePost extends Widget {
 	}
 
 
-	static public function render($args) {
-		WidgetSinglePost_render($args);
+	static public function render($args,$num=1) {
+		WidgetSinglePost_render($args,$num);
 	}
 
-	function __construct($name,$id,$class="",$register=true) {
-		parent::__construct($name,$id,'WidgetSinglePost_render',$class,$register);
+	function __construct($name,$id,$register=true) {
+		parent::__construct($name,$id,'WidgetSinglePost_render','widget_post',$register);
 	}
 }
 
 
 
-function WidgetMultiPost_render($args) {
+function WidgetMultiPost_render($args,$num=1) {
 	extract($args);
 
 	echo $before_widget . "\n";
 
+	/* Lets create a fake sidebar-like environment for the WidgetSinglePost */
 	$options=array();
 	$options['after_widget']="</div> <!-- class=post -->\n";
 
 	while (have_posts()) {
 		the_post();
-		$options['before_widget']="<div class=\"post\" id=\"post-" . the_ID() . "\">\n";
+		$options['before_widget']="<div class=\"post\" id=\"post-" . get_the_ID() . "\">\n";
 		WidgetSinglePost::render($options);
 	}
 	echo $after_widget . "\n";
@@ -97,52 +91,14 @@ function WidgetMultiPost_render($args) {
 
 
 class WidgetMultiPost extends Widget {
-	function __construct($name,$id,$class="",$register=true) {
-		parent::__construct($name,$id,'WidgetMultiPost_render',$class,$register);
+	function __construct($name,$id,$register=true) {
+		parent::__construct($name,$id,'WidgetMultiPost_render','widget_multipost',array(0),$register);
 	}
-	static public function render($args) {
-		WidgetMultiPost_render($args);
-	}
-}
-
-
-
-
-
-
-function PanelAsWidget_render($args) {
-	extract($args);
-	echo $before_widget . "\n";
-	$con=Context::getContext();
-
-//print_r($con);
-
-	$con->panels[$id]->render();
-	echo $after_widget . "\n";
-}
-
-
-
-
-
-class PanelAsWidget extends Widget {
-	public $panel;
-
-	function __construct($name,$id=0,$class="",$register=true) {
-		if (get_class($name) == "Panel") {
-			$this->panel=$name;
-			parent::__construct($this->panel->wp_sidebar['name'],$this->panel->wp_sidebar['id'],"PanelAsWidget_render","",true);
-		} else {
-			parent::__construct($name,$id,"PanelAsWidget_render",$class,$register);
-			$this->panel=new Panel($name,$id,$isHorizontal);
-		}
-	}
-
-
-	static public function render($args) {
-		PanelAsWidget_render($args);
+	static public function render($args,$num=1) {
+		WidgetMultiPost_render($args,$num=1);
 	}
 }
+
 
 
 ?>
