@@ -29,6 +29,7 @@ body {
 
 .header .categories a:hover {
 	text-decoration: underline;
+	border-radius: .2em .2em;
 }
 
 .header .heading-block {
