@@ -7,6 +7,8 @@ $context=Context::getContext();
 
 get_header();
 
+//print_r($wp_registered_widgets);
+
 //$context->panels['header-1']->render();
 //$context->panels['header-2']->render();
 
