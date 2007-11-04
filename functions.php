@@ -155,30 +155,14 @@ abstract class Widget {
 
 
 
-function PanelAsWidget_render($args,$num=1) {
-	global $wp_registered_widgets;
+function PanelAsWidget_render($args,$sidebarName) {
+	//global $wp_registered_widgets;
 	extract($args);
-	$options=get_option('widget_panel');
+	//$options=get_option('widget_panel');
 
 	echo($before_widget . "\n");
 
-	if (empty($num)) $num=0;
-
-	dynamic_sidebar($options[$num]['panel_name']);
-	
- echo("<pre>\n");
-// print_r($options);
-// echo("\n");
-// print_r($options[$num]['panel_name']);
-// echo("\n");
-print_r($args);
-//echo("\nwp_registered_widgets follows:\n");
-//print_r($wp_registered_widgets);
-
-//print_r(Context::getContext());
-//print_r(PanelAsWidget::$created);
-
-echo("</pre>\n");
+	dynamic_sidebar($sidebarName);
 
 	echo($after_widget . "\n");
 }
@@ -197,7 +181,7 @@ class PanelAsWidget extends Widget {
 	function __construct($name,$id=0,$register=true) {
 		if (get_class($name) == "Panel") {
 			$this->panel=$name;
-			$params['panel_name']=$this->panel->wp_sidebar['name'];
+			$params['params']['panel_name']=$this->panel->wp_sidebar['name'];
 
 			parent::__construct($this->panel->wp_sidebar['name'],
 				$this->panel->wp_sidebar['id'],
@@ -206,7 +190,7 @@ class PanelAsWidget extends Widget {
 				$params,
 				true);
 		} else {
-			$params['panel_name']=$name;
+			$params['params']['panel_name']=$name;
 			parent::__construct($name,
 				$id,
 				"PanelAsWidget_render",
