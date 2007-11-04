@@ -9,6 +9,50 @@ Author URI: http://avi.alkalay.net/
 $Id$
 */
 
-.horizontal-panel {
-	width: 100%
+
+body {
+	font: 9pt Verdana;
 }
+
+
+.post .header {
+}
+
+.header .categories a {
+	clear: both;
+	font-family: Verdana;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-decoration: none;
+	color: brown;
+}
+
+.header .categories a:hover {
+	text-decoration: underline;
+}
+
+.header .heading-block {
+	clear: both;
+	width: 100%;
+}
+
+.header .heading-block .baloon {
+	font-size: 0.8em;
+	text-align: center;
+	vertical-align: top;
+	width: 80px;
+	height: 61px;
+	float: left;
+	background: url(img/baloon.gif) no-repeat;
+}
+
+.header .heading-block .baloon a {
+	color: brown;
+	text-decoration: none;
+}
+
+.header .heading-block .baloon .number {
+	font-size: 2.7em;
+	font-weight: bold;
+}
+
