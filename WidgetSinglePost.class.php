@@ -31,7 +31,7 @@ class WidgetSinglePost extends Widget {
 				<div class="date">
 					<img alt="clock" src="<?php bloginfo('template_directory'); ?>/img/clock.png" style="vertical-align: middle"/> <?php the_time('r'); ?> (<?php the_modified_time('r'); ?>)
 				</div>
-				<div class="author"><?php printf(__('Por %s','theme'),__(get_the_author(),'personal')); ?></div>
+				<div class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></div>
 				<div class="admin">
 					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>"><img alt="permalink" src="<?php bloginfo('template_directory'); ?>/img/permalink.png"/></a>
 					<a href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>"><img alt="trackback" src="<?php bloginfo('template_directory'); ?>/img/trackback.png"/></a>
