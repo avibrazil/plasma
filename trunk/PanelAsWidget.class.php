@@ -32,7 +32,7 @@ class PanelAsWidget extends Widget {
 	function __construct($name,$id=0,$register=true) {
 		if (get_class($name) == "Panel") {
 			$this->panel=$name;
-			$params['params']['panel_name']=$this->panel->wp_sidebar['name'];
+			$params['panel_name']=$this->panel->wp_sidebar['name'];
 
 			parent::__construct($this->panel->wp_sidebar['name'],
 				$this->panel->wp_sidebar['id'],
@@ -41,12 +41,13 @@ class PanelAsWidget extends Widget {
 				$params,
 				true);
 		} else {
-			$params['params']['panel_name']=$name;
+			$params['panel_name']=$name;
 			parent::__construct($name,
 				$id,
 				"PanelAsWidget_render",
 				'widget_panel',
-				$params,$register);
+				$params,
+				$register);
 			$this->panel=new Panel($name,$id,$isHorizontal);
 		}
 		PanelAsWidget::$created[PanelAsWidget::$index]=$this;
@@ -58,8 +59,8 @@ class PanelAsWidget extends Widget {
 	}
 
 
-	static public function render($args,$num=0) {
-		PanelAsWidget_render($args,$num);
+	static public function render($args,$sidebarName) {
+		PanelAsWidget_render($args,$sidebarName);
 	}
 }
 

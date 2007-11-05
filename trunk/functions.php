@@ -133,11 +133,12 @@ abstract class Widget {
 	function __construct($name,$id, $callbackName, $class="", $params=array(), $register=true) {
 		global $wp_registered_widgets;
 
-		$params['classname']=$class;
+		$options['classname']=$class;
+		$options['params']=$params;
 
 		if ($register) {
 			//print_r($this);
-			wp_register_sidebar_widget($id,$name,$callbackName,$params);
+			wp_register_sidebar_widget($id,$name,$callbackName,$options);
 		}
 
 		$this->wp_widget=$wp_registered_widgets[$id];

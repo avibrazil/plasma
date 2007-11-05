@@ -29,12 +29,15 @@ body {
 
 .header .categories a:hover {
 	text-decoration: underline;
-	border-radius: .2em .2em;
+	background-color: yellow;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomleft: 10px;
 }
 
 .header .heading-block {
 	clear: both;
 	width: 100%;
+	margin-top: 5px;
 }
 
 .header .heading-block .baloon {
@@ -42,9 +45,14 @@ body {
 	text-align: center;
 	vertical-align: top;
 	width: 80px;
-	height: 61px;
+	height: 100%;
 	float: left;
-	background: url(img/baloon.gif) no-repeat;
+	background-color: #ffcc66;
+	padding-bottom: 5px;
+	border: 1px solid #663300;
+	margin-right: 5px;
+	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 15px;
 }
 
 .header .heading-block .baloon a {
@@ -57,3 +65,9 @@ body {
 	font-weight: bold;
 }
 
+.header .heading-block .title a, .header .heading-block .title a:hover {
+	color: orange;
+	font-size: 2em;
+	font-weight: bold;
+	text-decoration: none;
+}

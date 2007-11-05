@@ -1,0 +1,68 @@
+<?php
+/*
+
+$Id$
+*/
+
+function BestOf_render($args,$id) {
+	extract($args);
+	$tabs=BestOf::$created[$id]->$tabs;
+
+	echo($before_widget . "\n");
+
+	echo("<ul class=\"tabs\">\n");
+	foreach ($tabs as $tab) {
+		echo("<li>$tab['title']</li>\n");
+	}
+	echo("</ul>\n");
+
+	echo("<div class=\"pop-in\">\n");
+	foreach ($tabs as $tab) {
+		query_posts("cat=" . $tab['tag'] . "&order=ASC");
+		echo("<div>\n");
+		if (have_posts()) :
+			while (have_posts()) : the_post();
+				the_title();
+			endwhile;
+		endif;
+		echo("</div>\n");
+	}
+	echo("</div>\n");
+
+	echo($after_widget . "\n");
+}
+
+
+class BestOf extends Widget {
+	static public $created=array();
+
+	/**
+	 * Indexed array like this:
+	 * [0] = Array (
+	 *          title="Tab title 1"
+	 *          tag="tag1"
+	 *       )
+	 * [1] = Array (
+	 *          title="Tab title 2"
+	 *          tag="tag2"
+	 *       )
+	 * [2] = Array (
+	 *          title="Tab title 3"
+	 *          tag="tag3"
+	 *       )
+	 */
+	public $tabs=array();
+
+	public function __construct($name,$id=0,$register=true) {
+		$params[$id]=$id;
+		BesfOf::$created[$id]=$this;
+
+		parent::construct($name,$id,'BestOf_render','widget_bestof',$params);
+	}
+
+	public function render($args,$id) {
+		BestOf_render($args,$id);
+	}
+}
+
+?>
