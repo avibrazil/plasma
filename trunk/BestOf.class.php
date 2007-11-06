@@ -4,28 +4,38 @@
 $Id$
 */
 
-function BestOf_render($args,$id) {
+function BestOf_render($args,$num) {
 	extract($args);
-	$tabs=BestOf::$created[$id]->$tabs;
+	$tabs=BestOf::$created[$num]->tabs;
+
 
 	echo($before_widget . "\n");
 
+	print_r($args);
+	print_r("num=$num");
+	print_r("tabs=$tabs");
+
 	echo("<ul class=\"tabs\">\n");
 	foreach ($tabs as $tab) {
-		echo("<li>$tab['title']</li>\n");
+		echo("<li id=\"tab-" . $index . "\">" . $tab['title'] . "</li>\n");
+		$index++;
 	}
 	echo("</ul>\n");
 
+
+	$index=0;
 	echo("<div class=\"pop-in\">\n");
 	foreach ($tabs as $tab) {
 		query_posts("cat=" . $tab['tag'] . "&order=ASC");
-		echo("<div>\n");
+		echo("<ul id=\"pop-$index\">\n");
 		if (have_posts()) :
 			while (have_posts()) : the_post();
+				echo("<li>");
 				the_title();
+				echo("</li>");
 			endwhile;
 		endif;
-		echo("</div>\n");
+		echo("</ul>\n");
 	}
 	echo("</div>\n");
 
@@ -55,12 +65,12 @@ class BestOf extends Widget {
 
 	public function __construct($name,$id=0,$register=true) {
 		$params[$id]=$id;
-		BesfOf::$created[$id]=$this;
+		BestOf::$created[$id]=$this;
 
-		parent::construct($name,$id,'BestOf_render','widget_bestof',$params);
+		parent::__construct($name,$id,'BestOf_render','widget_bestof',$params);
 	}
 
-	public function render($args,$id) {
+	public static function render($args,$id) {
 		BestOf_render($args,$id);
 	}
 }
