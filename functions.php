@@ -130,7 +130,7 @@ abstract class Widget {
 
 	static public $widgets=array();
 
-	function __construct($name,$id, $callbackName, $class="", $params=array(), $register=true) {
+	function __construct($name,$id, $callbackName, $class="", $params=array(), $controlCallbackName, $dims, $controlParams, $register=true) {
 		global $wp_registered_widgets;
 
 		$options['classname']=$class;
@@ -139,6 +139,8 @@ abstract class Widget {
 		if ($register) {
 			//print_r($this);
 			wp_register_sidebar_widget($id,$name,$callbackName,$options);
+			if ($controlCallbackName)
+				wp_register_widget_control($id, $name, $controlCallbackName, $dims, $params);
 		}
 
 		$this->wp_widget=$wp_registered_widgets[$id];

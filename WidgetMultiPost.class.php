@@ -30,7 +30,7 @@ function WidgetMultiPost_render($args,$num=1) {
 
 class WidgetMultiPost extends Widget {
 	function __construct($name,$id,$register=true) {
-		parent::__construct($name,$id,'WidgetMultiPost_render','widget_multipost',array(0),$register);
+		parent::__construct($name,$id,'WidgetMultiPost_render','widget_multipost',array(0),'',0,0,$register);
 	}
 	static public function render($args,$num=1) {
 		WidgetMultiPost_render($args,$num=1);

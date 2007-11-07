@@ -63,7 +63,7 @@ class WidgetSinglePost extends Widget {
 	}
 
 	function __construct($name,$id,$register=true) {
-		parent::__construct($name,$id,'WidgetSinglePost_render','widget_post',$register);
+		parent::__construct($name,$id,'WidgetSinglePost_render','widget_post','',0,0,$register);
 	}
 }
 

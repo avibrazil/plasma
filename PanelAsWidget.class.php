@@ -38,7 +38,7 @@ class PanelAsWidget extends Widget {
 				$this->panel->wp_sidebar['id'],
 				"PanelAsWidget_render",
 				'widget_panel',
-				$params,
+				$params,'',0,0,
 				true);
 		} else {
 			$params['panel_name']=$name;
@@ -46,7 +46,7 @@ class PanelAsWidget extends Widget {
 				$id,
 				"PanelAsWidget_render",
 				'widget_panel',
-				$params,
+				$params,'',0,0,
 				$register);
 			$this->panel=new Panel($name,$id,$isHorizontal);
 		}
