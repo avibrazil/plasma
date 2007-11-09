@@ -168,7 +168,10 @@ abstract class Widget {
 new WidgetMultiPost("Flow of Posts","multipost");
 new PanelAsWidget(new Panel("Sidebar 1","sidebar-1"));
 new PanelAsWidget(new Panel("Sidebar 2","sidebar-2"));
-new BestOf("Best Of","best-of");
+$best=new BestOf("Best Of","bestof");
+
+//appendTab("bestof","English", "en");
+//appendTab("bestof","Portuguese", "pt_br");
 
 
 // Initialize Sidebars.
