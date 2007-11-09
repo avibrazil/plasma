@@ -4,8 +4,8 @@ $Id$
 */
 
 
-$BestPosts_cssClassName="widgetBestPosts";
-$BestPosts_wpOptions="widget_bestposts";
+$BestPosts_cssClassName = "widgetBestPosts";
+$BestPosts_wpOptions = "widget_bestposts";
 
 
 
@@ -177,9 +177,11 @@ function BestPosts_appendTab($instance,$title,$tag) {
 
 
 function BestPosts_register($instance,$name) {
-	$options['classname']=$BestPosts_cssClassName;
-	$options['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'BestPosts_render',$options);
+	print_r($BestPosts_cssClassName);
+	$opt['classname']=$BestPosts_cssClassName;
+	$opt['params']=$instance;
+	print_r($opt);
+	wp_register_sidebar_widget($instance,$name,'BestPosts_render',$opt);
 
 	$dims = array('width' => 500, 'height' => 350);
 	wp_register_widget_control($instance,$name,'BestPosts_control',$dims);
