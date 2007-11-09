@@ -164,7 +164,7 @@ function optionSelected(id) {
 
 
 
-function appendTab($instance,$title,$tag) {
+function BestPosts_appendTab($instance,$title,$tag) {
 	$tabs=get_option($BestPosts_wpOptions);
 	
 	$index=sizeof($tabs[$instance]);

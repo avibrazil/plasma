@@ -158,7 +158,7 @@ abstract class Widget {
 
 
 
-
+require_once('BestPosts.widget.php');
 
 
 // include(TEMPLATEPATH . '/post.php');
@@ -168,13 +168,17 @@ abstract class Widget {
 new WidgetMultiPost("Flow of Posts","multipost");
 new PanelAsWidget(new Panel("Sidebar 1","sidebar-1"));
 new PanelAsWidget(new Panel("Sidebar 2","sidebar-2"));
-$best=new BestOf("Best Of","bestof");
-
-//appendTab("bestof","English", "en");
-//appendTab("bestof","Portuguese", "pt_br");
 
 
-// Initialize Sidebars.
+BestPosts_register("bestposts-homepage","Best Posts [homepage]");
+
+//$best=new BestOf("Best Of","bestof");
+
+//BestPosts_appendTab("bestposts-homepage","English", "en");
+//BestPosts_appendTab("bestposts-homepage","Portuguese", "pt_br");
+
+
+// Inititalize Sidebars.
 
 //new Panel("Header 1","header-1",true);
 //new Panel("Header 2","header-2",true);
