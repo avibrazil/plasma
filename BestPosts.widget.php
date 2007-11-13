@@ -121,6 +121,17 @@ BestPosts_tabs['<?php echo("$id"); ?>']=new Array();
 
 
 
+function tabsAdd(id,title,tag) {
+	var i=BestPosts_tabs[id].length;
+
+	BestPosts_tabs[id][i]=new Array;
+
+	BestPosts_tabs[id][i]['tag']=tag;
+	BestPosts_tabs[id][i]['title']=title;
+}
+
+
+
 /** Unserialize the hidden <input id="${id}-tabs-tags"/> */
 function tabsUnserialize(id) {
 	var serElem=document.getElementById(id + "-tabs-tags");
@@ -130,9 +141,23 @@ function tabsUnserialize(id) {
 	for (var i=0; i<array1.length; i++) {
 		var array2=array1[i].split("~");
 
-		BestPosts_tabs[id][i]['tag']=array2[0];
-		BestPosts_tabs[id][i]['title']=array2[1];
+		tabsAdd(id,array2[1],array2[0]);
 	}
+}
+
+/** Serializes BestPosts_tabs[id] into the hidden <input id="${id}-tabs-tags"/> */
+function tabsSerialize(id) {
+	var serialized="";
+
+	for (var i=0; i<BestPosts_tabs[id].length; i++) {
+		if (serialized != "") serialized+="^";
+
+		serialized+=BestPosts_tabs[id][i]['tag'];
+		serialized+="~";
+		serialized+=BestPosts_tabs[id][i]['title'];
+	}
+
+	document.getElementById(id + "-tabs-tags").value=serialized;
 }
 
 
@@ -140,16 +165,21 @@ function tabsUnserialize(id) {
 function tabsRebuildUI(id) {
 	var elSel = document.getElementById(id + "-tabs");
 	var elOpt;
+	var selectedIndex=null;
+
+	if (arguments.length>1) selectedIndex=arguments[1];
 
 	// First remove all.
 	while (elOpt=elSel.childNodes[0]) elSel.removeChild(elOpt);
 
 	// Now create new options based on the BestPosts_tabs[id] array
 	for (var i=0; i<BestPosts_tabs[id].length; i++) {
-	  elOpt = document.createElement('option');
+		elOpt = document.createElement('option');
 
 		elOpt.text = BestPosts_tabs[id][i]['title'] + " (tag: " + BestPosts_tabs[id][i]['tag'] + ")";
 		elOpt.value = i;
+
+		if (selectedIndex!=null && selectedIndex==i) elOpt.selected=1;
 
 		try {
 			// standards compliant; doesn't work in IE
@@ -159,96 +189,149 @@ function tabsRebuildUI(id) {
 			elSel.add(elOpt);
 		}
 	}
+	document.getElementById(id + "-title-edit").value="";
+	document.getElementById(id + "-tag-edit").value="";
 }
 
 
-function removeTabSelected(id) {
-  var elSel = document.getElementById("tabs-" + id);
-  var i;
-  for (i = elSel.length - 1; i>=0; i--) {
-    if (elSel.options[i].selected) {
-      elSel.remove(i);
-    }
-  }
+function actionAddTab(id) {
+	var tabTitle=document.getElementById(id + "-title-edit").value;
+	var tabTag =document.getElementById(id + "-tag-edit").value;
+
+	tabsAdd(id,tabTitle,tabTag);
+	tabsSerialize(id);
+	tabsRebuildUI(id);
 }
 
-function appendTab(id) {
-	var tabTitle=document.getElementById("new-tab-title-" + id).value;
-	var tagName =document.getElementById("new-tab-tag-"   + id).value;
-	
-  var elOptNew = document.createElement('option');
-  elOptNew.text = tabTitle + " (tag: " + tagName + ")";
-  elOptNew.value = tagName + "|" + tabTitle;
-	elOptNew.id = id + "-" + tagName;
-	elOptNew.onclick = "optionSelected('" + id + "','" + elOptNew.id + "');";
 
-	var elSel = document.getElementById(id + "-tabs");
+function actionRemoveSelectedTab(id) {
+	var elemSelect=document.getElementById(id + "-tabs");
 
-	try {
-		elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
-	} catch(ex) {
-		elSel.add(elOptNew); // IE only
+	for (var i=0; i<elemSelect.length; i++) {
+		if (elemSelect.options[i].selected) {
+			BestPosts_tabs[id].splice(i,1);
+			break;
+		}
+	}
+	tabsSerialize(id);
+	tabsRebuildUI(id);
+}
+
+
+
+function actionUpdateSelectedTab(id) {
+	var tabTitle=document.getElementById(id + "-title-edit").value;
+	var tabTag=document.getElementById(id + "-tag-edit").value;
+	var elemSelect=document.getElementById(id + "-tabs");
+
+	if (tabTag=="") return;
+
+	for (var i=0; i<elemSelect.length; i++) {
+		if (elemSelect.options[i].selected) {
+			BestPosts_tabs[id][i]['tag']=tabTag;
+			BestPosts_tabs[id][i]['title']=tabTitle;
+			break;
+		}
+	}
+	tabsSerialize(id);
+	tabsRebuildUI(id);
+}
+
+
+
+function actionMoveSelectedUp(id) {
+	var elemSelect=document.getElementById(id + "-tabs");
+
+	for (var i=0; i<elemSelect.length; i++) {
+		if (elemSelect.options[i].selected) {
+			if (i==0) return;
+
+			var prev=BestPosts_tabs[id][i-1];
+			BestPosts_tabs[id][i-1]=BestPosts_tabs[id][i];
+			BestPosts_tabs[id][i]=prev;
+
+			break;
+		}
+	}
+	tabsSerialize(id);
+	tabsRebuildUI(id,i-1);
+}
+
+
+function actionMoveSelectedDown(id) {
+	var elemSelect=document.getElementById(id + "-tabs");
+
+	for (var i=0; i<elemSelect.length; i++) {
+		if (elemSelect.options[i].selected) {
+			if (i==elemSelect.length-1) return;
+
+			var next=BestPosts_tabs[id][i+1];
+			BestPosts_tabs[id][i+1]=BestPosts_tabs[id][i];
+			BestPosts_tabs[id][i]=next;
+
+			break;
+		}
+	}
+	tabsSerialize(id);
+	tabsRebuildUI(id,i+1);
+}
+
+
+function actionSelectTab(id) {
+	var elemSelect=document.getElementById(id + "-tabs");
+
+	for (var i=0; i<elemSelect.length; i++) {
+		if (elemSelect.options[i].selected) {
+			document.getElementById(id + "-title-edit").value=BestPosts_tabs[id][i]['title'];
+			document.getElementById(id + "-tag-edit").value=BestPosts_tabs[id][i]['tag'];
+
+			break;
+		}
 	}
 }
 
 
-function optionSelected(id) {
-	var elemSelect=document.getElementById("tabs-" + id);
-
-  for (var i = elemSelect.length - 1; i>=0; i--) {
-    if (elemSelect.options[i].selected) {
-			var tabtag=elemSelect.options[i].value.split("|");
-			document.getElementById("new-tab-tag-" + id).value=tabtag[0];
-			document.getElementById("new-tab-title-" + id).value=tabtag[1];
-			document.getElementById("current-tab-tag-" + id).value=elemSelect.options[i].id;
-
-			break;
-    }
-  }
-}
 
 //]]>
 </script>
-<table border="1"><tr><td style="width: 50%">
+
+<!-- The one field that matters. All the rest is just UI. -->
+<input type="hidden" id="<?php echo("$id"); ?>-tabs-tags" value="<?php echo(BestPosts_serialize($id)); ?>"/>
+
+<table border="1"><tr><td style="width: 90%">
 <select id="<?php echo("$id"); ?>-tabs"
-	onchange="optionSelected('<?php echo("$id"); ?>')"
+	onchange="actionSelectTab('<?php echo("$id"); ?>')"
 	style="width: 100%" size="5"></select>
 </td>
 
 <td>
-<input type="button" value="&uArr;" onclick=""/><br/>
-<input type="button" value="&dArr;" onclick=""/>
+<input type="button" value="&uArr;" onclick="actionMoveSelectedUp('<?php echo("$id"); ?>');"/><br/>
+<input type="button" value="&dArr;" onclick="actionMoveSelectedDown('<?php echo("$id"); ?>');"/>
 </td>
 </tr>
 
 <tr>
 <td>
-<input type="button" value="Add tab" onclick="appendTab('<?php echo("$id"); ?>')"/> 
-<input type="button" value="Delete tab" onclick="removeTabSelected('<?php echo("$id"); ?>')"/>
+<input type="button" value="Add tab" onclick="actionAddTab('<?php echo("$id"); ?>')"/> 
+<input type="button" value="Delete tab" onclick="actionRemoveSelectedTab('<?php echo("$id"); ?>')"/>
+<input type="button" value="Update selected" onclick="actionUpdateSelectedTab('<?php echo("$id"); ?>');"/>
 </td>
 </tr>
 
 <tr>
 <td>
-<!-- The one field that matters. All the rest is just UI. -->
-<input type="hidden" id="<?php echo("$id"); ?>-tabs-tags" value="<?php echo(BestPosts_serialize($id)); ?>"/>
-
-<input type="hidden" id="<?php echo("$id"); ?>-current-selection" value=""/>
-
 <label for="<?php echo("$id"); ?>-title-edit">Tab title</label><br/>
 <input style="width: 80%;" name="<?php echo("$id"); ?>-title-edit" id="<?php echo("$id"); ?>-title-edit" type="text"/><br/>
 <label for="<?php echo("$id"); ?>-tag-edit">Tag containing posts</label><br/>
 <input style="width: 80%;" name="<?php echo("$id"); ?>-tag-edit" id="<?php echo("$id"); ?>-tag-edit" type="text"/>
 </td>
 
-<td>
-<input type="button" value="Update selected" onclick="tabsRebuildUI('<?php echo("$id"); ?>');"/>
-</td>
 </tr>
 </table>
 
 <script type="text/javascript">
 //<![CDATA[
+tabsUnserialize('<?php echo("$id"); ?>');
 tabsRebuildUI('<?php echo("$id"); ?>');
 //]]>
 </script>
