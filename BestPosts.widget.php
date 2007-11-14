@@ -19,25 +19,60 @@ function BestPosts_render($args,$instance) {
 
 	if (empty($tabs)) return;
 
-	echo($before_widget . "\n");
+	echo($before_widget . "\n");?>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+function selectTab(widgetID,tabIndex) {
+	var theTab=document.getElementById(widgetID + "-tab-" + tabIndex);
+	var theList=document.getElementById(widgetID + "-list-" + tabIndex);
+
+	var tab;
+	var list;
+
+	tab=theTab;
+	while (tab=tab.nextSibling) tab.className="unselected";
+	tab=theTab;
+	while (tab=tab.previousSibling) tab.className="unselected";
+	theTab.className="selected";
+
+	list=theList;
+	while (list=list.nextSibling) list.className="unselected";
+	list=theList;
+	while (list=list.previousSibling) list.className="unselected";
+	theList.className="selected";
+}
+
+//]]>
+</script>
+
+
+<?php
 
 	$index=0;
-	echo("<ul class=\"tabs\">\n");
-	echo("instance=$instance\n");
-	print_r($tabs);
+	echo("<ul id=\"$instance-tabs\" class=\"tabs\">\n");
+//	echo("instance=$instance\n");
+//	print_r($tabs);
 	foreach ($tabs[$instance] as $tab) {
-		echo("<li id=\"tab-" . $index . "\">" . $tab['title'] . "</li>\n");
+		if ($index==0) $class="selected";
+		else $class="unselected";
+		echo("<li class=\"$class\" id=\"$instance" . "-tab-" . $index . "\" onclick=\"selectTab('$instance',$index);\">" . $tab['title'] . "</li>\n");
 		$index++;
 	}
 	echo("</ul>\n");
 
 
 	$index=0;
-	echo("<div class=\"pop-in\">\n");
-	echo("instance=$instance\n");
+	echo("<div id=\"$instance-lists\" class=\"lists\">\n");
+//	echo("instance=$instance\n");
 	foreach ($tabs[$instance] as $tab) {
+		if ($index==0) $class="selected";
+		else $class="unselected";
 		query_posts("tag=" . $tab['tag'] . "&order=DESC&showposts=15");
-		echo("<ul id=\"list-$index\">\n");
+		echo("<ul class=\"$class\" id=\"$instance" . "-list-" . "$index\">\n");
 		if (have_posts()) :
 			while (have_posts()) : the_post();
 				echo("<li>");
@@ -45,7 +80,7 @@ function BestPosts_render($args,$instance) {
 				echo("</li>\n");
 			endwhile;
 		endif;
-		echo("</ul>\n");
+		echo("</ul>\n\n");
 		$index++;
 	}
 	echo("</div>\n");
@@ -77,17 +112,50 @@ function BestPosts_serialize($instance) {
 function BestPosts_unserialize($instance,$string) {
 	global $BestPosts_cssClassName, $BestPosts_wpOptions;
 	
-	$final[$instance]=array();
-	$unified=split("^",$string);
-	
+	$final=array();
+	$unified=split("\^",$string);
+
+	$i=0;
 	foreach ($unified as $pair) {
-		$temp=split("~",$pair);
-		$final[$instance]['tag']=$temp[0];
-		$final[$instance]['title']=$temp[1];
+		$temp=split("\~",$pair);
+		$final[$i]['tag']=$temp[0];
+		$final[$i]['title']=$temp[1];
+		$i++;
 	}
 
 	return $final;
 }
+
+
+
+
+
+
+function BestPosts_appendTab($instance,$title,$tag) {
+	global $BestPosts_cssClassName, $BestPosts_wpOptions;
+
+	$tabs=get_option($BestPosts_wpOptions);
+	
+	$index=sizeof($tabs[$instance]);
+	$tabs[$instance][$index]=array('title' => $title, 'tag' => $tag);
+
+	update_option($BestPosts_wpOptions, $tabs);
+}
+
+
+
+
+function BestPosts_register($instance,$name) {
+	global $BestPosts_cssClassName, $BestPosts_wpOptions;
+
+	$opt['classname']=$BestPosts_cssClassName;
+	$opt['params']=$instance;
+	wp_register_sidebar_widget($instance,$name,'BestPosts_render',$opt);
+
+	$dims = array('width' => 380, 'height' => 280);
+	wp_register_widget_control($instance,$name,'BestPosts_control',$dims,$instance);
+}
+
 
 
 
@@ -100,9 +168,16 @@ function BestPosts_control($id) {
 	if ( !is_array($options) )
 		$options = $newoptions = array();
 
-//	if ($_POST["$id-submit"]) {
-//		$newoptions[$id][
-//	}
+//echo("<pre>\n");
+//print_r($_POST);
+//echo("</pre>\n");
+
+	if ($_POST["$id-tabs-tags"]) {
+		$returnedString=stripslashes($_POST["$id-tabs-tags"]);
+//print_r($returnedString);
+		$newoptions[$id]=BestPosts_unserialize($id,$returnedString);
+//print_r($newoptions[$id]);
+	}
 
 	if ( $options != $newoptions ) {
 		$options = $newoptions;
@@ -112,10 +187,7 @@ function BestPosts_control($id) {
 <script type="text/javascript">
 //<![CDATA[
 
-// Reference: http://www.mredkj.com/tutorials/tutorial005.html
-
-
-// This array is filled by tabsUnserialize() function and 
+// This array is filled by tabsUnserialize()
 var BestPosts_tabs=new Array();
 BestPosts_tabs['<?php echo("$id"); ?>']=new Array();
 
@@ -296,9 +368,10 @@ function actionSelectTab(id) {
 </script>
 
 <!-- The one field that matters. All the rest is just UI. -->
-<input type="hidden" id="<?php echo("$id"); ?>-tabs-tags" value="<?php echo(BestPosts_serialize($id)); ?>"/>
+<input type="hidden" id="<?php echo("$id"); ?>-tabs-tags" name="<?php echo("$id"); ?>-tabs-tags" value="<?php echo(BestPosts_serialize($id)); ?>"/>
 
-<table border="1"><tr><td style="width: 90%">
+<b>Current Tabs</b>
+<table border="0"><tr><td style="width: 90%">
 <select id="<?php echo("$id"); ?>-tabs"
 	onchange="actionSelectTab('<?php echo("$id"); ?>')"
 	style="width: 100%" size="5"></select>
@@ -320,10 +393,10 @@ function actionSelectTab(id) {
 
 <tr>
 <td>
-<label for="<?php echo("$id"); ?>-title-edit">Tab title</label><br/>
-<input style="width: 80%;" name="<?php echo("$id"); ?>-title-edit" id="<?php echo("$id"); ?>-title-edit" type="text"/><br/>
-<label for="<?php echo("$id"); ?>-tag-edit">Tag containing posts</label><br/>
-<input style="width: 80%;" name="<?php echo("$id"); ?>-tag-edit" id="<?php echo("$id"); ?>-tag-edit" type="text"/>
+<label for="<?php echo("$id"); ?>-title-edit"><b>Tab title</b></label><br/>
+<input style="width: 80%;" id="<?php echo("$id"); ?>-title-edit" type="text"/><br/>
+<label for="<?php echo("$id"); ?>-tag-edit"><b>Tag containing posts</b></label><br/>
+<input style="width: 80%;" id="<?php echo("$id"); ?>-tag-edit" type="text"/>
 </td>
 
 </tr>
@@ -340,92 +413,6 @@ tabsRebuildUI('<?php echo("$id"); ?>');
 
 	<?php
 }
-
-
-
-
-
-function BestPosts_appendTab($instance,$title,$tag) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
-
-	$tabs=get_option($BestPosts_wpOptions);
-	
-	$index=sizeof($tabs[$instance]);
-	$tabs[$instance][$index]=array('title' => $title, 'tag' => $tag);
-
-	update_option($BestPosts_wpOptions, $tabs);
-}
-
-
-
-
-function BestPosts_register($instance,$name) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
-
-	$opt['classname']=$BestPosts_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'BestPosts_render',$opt);
-
-	$dims = array('width' => 500, 'height' => 350);
-	wp_register_widget_control($instance,$name,'BestPosts_control',$dims,$instance);
-}
-
-
-
-class BestOf extends Widget {
-	static public $created=array();
-
-	/**
-	 * Indexed array like this:
-	 * [0] = Array (
-	 *          title="Tab title 1"
-	 *          tag="tag1"
-	 *       )
-	 * [1] = Array (
-	 *          title="Tab title 2"
-	 *          tag="tag2"
-	 *       )
-	 * [2] = Array (
-	 *          title="Tab title 3"
-	 *          tag="tag3"
-	 *       )
-	 */
-	public $tabs=array();
-
-	public function __construct($name,$id=0,$register=true) {
-		$params['id']=$id;
-		BestOf::$created[$id]=$this;
-
-		$dims = array('width' => 500, 'height' => 350);
-
-		parent::__construct($name,$id,'BestOf_render','widget_bestof',$params,'BestOf_control',$dims,$params);
-
-		$options = get_option('widget_bestof');
-	}
-
-
-
-
-
-
-
-	public static function render($args,$id) {
-		BestOf_render($args,$id);
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
