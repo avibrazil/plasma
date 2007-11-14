@@ -14,6 +14,12 @@ body {
 	font: 9pt Verdana;
 }
 
+/*********************************************
+ *********************************************
+ **
+ ** Single Post related classes
+ **
+ **/
 
 .post .header {
 }
@@ -70,4 +76,60 @@ body {
 	font-size: 2em;
 	font-weight: bold;
 	text-decoration: none;
+}
+
+/*********************************************
+ *********************************************
+ **
+ ** End of Single Post related classes
+ **
+ **/
+
+
+
+/*********************************************
+ *********************************************
+ **
+ ** Widget Best Posts related classes
+ **
+ **/
+
+.widgetBestPosts {
+	border: 1px solid #333333;
+	width: 300px;
+	background: #eee;
+	margin: 0px;
+	padding: 0px;
+}
+
+.widgetBestPosts .tabs li {
+	display: inline;
+	font: 8pt Arial;
+	padding: 5px;
+	border: 1px solid blue;
+	border-bottom: 0px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.widgetBestPosts .tabs li.selected {
+	color: red;
+	border: 1px solid red;
+	border-bottom: 0px;
+}
+
+.widgetBestPosts .lists .unselected {
+	display: none;
+}
+
+
+/*********************************************
+ *********************************************
+ **
+ ** End of Widget Best Posts related classes
+ **
+ **/
+
+.horizontal-panel {
+	max-width: 100%;
 }
