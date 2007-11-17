@@ -78,12 +78,11 @@ body {
 	text-decoration: none;
 }
 
-/*********************************************
- *********************************************
- **
+/**
  ** End of Single Post related classes
  **
- **/
+ *********************************************
+ *********************************************/
 
 
 
@@ -102,20 +101,40 @@ body {
 	padding: 0px;
 }
 
+.widgetBestPosts .tabs {
+	padding-left: 3px;
+	margin-bottom: 1px;
+}
+
 .widgetBestPosts .tabs li {
 	display: inline;
 	font: 8pt Arial;
 	padding: 5px;
-	border: 1px solid blue;
+	padding-bottom: 1px;
+	border: 1px solid black;
 	border-bottom: 0px;
-	margin-left: 3px;
-	margin-right: 3px;
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
 .widgetBestPosts .tabs li.selected {
-	color: red;
-	border: 1px solid red;
-	border-bottom: 0px;
+	background: white;
+}
+
+.widgetBestPosts .lists {
+}
+
+.widgetBestPosts .lists ul {
+	padding-left: 3px;
+	padding-top: 3px;
+	margin-top: 0px;
+	list-style-type: none;
+	background-color: white;
+}
+
+.widgetBestPosts .lists li {
+	font: 8pt Arial;
+	border-bottom: 1px solid black;
 }
 
 .widgetBestPosts .lists .unselected {
@@ -123,13 +142,21 @@ body {
 }
 
 
-/*********************************************
- *********************************************
- **
+/**
  ** End of Widget Best Posts related classes
  **
- **/
+ *********************************************
+ *********************************************/
 
 .horizontal-panel {
 	max-width: 100%;
+	clear: both;
+}
+
+.horizontal-panel .widget {
+	float: left;
+}
+
+.vertical-panel .widget {
+	float: none;
 }

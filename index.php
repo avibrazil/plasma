@@ -3,21 +3,16 @@
 
 // $Id$
 
-$context=Context::getContext();
 
 get_header();
 
 //print_r($wp_registered_widgets);
 
-//$context->panels['header-1']->render();
-//$context->panels['header-2']->render();
 
-$context->panels['main-multipost']->render();
-//print_r($context);
+Panel_render("main-multipost");
 
-$context->panels['footer-1']->render();
-$context->panels['footer-2']->render();
-
+Panel_render('footer-1');
+Panel_render('footer-2');
 
 get_footer();
 
