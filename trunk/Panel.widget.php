@@ -6,24 +6,61 @@ $Id$
 
 
 
-function PanelAsWidget_render($args,$sidebarName) {
-	//global $wp_registered_widgets;
+$PanelWidget_cssClassName = "widgetPanel";
+$PanelWidget_wpOptions = "widget_panel";
+
+
+
+function PanelWidget_render($args,$instance) {
+	global $PanelWidget_cssClassName, $PanelWidget_wpOptions;
+
 	extract($args);
-	//$options=get_option('widget_panel');
+	
+	$panels=get_option($PanelWidget_wpOptions);
+
+	if (empty($panels[$instance]['panel'])) return;
 
 	echo($before_widget . "\n");
 
-	dynamic_sidebar($sidebarName);
+	Panel_render($panels[$instance]['panel']);
 
 	echo($after_widget . "\n");
 }
 
 
+function PanelWidget_register($instance, $name, $panelID="", $panelName="",$horizontal=false) {
+	global $PanelWidget_cssClassName, $PanelWidget_wpOptions;
+	global $wp_registered_sidebars;
+
+	$opt['classname']=$PanelWidget_cssClassName;
+	$opt['params']=$instance;
+	wp_register_sidebar_widget($instance,$name,'PanelWidget_render',$opt);
+
+	if (empty($panelID)) $panelID="panel-" . $instance;
+
+	if (empty($wp_registered_sidebars[$panelID])) {
+		// Panel (a.k.a. sidebar) doesn exists. Register a new panel.
+		if (empty($panelName)) $panelName=$name;
+		Panel_register($panelID,$panelName,$horizontal);
+	}
+
+	// Bind this widget to its panel
+	$options=$newoptions=get_option($PanelWidget_wpOptions);
+	if ( !is_array($options) ) $options = $newoptions = array();
+
+	$newoptions[$instance]['panel']=$panelID;
+
+	if ($options != $newoptions) {
+		$options = $newoptions;
+		update_option($PanelWidget_wpOptions, $options);
+	}
+}
 
 
+
+/* Old stuff
 
 class PanelAsWidget extends Widget {
-	/** Encapsulated panel of class Panel */
 	public $panel;
 
 	static private $index=1;
@@ -65,7 +102,7 @@ class PanelAsWidget extends Widget {
 }
 
 
-
+*/
 
 
 ?>
