@@ -28,7 +28,7 @@ function MultiPost_render($args,$instance) {
 	while (have_posts()) {
 		the_post();
 		$options['before_widget']="<div class=\"post\" id=\"post-" . get_the_ID() . "\">\n";
-		SinglePost_render($options);
+		SinglePost_render($options,0);
 	}
 
 	echo $after_widget . "\n";
@@ -40,9 +40,9 @@ function MultiPost_render($args,$instance) {
 function MultiPost_register($instance, $name) {
 	global $MultiPost_cssClassName, $MultiPost_wpOptions;
 
-	$opt['classname']=$SinglePost_cssClassName;
+	$opt['classname']=$MultiPost_cssClassName;
 	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'SinglePost_render',$opt);
+	wp_register_sidebar_widget($instance,$name,'MultiPost_render',$opt);
 }
 
 

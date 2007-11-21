@@ -115,6 +115,7 @@ body {
 	border-bottom: 0px;
 	margin-left: 0px;
 	margin-right: 0px;
+	cursor: default;
 }
 
 .widgetBestPosts .tabs li.selected {
@@ -153,10 +154,11 @@ body {
 	clear: both;
 }
 
+.vertical-panel .widget {
+	float: none;
+}
+
 .horizontal-panel .widget {
 	float: left;
 }
 
-.vertical-panel .widget {
-	float: none;
-}
