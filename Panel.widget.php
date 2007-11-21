@@ -5,6 +5,8 @@ $Id$
 */
 
 
+require_once('Panel.php');
+
 
 $PanelWidget_cssClassName = "widgetPanel";
 $PanelWidget_wpOptions = "widget_panel";

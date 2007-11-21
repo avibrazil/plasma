@@ -15,7 +15,7 @@ function SinglePost_render($args,$instance) {
 	extract($args);
 
 	echo($before_widget . "\n");
-	SinglePost_renderPost($args,$num);
+	SinglePost_renderPost($args,$instance);
 	echo($after_widget . "\n");
 }
 
@@ -68,12 +68,17 @@ function SinglePost_renderPost($args,$instance) {
 	<div class="content"><?php
 		if (is_search()) {
 			the_excerpt();?>
-			<p class="readmore"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>"><?php _e("Read more . . .",'theme'); ?></a></p><?php
+			<span class="readmore">
+				<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>">
+					<?php _e("Read more . . .",'theme'); ?>
+				</a>
+			</span><?php
 		} else the_content();?>
 	
-		<!--
+<!--
 		<?php trackback_rdf(); ?>
-		-->
+-->
+
 	</div> <!-- class=content -->
 	<div class="info"><?php wp_link_pages(); ?></div><?php
 }
