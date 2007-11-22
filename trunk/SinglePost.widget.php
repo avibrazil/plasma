@@ -14,9 +14,14 @@ function SinglePost_render($args,$instance) {
 	global $SinglePost_cssClassName, $SinglePost_wpOptions;
 	extract($args);
 
-	echo($before_widget . "\n");
+	if ($wrapped) echo($before_widget . "\n");
+	else the_post();
+
+	echo("<div class=\"" . sandbox_post_class(0) . "\" id=\"post-" . get_the_ID() . "\">\n");
 	SinglePost_renderPost($args,$instance);
-	echo($after_widget . "\n");
+	echo("</div>");
+
+	if ($wrapped) echo($after_widget . "\n");
 }
 
 
@@ -38,31 +43,34 @@ function SinglePost_renderPost($args,$instance) {
 	global $SinglePost_cssClassName, $SinglePost_wpOptions;?>
 
 	<div class="header">
-		<div class="categories"><?php the_category(' || '); ?></div>
 
-		<div class="heading-block">
-			<div class="baloon">
-				<span class="number"><a href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>"><?php comments_number('0','1','%'); ?></a></span><br/><a href="<?php comments_link(); ?>" title="<?php printf(__('Comments to: %s','theme'), the_title('','',0)); ?>"><?php if ($post->comment_count == 1) { _e('comment','theme'); } else { _e('comments','theme');} ?></a>
-			</div>
+		<a class="title" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title(",",0)); ?>"><?php the_title(); ?></a>
 
-			<div class="title">
-				<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title(",",0)); ?>"><?php the_title(); ?></a>
-			</div>
+		<a class="comments" href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>">
+			<span class="number"><?php comments_number('0','1','%'); ?></span>
+			<span class="word"><?php
+				if ($post->comment_count == 1) _e('comment','theme');
+				else _e('comments','theme');?>
+			</span>
+		</a>
 
-			<div class="date">
-				<img alt="clock" src="<?php bloginfo('template_directory'); ?>/img/clock.png" style="vertical-align: middle"/> <?php the_time('r'); ?> (<?php the_modified_time('r'); ?>)
-			</div>
-			<div class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></div>
-			<div class="admin">
-				<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>"><img alt="permalink" src="<?php bloginfo('template_directory'); ?>/img/permalink.png"/></a>
-				<a href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>"><img alt="trackback" src="<?php bloginfo('template_directory'); ?>/img/trackback.png"/></a>
-				<a href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>"><img alt="comments" src="<?php bloginfo('template_directory'); ?>/img/comment.png"/></a>
-				<?php comments_rss_link('<img alt="feed" title="' .
-					__('Subscribe comments to this post','theme') .
-					'" src="' . get_bloginfo('template_directory') . '/img/feed.png"/>'); ?>
-				<?php edit_post_link('<img alt="edit" src="' . get_bloginfo('template_directory') . '/img/edit.png"/>'); ?>
-			</div> <!-- class=admin -->
-		</div> <!-- class=heading-block -->
+		<span class="categories"><?php the_category(' || '); ?></span>
+
+		<span class="date"><?php the_time('r'); ?></span>
+		<span class="date-modified">(<?php the_modified_time('r'); ?>)</span>
+
+		<span class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></span>
+
+		<div class="admin">
+			<a class="esc-permalink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>">&nbsp;</a>
+			<a class="esc-trackback" href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>"><span></span></a>
+			<a class="esc-comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/comment.png"/></a>
+			<?php comments_rss_link('<img alt="feed" title="' .
+				__('Subscribe comments to this post','theme') .
+				'" src="' . get_bloginfo('template_directory') . '/img/feed.png"/>'); ?>
+			<?php edit_post_link('<img alt="edit" src="' . get_bloginfo('template_directory') . '/img/edit.png"/>'); ?>
+		</div> <!-- class=admin -->
+
 	</div> <!-- class=header -->
 
 	<div class="content"><?php
@@ -80,6 +88,7 @@ function SinglePost_renderPost($args,$instance) {
 -->
 
 	</div> <!-- class=content -->
+
 	<div class="info"><?php wp_link_pages(); ?></div><?php
 }
 

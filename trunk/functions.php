@@ -26,6 +26,12 @@ require_once('BestPosts.widget.php');
 require_once('MultiPost.widget.php');
 require_once('Panel.widget.php');
 require_once('Main.widget.php');
+require_once('Comments.widget.php');
+require_once('Misc.widgets.php');
+
+// Use Sandbox' class builder functions
+require_once('classbuilder.php');
+
 
 
 // Create Sidebar 1 then wrap it as a widget
@@ -53,10 +59,18 @@ PanelWidget_register("footer-2","Footer 2","footer-2","Footer 2",true);
 
 Panel_register("master-layout","Master Layout for All Pages");
 
+Panel_register("comments","Comments & Reactions");
+
+
+
 // Register elements as widgets
 BestPosts_register("bestposts-homepage","Best Posts [home]");
 MultiPost_register("multipost","Flow of Posts");
 SinglePost_register("singlepost","One Post");
+ExpandableHeader_register("banner","Header Banner");
+CommentForm_register("commentform","Comment Form");
+Comments_register("commentslist","Comments List");
+CommentBlock_register("commentblock","Comments & Reactions");
 
 /*
 Comments_register("comments","Flow of Comments");

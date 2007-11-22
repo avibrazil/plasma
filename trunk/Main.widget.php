@@ -3,7 +3,7 @@
 /*
 Template Name: Abstraction of main blog content
 
-$Id: Panel.php 24 2007-11-17 01:51:51Z aviram $
+$Id$
 */
 
 $Main_cssClassName="widgetMain";
