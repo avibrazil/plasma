@@ -36,7 +36,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body>
+<body class="<?php sandbox_body_class() ?>">
 <!--
 
 <div id="banner">

@@ -19,19 +19,18 @@ function MultiPost_render($args,$instance) {
 
 	extract($args);
 
-	echo $before_widget . "\n";
+	echo($before_widget . "\n");
 
 	/* Lets create a fake sidebar-like environment for the Widget SinglePost */
 	$options=array();
-	$options['after_widget']="</div> <!-- class=post -->\n";
+	$options['wrapped']=true;
 
 	while (have_posts()) {
 		the_post();
-		$options['before_widget']="<div class=\"post\" id=\"post-" . get_the_ID() . "\">\n";
 		SinglePost_render($options,0);
 	}
 
-	echo $after_widget . "\n";
+	echo($after_widget . "\n");
 }
 
 

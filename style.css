@@ -14,6 +14,76 @@ body {
 	font: 9pt Verdana;
 }
 
+
+/*********************************************
+ *********************************************
+ **
+ ** Blog Header related classes
+ **
+ **/
+
+#banner {
+	/* The nice and exapandable blue and green bar */
+	
+	height: 177px;
+	background: url(img/banner-background.png) no-repeat top right;
+	position: relative;
+	width: 100%;
+}
+
+
+
+#banner-inner {
+	/* The nice and fixed orange, blue an green banner, with star */
+	
+	height: 177px;
+	background: url(img/banner-header.png) no-repeat;
+	overflow: hidden;
+	position: static;
+}
+
+
+#banner-header {
+	/* Blog title */
+	
+	font-size: 46px;
+	color: white;
+	font-family: Arial Black;
+	font-variant:small-caps;
+	position: absolute;
+	left: 430px;
+	top: 1em;
+	text-align: left;
+}
+
+#banner-header a {
+	color: white;
+	text-decoration: none;
+}
+
+#banner-description {
+	/* Blog subtitle or description */
+	
+	font-family: Arial;
+	color: white;
+	font-weight: normal !important;
+	font-size: 18px;
+	/*letter-spacing:1px;*/
+	/* font-variant:small-caps; */
+	bottom: 3px;
+	right: 10px;
+	position: absolute;
+}
+
+
+/**
+ ** End of Blog Header related classes
+ **
+ *********************************************
+ *********************************************/
+
+
+
 /*********************************************
  *********************************************
  **
@@ -21,11 +91,22 @@ body {
  **
  **/
 
-.post .header {
+body.single .post .header {
+	clear: both;
+	width: 100%;
+	position: relative;
+	border: 1px solid grey;
+	margin-bottom: 1em;
 }
 
-.header .categories a {
+body.single .post .header .categories {
 	clear: both;
+	left: 0em;
+	top: 0em;
+/*	position: absolute; */
+}
+
+body.single .post .header .categories a {
 	font-family: Verdana;
 	font-weight: bold;
 	font-variant: small-caps;
@@ -33,50 +114,78 @@ body {
 	color: brown;
 }
 
-.header .categories a:hover {
+body.single .post .header .categories a:hover {
 	text-decoration: underline;
 	background-color: yellow;
 	-moz-border-radius-topright: 10px;
 	-moz-border-radius-bottomleft: 10px;
 }
 
-.header .heading-block {
-	clear: both;
-	width: 100%;
-	margin-top: 5px;
-}
-
-.header .heading-block .baloon {
+body.single .post .header .comments {
 	font-size: 0.8em;
 	text-align: center;
-	vertical-align: top;
+	color: brown;
+	text-decoration: none;
 	width: 80px;
-	height: 100%;
-	float: left;
+	/*height: 100%; */
+	position: absolute;
+	left: 0;
+	top: 1.5em;
 	background-color: #ffcc66;
 	padding-bottom: 5px;
-	border: 1px solid #663300;
+	border: 3px solid #663300;
 	margin-right: 5px;
 	-moz-border-radius-topright: 15px;
 	-moz-border-radius-bottomleft: 15px;
 }
 
-.header .heading-block .baloon a {
-	color: brown;
-	text-decoration: none;
-}
 
-.header .heading-block .baloon .number {
+body.single .post .header .comments .number {
 	font-size: 2.7em;
 	font-weight: bold;
+	display: block;
 }
 
-.header .heading-block .title a, .header .heading-block .title a:hover {
+body.single .post .header .title,
+body.single .post .header .title:hover {
 	color: orange;
 	font-size: 2em;
 	font-weight: bold;
 	text-decoration: none;
+	left: 90px;
+	top: .5em;
 }
+
+body.single .post .header .date {
+	color: grey;
+	font-size: .8em;
+	position: absolute;
+	right: 10px;
+	top: 4em;
+}
+
+body.single .post .header .author {
+	color: grey;
+	position: absolute;
+	left: 90px;
+	bottom: 0;
+	font-size: 1em;
+}
+
+
+body.single .post .header .admin {
+	position: absolute;
+	right: 0px;
+	top: 1em;
+	width: 40px;
+	border: 1px solid black;
+}
+
+body.single .post .content {
+	clear: both;
+}
+
+
 
 /**
  ** End of Single Post related classes
@@ -149,11 +258,62 @@ body {
  *********************************************
  *********************************************/
 
+
+
+/*********************************************
+ *********************************************
+ **
+ ** Widget Comments (list) related classes
+ **
+ **/
+
+.commentlist li {
+	margin-bottom: 3em;
+	border-bottom: 1px solid rgb(221, 221, 221);
+	clear: both;
+	border: 1px solid brown;
+}
+
+.commentlist li .metadata {
+	float: left;
+	width: 19%;
+	border: 1px solid red;
+}
+
+.commentlist li .metadata .author, .commentlist li .metadata .date, .commentlist li .metadata .control {
+	display: block;
+}
+
+.commentlist li .metadata .author {
+	font-weight: bold;
+}
+
+.commentlist li .metadata .date {
+	margin-top: 1em;
+}
+
+.commentlist li .content {
+	float: right;
+	width: 79%;
+	border: 1px solid yellow;
+}
+
+.commentlist li .content p {
+}
+
+
+/**
+ ** End of Widget Comments (list) related classes
+ **
+ *********************************************
+ *********************************************/
+
+
 .horizontal-panel {
 	max-width: 100%;
 	clear: both;
 }
-
+/*
 .vertical-panel .widget {
 	float: none;
 }
@@ -162,3 +322,7 @@ body {
 	float: left;
 }
 
+.horizontal-panel .vertical-panel, .vertical-panel .horizontal-panel {
+	float: none;
+}
+*/
