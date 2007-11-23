@@ -19,11 +19,16 @@ function MultiPost_render($args,$instance) {
 
 	extract($args);
 
-	echo($before_widget . "\n");
+	query_posts(0);
 
-	/* Lets create a fake sidebar-like environment for the Widget SinglePost */
+	echo($before_widget . "\n");
+	echo($before_title . __("Recently at the Blog",'theme') . $after_title . "\n");
+
 	$options=array();
 	$options['wrapped']=true;
+
+	if (is_home() || is_search())
+		$options['content']='excerpt';
 
 	while (have_posts()) {
 		the_post();
