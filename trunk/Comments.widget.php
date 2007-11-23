@@ -130,7 +130,7 @@ function Comments_render($args,$instance) {
 				<span class="author"><?php comment_author_link() ?></span><?php
 				if (get_comment_author_url()) {
 					echo("<span class=\"from\">");
-					printf(__("of %s",'theme'), get_comment_author_url_link());
+					printf(__("from %s",'theme'), get_comment_author_url_link());
 					echo("</span>");
 				}?>
 				<span class="date"><?php comment_date() ?></span>

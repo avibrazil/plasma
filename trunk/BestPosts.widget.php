@@ -13,15 +13,15 @@ function BestPosts_render($args,$instance) {
 	global $BestPosts_cssClassName, $BestPosts_wpOptions;
 
 	extract($args);
-	//$tabs=BestOf::$created[$instance]->tabs;
 
 	$tabs = get_option($BestPosts_wpOptions);
 
 	if (empty($tabs)) return;
 
-	echo($before_widget . "\n");?>
-
-
+	echo($before_widget . "\n");
+	echo($before_title);
+	printf(__("Best of %s",'theme'),__(get_bloginfo('name'),'personal'));
+	echo($after_title . "\n");?>
 
 <script type="text/javascript">
 //<![CDATA[
@@ -48,14 +48,10 @@ function selectTab(widgetID,tabIndex) {
 
 //]]>
 </script>
-
-
-<?php
+<div class="wrapper"><?php
 
 	$index=0;
 	echo("<ul id=\"$instance-tabs\" class=\"tabs\">\n");
-//	echo("instance=$instance\n");
-//	print_r($tabs);
 	foreach ($tabs[$instance] as $tab) {
 		if ($index==0) $class="selected";
 		else $class="unselected";
@@ -66,24 +62,23 @@ function selectTab(widgetID,tabIndex) {
 
 
 	$index=0;
+	$options=array('wrapped'=>1,'content'=>'no');
 	echo("<div id=\"$instance-lists\" class=\"lists\">\n");
-//	echo("instance=$instance\n");
 	foreach ($tabs[$instance] as $tab) {
 		if ($index==0) $class="selected";
 		else $class="unselected";
 		query_posts("tag=" . $tab['tag'] . "&order=DESC&showposts=15");
-		echo("<ul class=\"$class\" id=\"$instance" . "-list-" . "$index\">\n");
-		if (have_posts()) :
-			while (have_posts()) : the_post();
-				echo("<li>");
-				the_title();
-				echo("</li>\n");
-			endwhile;
-		endif;
-		echo("</ul>\n\n");
+		echo("<div class=\"$class\" id=\"$instance" . "-list-" . "$index\">\n");
+		if (have_posts()) {
+			while (have_posts()) {
+				the_post();
+				SinglePost_render($options,0);
+			}
+		}
+		echo("</div>\n\n");
 		$index++;
 	}
-	echo("</div>\n");
+	echo("</div></div>\n");
 
 	echo($after_widget . "\n");
 }

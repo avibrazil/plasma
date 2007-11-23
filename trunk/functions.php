@@ -35,8 +35,8 @@ require_once('classbuilder.php');
 
 
 // Create Sidebar 1 then wrap it as a widget
-Panel_register("sidebar-1","Sidebar 1");
-PanelWidget_register("sidebar-1","Sidebar 1","sidebar-1","Sidebar 1");
+Panel_register("panel-sidebar-1","Sidebar 1");
+PanelWidget_register("widget-sidebar-1","Sidebar 1","panel-sidebar-1","Sidebar 1");
 
 // Dynamic Panel creation through a widget.
 // Same as above but automatically creates a Panel inside the widget.
@@ -71,6 +71,8 @@ ExpandableHeader_register("banner","Header Banner");
 CommentForm_register("commentform","Comment Form");
 Comments_register("commentslist","Comments List");
 CommentBlock_register("commentblock","Comments & Reactions");
+FeaturedPost_register("featuredpost","Featured Post");
+
 
 /*
 Comments_register("comments","Flow of Comments");

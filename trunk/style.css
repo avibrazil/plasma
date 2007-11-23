@@ -87,7 +87,7 @@ body {
 /*********************************************
  *********************************************
  **
- ** Single Post related classes
+ ** Single Post (as single page) related classes
  **
  **/
 
@@ -95,15 +95,14 @@ body.single .post .header {
 	clear: both;
 	width: 100%;
 	position: relative;
-	border: 1px solid grey;
-	margin-bottom: 1em;
+	border-bottom: 1px solid grey;
+	padding-bottom: 2em;
 }
 
 body.single .post .header .categories {
-	clear: both;
 	left: 0em;
 	top: 0em;
-/*	position: absolute; */
+	position: absolute;
 }
 
 body.single .post .header .categories a {
@@ -122,7 +121,6 @@ body.single .post .header .categories a:hover {
 }
 
 body.single .post .header .comments {
-	font-size: 0.8em;
 	text-align: center;
 	color: brown;
 	text-decoration: none;
@@ -139,44 +137,68 @@ body.single .post .header .comments {
 	-moz-border-radius-bottomleft: 15px;
 }
 
+body.single .post .header .comments .word {
+	font-size: .8em;
+}
 
 body.single .post .header .comments .number {
-	font-size: 2.7em;
+	font-size: 2em;
 	font-weight: bold;
 	display: block;
 }
 
-body.single .post .header .title,
-body.single .post .header .title:hover {
+body.single .post .header .title {
 	color: orange;
-	font-size: 2em;
+	font-size: 1.8em;
+	font-family: Arial;
 	font-weight: bold;
 	text-decoration: none;
-	left: 90px;
-	top: .5em;
+	display: block;
+	position: relative;
+	margin-left: 90px;
+	margin-right: 50px;
+	top: .7em;
 }
 
 body.single .post .header .date {
 	color: grey;
-	font-size: .8em;
-	position: absolute;
-	right: 10px;
-	top: 4em;
+	font-size: .9em;
+	font-family: Arial, Tahoma;
+	position: relative;
+	margin-left: 100px;
+	top: 1.3em;
 }
+
+body.single .post .header .date-modified {
+	color: grey;
+	font-size: .9em;
+	font-family: Arial, Tahoma;
+	position: relative;
+	top: 1.3em;
+}
+
+body.single .post .header .short,
+body.single .post .header .default {
+	display: none;
+}
+
+
 
 body.single .post .header .author {
 	color: grey;
-	position: absolute;
-	left: 90px;
-	bottom: 0;
-	font-size: 1em;
+	font-family: Arial, Tahoma;
+	font-size: .9em;
+	display: block;
+	position: relative;
+	left: 100px;
+	top: 1.3em;
 }
 
 
 body.single .post .header .admin {
 	position: absolute;
-	right: 0px;
-	top: 1em;
+	right: 0;
+	top: 1.5em;
 	width: 40px;
 	border: 1px solid black;
 }
@@ -188,10 +210,110 @@ body.single .post .content {
 
 
 /**
- ** End of Single Post related classes
+ ** End of Single Post (single page) related classes
  **
  *********************************************
  *********************************************/
+
+
+
+
+
+
+
+
+/*********************************************
+ *********************************************
+ **
+ ** Single Post (multipost page) related classes
+ **
+ **/
+
+body.home .post .header {
+	clear: both;
+	width: 100%;
+	position: relative;
+	margin-bottom: 2em;
+}
+
+body.home .post .header .categories {
+	left: 0em;
+	top: 0em;
+	position: absolute;
+	font-family: Tahoma, Arial;
+	font-size: .9em;
+}
+
+body.home .post .header .categories a {
+	font-family: Tahoma, Arial;
+	text-decoration: none;
+	color: brown;
+}
+
+body.home .post .header .categories a:hover {
+	text-decoration: underline;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+}
+
+body.home .post .header .title {
+	color: orange;
+	font-size: 1.4em;
+	font-family: Arial;
+	font-weight: bold;
+	text-decoration: none;
+	display: block;
+	position: relative;
+	top: .8em;
+}
+
+
+body.home .post .header .author,
+body.home .post .header .comments,
+body.home .post .header .date {
+	color: grey;
+	font-family: Tahoma, Arial;
+	font-size: .9em;
+	position: relative;
+	top: 1em;
+}
+
+body.home .post .header .comments,
+body.home .post .header .date {
+	margin-left: 1em;
+}
+
+body.home .post .header .long,
+body.home .post .header .default,
+body.home .post .header .date-modified,
+body.home .post .header .admin {
+	display: none;
+}
+
+body.home .post .content {
+	clear: both;
+	margin-bottom: 4em;
+	font-family: Tahoma, Arial;
+	font-size: .9em;
+}
+
+body.home .post .readmore {
+	font-weight: bold;
+}
+
+/**
+ ** End of Single Post (multipost page) related classes
+ **
+ *********************************************
+ *********************************************/
+
+
+
+
+
+
+
+
 
 
 
@@ -203,11 +325,21 @@ body.single .post .content {
  **/
 
 .widgetBestPosts {
-	border: 1px solid #333333;
-	width: 300px;
-	background: #eee;
+	width: 30%;
 	margin: 0px;
-	padding: 0px;
+}
+
+.widgetBestPosts>.wrapper {
+	border: 1px solid rgb(213,213,213);
+	background: rgb(241,241,241);
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.widgetBestPosts .post .header {
+	margin-bottom: 0 !important;
+	padding-bottom: 1em !important;
+	border-bottom: 1px dotted rgb(213,213,213);
 }
 
 .widgetBestPosts .tabs {
@@ -218,9 +350,11 @@ body.single .post .content {
 .widgetBestPosts .tabs li {
 	display: inline;
 	font: 8pt Arial;
+	color: rgb(102,102,102);
+	background: rgb(246,246,246);
 	padding: 5px;
 	padding-bottom: 1px;
-	border: 1px solid black;
+	border: 1px solid rgb(213,213,213);
 	border-bottom: 0px;
 	margin-left: 0px;
 	margin-right: 0px;
@@ -229,28 +363,53 @@ body.single .post .content {
 
 .widgetBestPosts .tabs li.selected {
 	background: white;
+	color: red;
 }
 
-.widgetBestPosts .lists {
-}
-
-.widgetBestPosts .lists ul {
+.widgetBestPosts .lists .selected {
 	padding-left: 3px;
 	padding-top: 3px;
 	margin-top: 0px;
 	list-style-type: none;
 	background-color: white;
+	border: 1px solid rgb(213,213,213);
 }
 
-.widgetBestPosts .lists li {
-	font: 8pt Arial;
-	border-bottom: 1px solid black;
+.widgetBestPosts .post .header {
+	width: 95% !important;
+	margin-left: .5em !important;
 }
 
+.widgetBestPosts .post .header:hover {
+	background-color: rgb(248,241,248);
+}
+
+.widgetBestPosts .post .header .categories,
+.widgetBestPosts .post .header .default,
+.widgetBestPosts .post .header .date-modified,
+.widgetBestPosts .post .header .admin,
 .widgetBestPosts .lists .unselected {
 	display: none;
 }
 
+
+
+.widgetBestPosts .post .header .author,
+.widgetBestPosts .post .header .comments,
+.widgetBestPosts .post .header .date {
+	top: .6em !important;
+}
+
+.widgetBestPosts .post .header .title {
+	font-family: Arial !important;
+	font-size: 1em !important;
+	color: navy !important;
+}
+
+.widgetBestPosts .post .header .title:hover {
+	color: rgb(0, 0, 238) !important;
+	text-decoration: underline;
+}
 
 /**
  ** End of Widget Best Posts related classes
@@ -269,15 +428,18 @@ body.single .post .content {
 
 .commentlist li {
 	margin-bottom: 3em;
+	padding-bottom: 2em;
 	border-bottom: 1px solid rgb(221, 221, 221);
 	clear: both;
-	border: 1px solid brown;
+	/* border: 1px solid brown; */
+	float: left;
+	width: 100%;
 }
 
 .commentlist li .metadata {
 	float: left;
-	width: 19%;
-	border: 1px solid red;
+	width: 29%;
+/*	border: 1px solid red; */
 }
 
 .commentlist li .metadata .author, .commentlist li .metadata .date, .commentlist li .metadata .control {
@@ -286,6 +448,22 @@ body.single .post .content {
 
 .commentlist li .metadata .author {
 	font-weight: bold;
+	font-family: Arial;
+}
+
+.commentlist li .metadata .author a {
+	color: navy;
+}
+
+.commentlist li .metadata .from, .commentlist li .metadata .from a {
+	color: grey;
+	font-size: .9em;
+	overflow: hidden;
+	font-family: Tahoma, Arial;
+}
+
+.commentlist li .metadata .from a:hover {
+	text-decoration: none;
 }
 
 .commentlist li .metadata .date {
@@ -294,11 +472,12 @@ body.single .post .content {
 
 .commentlist li .content {
 	float: right;
-	width: 79%;
-	border: 1px solid yellow;
+	width: 69%;
+	/* border: 1px solid yellow; */
 }
 
 .commentlist li .content p {
+	margin-top: 0;
 }
 
 
@@ -309,20 +488,135 @@ body.single .post .content {
  *********************************************/
 
 
-.horizontal-panel {
-	max-width: 100%;
-	clear: both;
+
+
+
+/*********************************************
+ *********************************************
+ **
+ ** Widget Comments (list) related classes
+ **
+ **/
+
+
+.widgetFeaturedPost {
+	width: 63%;
 }
-/*
-.vertical-panel .widget {
+
+.widgetFeaturedPost>.widgettitle {
+	float: left;
+	margin-top: 0;
+}
+
+.widgetFeaturedPost>.post {
+	float: right;
+	width: 70%;
+}
+
+.widgetFeaturedPost>.post .header {
+	top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.widgetFeaturedPost>.post .header .title {
+	top: 0 !important;
+	font-weight: bold !important;
+	text-decoration: underline !important;
+	color: red !important;
+}
+
+
+.widgetFeaturedPost>.post .header .categories {
+	width: 30%;
+	top: 3em !important;
+	left: -42.5% !important;
+}
+
+.widgetFeaturedPost>.post .header .short {
+	position: absolute !important;
+	left: -42.5% !important;
+	top: 6em !important;
+	margin-left: 0 !important;
+}
+
+.widgetFeaturedPost>.post .header .comments {
+	position: absolute !important;
+	left: -42.5% !important;
+	top: 7.5em !important;
+	margin-left: 0 !important;
+}
+
+.widgetFeaturedPost>.post .header .author {
+	position: absolute !important;
+	left: -42.5% !important;
+	top: 9em !important;
+	margin-left: 0 !important;
+}
+
+.widgetFeaturedPost>.post .header .admin {
+	display: block !important;
+	position: absolute !important;
+	left: -42.5% !important;
+	top: 10em !important;
+	margin-left: 0 !important;
+}
+
+.widgetFeaturedPost>.post .content {
+	margin-bottom: 0 !important;
+}
+
+/**
+ ** End of Widget Featured Post related classes
+ **
+ *********************************************
+ *********************************************/
+
+
+.vertical-panel>.widget {
 	float: none;
 }
 
-.horizontal-panel .widget {
+.horizontal-panel>.widget {
 	float: left;
 }
 
-.horizontal-panel .vertical-panel, .vertical-panel .horizontal-panel {
-	float: none;
+.horizontal-panel {
+	max-width: 100%;
+	width: 100%;
+	clear: both;
+	float: left;
 }
-*/
+
+#widget-sidebar-1 {
+	width: 30%;
+}
+.widgetSinglePost, .widgetCommentBlock {
+	width: 60%;
+}
+
+.widgetMultiPost {
+	width: 30%;
+}
+
+#panel-home {
+	background-color: rgb(238, 237, 223);
+}
+
+#panel-home>.widget {
+	background-color: white;
+	margin: 1%;
+	margin-right: 0;
+	margin-bottom: 0;
+	padding: 1%;
+}
+
+.widget>.widgettitle {
+	font-family: Arial;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-left: .5em;
+}
+
+#widget-sidebar-1 {
+	float: right;
+}
