@@ -163,15 +163,9 @@ function BestPosts_control($id) {
 	if ( !is_array($options) )
 		$options = $newoptions = array();
 
-//echo("<pre>\n");
-//print_r($_POST);
-//echo("</pre>\n");
-
 	if ($_POST["$id-tabs-tags"]) {
 		$returnedString=stripslashes($_POST["$id-tabs-tags"]);
-//print_r($returnedString);
 		$newoptions[$id]=BestPosts_unserialize($id,$returnedString);
-//print_r($newoptions[$id]);
 	}
 
 	if ( $options != $newoptions ) {
