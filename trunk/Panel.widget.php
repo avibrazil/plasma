@@ -38,10 +38,12 @@ function PanelWidget_register($instance, $name, $panelID="", $panelName="",$hori
 	$opt['params']=$instance;
 	wp_register_sidebar_widget($instance,$name,'PanelWidget_render',$opt);
 
+	add_widget_default_control($instance,$name,$PanelWidget_wpOptions);
+
 	if (empty($panelID)) $panelID="panel-" . $instance;
 
 	if (empty($wp_registered_sidebars[$panelID])) {
-		// Panel (a.k.a. sidebar) doesn exists. Register a new panel.
+		// Panel (a.k.a. sidebar) doesn't exist. Register a new panel.
 		if (empty($panelName)) $panelName=$name;
 		Panel_register($panelID,$panelName,$horizontal);
 	}

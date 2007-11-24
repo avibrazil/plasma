@@ -33,10 +33,81 @@ require_once('Misc.widgets.php');
 require_once('classbuilder.php');
 
 
+function default_widget_control($params) {
+	extract($params);
 
-// Create Sidebar 1 then wrap it as a widget
+	$options = get_option($wpOptionName);
+	if ( !is_array($options) )
+		$options = array();
+
+echo("<pre>");
+//print_r($params);
+print_r($options[$id]);
+echo("</pre>");
+
+	if (isset($callback))
+		$newoptions=call_user_func_array( $callback, $params);
+
+	if ( !is_array($newoptions) )
+		$newoptions = array();
+
+	if ($_POST["$id-float"])
+		$newoptions['float']=stripslashes($_POST["$id-float"]);
+
+	if ($_POST["$id-clear"])
+		$newoptions['clear']=stripslashes($_POST["$id-clear"]);
+
+	if ($_POST["$id-width"])
+		$newoptions['width']=stripslashes($_POST["$id-width"]);
+
+	if ( $options[$id] != $newoptions ) {
+		$options[$id] = $newoptions;
+		update_option($wpOptionName, $options[$id]);
+	}?>
+
+<label for="<?php echo($wpOptionName); ?>-float"><b>Put widget on</b></label><br/>
+<select name="<?php echo($wpOptionName); ?>-float">
+	<option value="undef" <?php if (!isset($options[$id]['float'])) echo("selected=\"selected\""); ?>>Undefined</option>
+	<option value="left" <?php if ($options[$id]['float']=='left') echo("selected=\"selected\""); ?>>Left</option>
+	<option value="right" <?php if ($options[$id]['float']=='right') echo("selected=\"selected\""); ?>>Right</option>
+</select>
+<br/>
+<label for="<?php echo($wpOptionName); ?>-clear"><b>Don't let other widgets float on</b></label><br/>
+<select name="<?php echo($wpOptionName); ?>-clear">
+	<option value="undef">Undefined</option>
+	<option value="left">Left</option>
+	<option value="right">Right</option>
+	<option value="both">Both</option>
+</select>
+<br/>
+<label for="<?php echo($wpOptionName); ?>-width"><b>Widget width (please specify units as in CSS)</b></label><br/>
+<input name="<?php echo($wpOptionName); ?>-width" type="text"/><?php
+}
+
+
+
+function add_widget_default_control($instance,$name,$wpOptionName,$callback=0,$dims=0) {
+	$params=array('width' => 380, 'height' => 280);
+	$params['wpOptionName']=$wpOptionName;
+	$params['id']=$instance;
+	$params['name']=$name;
+
+	if ($callback) $params['privateCallback']=$callback;
+
+	if ($dims) $params=array_merge($params,$dims);
+
+	wp_register_widget_control($instance,$name,'default_widget_control',$params,$params);
+}
+
+
+
+// Create "Sidebar 1"
 Panel_register("panel-sidebar-1","Sidebar 1");
-PanelWidget_register("widget-sidebar-1","Sidebar 1","panel-sidebar-1","Sidebar 1");
+
+// Then instantiate it as (wrap it in) 3 different widgets
+PanelWidget_register("widget1-sidebar-1","Sidebar 1 [1]","panel-sidebar-1","Sidebar 1");
+PanelWidget_register("widget2-sidebar-1","Sidebar 1 [2]","panel-sidebar-1","Sidebar 1");
+PanelWidget_register("widget3-sidebar-1","Sidebar 1 [3]","panel-sidebar-1","Sidebar 1");
 
 // Dynamic Panel creation through a widget.
 // Same as above but automatically creates a Panel inside the widget.
