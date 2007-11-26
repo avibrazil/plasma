@@ -22,7 +22,7 @@ function PanelWidget_render($args,$instance) {
 
 	if (empty($panels[$instance]['panel'])) return;
 
-	echo($before_widget . "\n");
+	echo(Panel_insert_widget_style($before_widget,$panels[$instance]) . "\n");
 
 	Panel_render($panels[$instance]['panel']);
 
@@ -38,7 +38,7 @@ function PanelWidget_register($instance, $name, $panelID="", $panelName="",$hori
 	$opt['params']=$instance;
 	wp_register_sidebar_widget($instance,$name,'PanelWidget_render',$opt);
 
-	add_widget_default_control($instance,$name,$PanelWidget_wpOptions);
+	Panel_add_style_control($instance,$name,$PanelWidget_wpOptions);
 
 	if (empty($panelID)) $panelID="panel-" . $instance;
 
