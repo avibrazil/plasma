@@ -14,8 +14,10 @@ function SinglePost_render($args,$instance) {
 	global $SinglePost_cssClassName, $SinglePost_wpOptions;
 	extract($args);
 
+	$singles=get_option($SinglePost_wpOptions);
+
 	if (! $wrapped) {
-		echo($before_widget . "\n");
+		echo(Panel_insert_widget_style($before_widget,$singles[$instance]) . "\n");
 		the_post();
 	}
 
@@ -35,6 +37,8 @@ function SinglePost_register($instance, $name) {
 	$opt['classname']=$SinglePost_cssClassName;
 	$opt['params']=$instance;
 	wp_register_sidebar_widget($instance,$name,'SinglePost_render',$opt);
+
+	Panel_add_style_control($instance,$name,$SinglePost_wpOptions);
 }
 
 
@@ -78,16 +82,14 @@ function SinglePost_renderPost($args,$instance) {
 				if (get_comments_number() == "1") _e('comment','theme');
 				else _e('comments','theme');?></span></a>
 
-		<span class="categories"><?php the_category(', '); ?></span>
+		<span class="categories"><?php the_category(' &bull; '); ?></span>
 
 		<div class="admin">
 			<a class="esc-permalink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>">&nbsp;</a>
-			<a class="esc-trackback" href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>"><span></span></a>
-			<a class="esc-comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/comment.png"/></a>
-			<?php comments_rss_link('<img alt="feed" title="' .
-				__('Subscribe comments to this post','theme') .
-				'" src="' . get_bloginfo('template_directory') . '/img/feed.png"/>'); ?>
-			<?php edit_post_link('<img alt="edit" src="' . get_bloginfo('template_directory') . '/img/edit.png"/>'); ?>
+			<a class="esc-trackback" href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>">&nbsp;</a>
+			<a class="esc-comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>">&nbsp;</a>
+			<a class="esc-commentsfeed" href="<?php echo(get_post_comments_feed_link()); ?>" title="<?php _e('Subscribe comments to this post','theme')?>">&nbsp;</a>
+			<?php edit_post_link('<span class="esc-editpost">&nbsp;</span>'); ?>
 		</div> <!-- class=admin -->
 
 	</div> <!-- class=header --><?php
@@ -96,7 +98,7 @@ function SinglePost_renderPost($args,$instance) {
 
 	if ($content=='excerpt') {
 		if (function_exists('the_excerpt_reloaded')) {
-			the_excerpt_reloaded(80,'<a><p><i>','excerpt', false);
+			the_excerpt_reloaded(50,'<a><p><i>','excerpt', false);
 		} else the_excerpt();?>
 		<span class="readmore">
 			<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>">
@@ -128,12 +130,16 @@ function FeaturedPost_register($instance,$name) {
 	$opt['classname']=$FeaturedPost_cssClassName;
 	$opt['params']=$instance;
 	wp_register_sidebar_widget($instance,$name,'FeaturedPost_render',$opt);
+
+	Panel_add_style_control($instance,$name,$FeaturedPost_wpOptions);
 }
 
 
 function FeaturedPost_render($args,$instance) {
 	global $FeaturedPost_cssClassName, $FeaturedPost_wpOptions;
 	extract($args);
+
+	$myoptions=get_option($FeaturedPost_wpOptions);
 
 	$query='posts_per_page=1&orderby=date&tag=en';
 	if (is_category()) $query.='&cat='.get_the_category();
@@ -142,15 +148,48 @@ function FeaturedPost_render($args,$instance) {
 
 	if (! have_posts()) return;
 
-	echo($before_widget . "\n");
+	echo(Panel_insert_widget_style($before_widget,$myoptions[$instance]) . "\n");
 
 	echo($before_title);
 	_e("Featured Post",'theme');
 	echo($after_title . "\n");
 
+	$params=array();
+	$params['wrapped']=true;
+	$params['content']='excerpt';
+
+	while (have_posts()) {
+		the_post();
+		SinglePost_render($params,0);
+	}
+
+	echo($after_widget . "\n");
+}
+
+
+
+
+$MultiPost_cssClassName = "widgetMultiPost";
+$MultiPost_wpOptions = "widget_multipost";
+
+
+function MultiPost_render($args,$instance) {
+	global $MultiPost_cssClassName, $MultiPost_wpOptions;
+
+	extract($args);
+
+	query_posts(0);
+
+	$multi=get_option($MultiPost_wpOptions);
+	echo(Panel_insert_widget_style($before_widget,$multi[$instance]) . "\n");
+
+	echo($before_title . __("Recently at the Blog",'theme') . $after_title . "\n");
+
 	$options=array();
 	$options['wrapped']=true;
-	$options['content']='excerpt';
+
+	if (is_home() || is_search())
+		$options['content']='excerpt';
 
 	while (have_posts()) {
 		the_post();
@@ -159,4 +198,21 @@ function FeaturedPost_render($args,$instance) {
 
 	echo($after_widget . "\n");
 }
+
+
+
+
+function MultiPost_register($instance, $name) {
+	global $MultiPost_cssClassName, $MultiPost_wpOptions;
+
+	$opt['classname']=$MultiPost_cssClassName;
+	$opt['params']=$instance;
+	wp_register_sidebar_widget($instance,$name,'MultiPost_render',$opt);
+
+	Panel_add_style_control($instance,$name,$MultiPost_wpOptions);
+}
+
+
+
+
 ?>

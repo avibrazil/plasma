@@ -14,14 +14,16 @@ function BestPosts_render($args,$instance) {
 
 	extract($args);
 
-	$tabs = get_option($BestPosts_wpOptions);
+	$options = get_option($BestPosts_wpOptions);
 
-	if (empty($tabs)) return;
+	if (empty($options[$instance]['tabs'])) return;
 
-	echo($before_widget . "\n");
+	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");
 	echo($before_title);
 	printf(__("Best of %s",'theme'),__(get_bloginfo('name'),'personal'));
 	echo($after_title . "\n");?>
+
+
 
 <script type="text/javascript">
 //<![CDATA[
@@ -50,21 +52,22 @@ function selectTab(widgetID,tabIndex) {
 </script>
 <div class="wrapper"><?php
 
+
 	$index=0;
-	echo("<ul id=\"$instance-tabs\" class=\"tabs\">\n");
-	foreach ($tabs[$instance] as $tab) {
+	echo("<div id=\"$instance-tabs\" class=\"tabs\">\n");
+	foreach ($options[$instance]['tabs'] as $tab) {
 		if ($index==0) $class="selected";
 		else $class="unselected";
 		echo("<li class=\"$class\" id=\"$instance" . "-tab-" . $index . "\" onclick=\"selectTab('$instance',$index);\">" . $tab['title'] . "</li>\n");
 		$index++;
 	}
-	echo("</ul>\n");
+	echo("</div>\n");
 
 
 	$index=0;
-	$options=array('wrapped'=>1,'content'=>'no');
+	$params=array('wrapped'=>1,'content'=>'no');
 	echo("<div id=\"$instance-lists\" class=\"lists\">\n");
-	foreach ($tabs[$instance] as $tab) {
+	foreach ($options[$instance]['tabs'] as $tab) {
 		if ($index==0) $class="selected";
 		else $class="unselected";
 		query_posts("tag=" . $tab['tag'] . "&order=DESC&showposts=15");
@@ -72,7 +75,7 @@ function selectTab(widgetID,tabIndex) {
 		if (have_posts()) {
 			while (have_posts()) {
 				the_post();
-				SinglePost_render($options,0);
+				SinglePost_render($params,0);
 			}
 		}
 		echo("</div>\n\n");
@@ -90,13 +93,13 @@ function BestPosts_serialize($instance) {
 
 	$string="";
 
-	$tabs = get_option($BestPosts_wpOptions);
+	$options = get_option($BestPosts_wpOptions);
 
-	if (empty($tabs[$instance])) return $string;
+	if (empty($options[$instance]['tabs'])) return $string;
 
 
 	/* Build $string="tag1~Title 1^tag2~Title 2^tag3~Title 3" */
-	foreach($tabs[$instance] as $fullTab) {
+	foreach($options[$instance]['tabs'] as $fullTab) {
 		if (!empty($string)) $string.="^";
 		$string.=$fullTab['tag'] . "~" . $fullTab['title'];
 	}
@@ -107,6 +110,7 @@ function BestPosts_serialize($instance) {
 function BestPosts_unserialize($instance,$string) {
 	global $BestPosts_cssClassName, $BestPosts_wpOptions;
 	
+	$final=array();
 	$final=array();
 	$unified=split("\^",$string);
 
@@ -129,12 +133,21 @@ function BestPosts_unserialize($instance,$string) {
 function BestPosts_appendTab($instance,$title,$tag) {
 	global $BestPosts_cssClassName, $BestPosts_wpOptions;
 
-	$tabs=get_option($BestPosts_wpOptions);
+	$options=get_option($BestPosts_wpOptions);
 	
-	$index=sizeof($tabs[$instance]);
-	$tabs[$instance][$index]=array('title' => $title, 'tag' => $tag);
+	if (!is_array($options));
+		$options=array();
 
-	update_option($BestPosts_wpOptions, $tabs);
+	if (!is_array($options[$instance]));
+		$options[$instance]=array();
+
+	if (!is_array($options[$instance]['tabs']));
+		$options[$instance]['tabs']=array();
+
+	$index=sizeof($options[$instance]['tabs']);
+	$options[$instance]['tabs'][$index]=array('title' => $title, 'tag' => $tag);
+
+	update_option($BestPosts_wpOptions, $options);
 }
 
 
@@ -148,7 +161,7 @@ function BestPosts_register($instance,$name) {
 	wp_register_sidebar_widget($instance,$name,'BestPosts_render',$opt);
 
 	$dims = array('width' => 380, 'height' => 280);
-	wp_register_widget_control($instance,$name,'BestPosts_control',$dims,$instance);
+	Panel_add_style_control($instance,$name,$BestPosts_wpOptions,'BestPosts_control',$dims);
 }
 
 
@@ -156,20 +169,26 @@ function BestPosts_register($instance,$name) {
 
 function BestPosts_control($id) {
 	global $BestPosts_cssClassName, $BestPosts_wpOptions;
-//	extract($params);
 
-	$options = $newoptions = get_option($BestPosts_wpOptions);
+	$options = get_option($BestPosts_wpOptions);
 
-	if ( !is_array($options) )
-		$options = $newoptions = array();
+	if (! is_array($options))
+		$options = array();
+
+	if (!is_array($options[$id]))
+		$options[$id]=array();
+
+	if (!is_array($options[$id]['tabs']))
+		$options[$id]['tabs']=array();
 
 	if ($_POST["$id-tabs-tags"]) {
 		$returnedString=stripslashes($_POST["$id-tabs-tags"]);
-		$newoptions[$id]=BestPosts_unserialize($id,$returnedString);
+		$newoptions=BestPosts_unserialize($id,$returnedString);
 	}
 
-	if ( $options != $newoptions ) {
-		$options = $newoptions;
+
+	if ( is_array($newoptions) && $options[$id]['tabs']!=$newoptions ) {
+		$options[$id]['tabs'] = $newoptions;
 		update_option($BestPosts_wpOptions, $options);
 	}?>
 
@@ -396,11 +415,7 @@ function actionSelectTab(id) {
 tabsUnserialize('<?php echo("$id"); ?>');
 tabsRebuildUI('<?php echo("$id"); ?>');
 //]]>
-</script>
-
-
-
-	<?php
+</script><?php
 }
 
 
