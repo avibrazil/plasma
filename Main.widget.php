@@ -17,18 +17,19 @@ function Main_register($id,$name) {
 	$opt['params']=$id;
 	wp_register_sidebar_widget($id,$name,'Main_render',$opt);
 
-	
+	Panel_add_style_control($id,$name,$Main_wpOptions);
+
 	// Main WP pages are now Panels (a.k.a. sidebars).
 	// The "true" means they are horizontal Panels.
 	// See also http://codex.wordpress.org/Templates_Hierarchy
 	Panel_register("panel-home","Home main",true);
-	PanelWidget_register("panel-home","Home main","panel-home","Home main");
+	PanelWidget_register("widget-panel-home","Home main","panel-home","Home main");
 
 	Panel_register("panel-single", "Single main",true);
-	PanelWidget_register("panel-single","Single main","panel-single","Single main");
+	PanelWidget_register("widget-panel-single","Single main","panel-single","Single main");
 
 	Panel_register("panel-archive", "Archive main",true);
-	PanelWidget_register("panel-archive","Archive main","panel-archive","Archive main");
+	PanelWidget_register("widget-panel-archive","Archive main","panel-archive","Archive main");
 }
 
 
@@ -36,19 +37,20 @@ function Main_register($id,$name) {
 function Main_render($args,$id) {
 	global $Main_cssClassName, $Main_wpOptions;
 
-	extract($args);
+/*	extract($args);
 
-	echo $before_widget . "\n";
-
+	$main=get_option($Main_wpOptions);
+	echo(Panel_insert_widget_style($before_widget,$main[$id]) . "\n");
+*/
 	if (is_single()) {
-		Panel_render('panel-single');
+		PanelWidget_render($args,'widget-panel-single');
 	} else if (is_home()) {
-		Panel_render('panel-home');
+		Panel_render($args,'widget-panel-home');
 	} else if (is_archive()) {
-		Panel_render('panel-archive');
+		Panel_render($args,'widget-panel-archive');
 	} else echo("<b>no match</b>\n");
-
-	echo $after_widget . "\n";
+/*
+	echo $after_widget . "\n";*/
 }
 
 ?>

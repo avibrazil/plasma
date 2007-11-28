@@ -16,11 +16,13 @@ function CommentForm_render($args,$instance) {
 	global $comment_author, $comment_author_email, $comment_author_url;
 	global $wp_query;
 
+	extract($args);
+
+	$cforms=get_option($CommentForm_wpOptions);
 
 	if ('open' != $post->comment_status) return;
 
-	extract($args);
-	echo($before_widget . "\n");
+	echo(Panel_insert_widget_style($before_widget,$cforms[$instance]) . "\n");
 	echo($before_title . __('Leave a Reply','theme') . $after_title);
 
 	if ( get_option('comment_registration') && !$user_ID ) {
@@ -61,7 +63,7 @@ function CommentForm_render($args,$instance) {
 			</p>
 			<p>
 				<input name="submit" type="submit" id="submit" tabindex="5" value="<?php _e('Submit Comment','theme'); ?>" />
-				<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
+				<input type="hidden" name="comment_post_ID" value="<?php echo $post->ID; ?>" />
 			</p>
 			<?php do_action('comment_form', $post->ID); ?>
 		</form><?php
@@ -76,6 +78,8 @@ function CommentForm_register($instance, $name) {
 	$opt['classname']=$CommentForm_cssClassName;
 	$opt['params']=$instance;
 	wp_register_sidebar_widget($instance,$name,'CommentForm_render',$opt);
+
+	Panel_add_style_control($instance,$name,$CommentForm_wpOptions);
 }
 
 
@@ -94,7 +98,9 @@ function Comments_render($args,$instance) {
 	global $wp_query, $comment;
 
 	extract($args);
-	echo($before_widget . "\n");
+
+	$cmts=get_option($Comments_wpOptions);
+	echo(Panel_insert_widget_style($before_widget,$cmts[$instance]) . "\n");
 
 	echo($before_title);
 
@@ -162,6 +168,8 @@ function Comments_register($instance, $name) {
 	$opt['classname']=$Comments_cssClassName;
 	$opt['params']=$instance;
 	wp_register_sidebar_widget($instance,$name,'Comments_render',$opt);
+
+	Panel_add_style_control($instance,$name,$Comments_wpOptions);
 }
 
 
@@ -181,6 +189,10 @@ function CommentBlock_render($args,$instance) {
 
 	extract($args);
 
+	$cmts=get_option($CommentBlock_wpOptions);
+	echo(Panel_insert_widget_style($before_widget,$cmts[$instance]) . "\n");
+
+
 	echo($before_widget . "\n");
 	comments_template();
 	echo($after_widget . "\n");
@@ -194,6 +206,8 @@ function CommentBlock_register($instance, $name) {
 	$opt['classname']=$CommentBlock_cssClassName;
 	$opt['params']=$instance;
 	wp_register_sidebar_widget($instance,$name,'CommentBlock_render',$opt);
+
+	Panel_add_style_control($instance,$name,$CommentBlock_wpOptions);
 }
 
 
