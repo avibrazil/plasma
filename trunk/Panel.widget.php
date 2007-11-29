@@ -27,7 +27,13 @@ function Panel_register($id,$name,$horizontal=false) {
 function Panel_render($instance) {
 	global $wp_registered_sidebars;
 
-	if ($wp_registered_sidebars[$instance]['horizontal']) $class='horizontal-panel';
+
+echo("<pre>");
+echo("instance=$instance :::: \n");
+print_r($wp_registered_sidebars[$instance]);
+echo("</pre>");
+
+	if (isset($wp_registered_sidebars[$instance]['horizontal']) && $wp_registered_sidebars[$instance]['horizontal']) $class='horizontal-panel';
 	else $class='vertical-panel';
 
 	echo "<div class=\"$class\" id=\"$instance\">\n";
