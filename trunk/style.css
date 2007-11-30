@@ -606,11 +606,6 @@ body.home .post .readmore {
  *********************************************
  *********************************************/
 
-
-.vertical-panel .widget {
-	float: none;
-}
-
 .horizontal-panel .widget {
 	float: left;
 }
@@ -619,7 +614,6 @@ body.home .post .readmore {
 	max-width: 100%;
 	width: 100%;
 	clear: both;
-	float: left;
 }
 
 #main-content .widget,

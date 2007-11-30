@@ -36,19 +36,27 @@ function Main_register($id,$name) {
 
 function Main_render($args,$id) {
 	global $Main_cssClassName, $Main_wpOptions;
+/*
+echo("\n<pre>\n");
+echo("id=$id :::: \n");
+print_r($args);
+echo("</pre>\n");
+*/
 
 /*	extract($args);
 
 	$main=get_option($Main_wpOptions);
 	echo(Panel_insert_widget_style($before_widget,$main[$id]) . "\n");
 */
+
 	if (is_single()) {
 		PanelWidget_render($args,'widget-panel-single');
 	} else if (is_home()) {
-		Panel_render($args,'widget-panel-home');
+		PanelWidget_render($args,'widget-panel-home');
 	} else if (is_archive()) {
-		Panel_render($args,'widget-panel-archive');
+		PanelWidget_render($args,'widget-panel-archive');
 	} else echo("<b>no match</b>\n");
+
 /*
 	echo $after_widget . "\n";*/
 }
