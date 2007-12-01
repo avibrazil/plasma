@@ -98,7 +98,7 @@ body.single .post .header {
 	clear: both;
 	width: 100%;
 	position: relative;
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid rgb(128,128,128);
 	padding-bottom: 2em;
 }
 
@@ -164,7 +164,7 @@ body.single .post .header .title {
 }
 
 body.single .post .header .date {
-	color: grey;
+	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
 	position: relative;
@@ -173,7 +173,7 @@ body.single .post .header .date {
 }
 
 body.single .post .header .date-modified {
-	color: grey;
+	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
 	position: relative;
@@ -188,7 +188,7 @@ body.single .post .header .default {
 
 
 body.single .post .header .author {
-	color: grey;
+	color: rgb(128,128,128);
 	font-family: Arial, Tahoma;
 	font-size: .9em;
 	display: block;
@@ -206,11 +206,8 @@ body.single .post .header .admin {
 	padding-top: .5em;
 }
 
-.header .admin .esc-editpost,
-.header .admin .esc-commentsfeed,
-.header .admin .esc-comments,
-.header .admin .esc-trackback,
-.header .admin .esc-permalink {
+.adm-commentsfeed, .adm-permalink, .adm-editpost,
+.adm-comments, .adm-trackback {
 	padding: 8px;
 	background: url(blogicons/permalink.png) no-repeat;
 	font-size: 0;
@@ -219,25 +216,26 @@ body.single .post .header .admin {
 	text-decoration: none;
 }
 
-.header .admin .esc-editpost {
+.adm-editpost {
 	background-image: url(blogicons/edit.png);
 }
 
-.header .admin .esc-commentsfeed {
+.adm-commentsfeed {
 	background-image: url(blogicons/feed.png);
 }
 
-.header .admin .esc-comments {
+.adm-comments {
 	background-image: url(blogicons/comment.png);
 }
 
-.post .header .admin .esc-trackback {
+.adm-trackback {
 	background-image: url(blogicons/trackback.png);
 }
 
 
 body.single .post .content {
 	clear: both;
+	font-family: Helvetica, Verdana, Arial
 }
 
 
@@ -283,7 +281,7 @@ body.home .post .header .title {
 body.home .post .header .author,
 body.home .post .header .comments,
 body.home .post .header .date {
-	color: grey;
+	color: rgb(128,128,128);
 	font-family: Tahoma, Arial;
 	font-size: .9em;
 	position: relative;
@@ -439,6 +437,35 @@ body.home .post .readmore {
  *********************************************/
 
 
+/*********************************************
+ *********************************************
+ **
+ ** Widget Comment Input Form related classes
+ **
+ **/
+
+
+input, textarea {
+	border: 1px solid;
+}
+
+input, textarea {
+	background: #efefff;
+	border-color: orange;
+}
+
+.widgetCommentForm textarea {
+	width: 80%;
+}
+
+
+
+/**
+ ** End of Comment Input Form related classes
+ **
+ *********************************************
+ *********************************************/
+
 
 /*********************************************
  *********************************************
@@ -447,60 +474,56 @@ body.home .post .readmore {
  **
  **/
 
-.commentlist li {
+.widgetComments li {
 	margin-bottom: 3em;
 	padding-bottom: 2em;
 	border-bottom: 1px solid rgb(221, 221, 221);
+	list-style-type: none;
 	clear: both;
 	/* border: 1px solid brown; */
 	float: left;
-	width: 100%;
+	width: 90%;
 }
 
-.commentlist li .metadata {
+.widgetComments li .metadata {
 	float: left;
 	width: 29%;
 /*	border: 1px solid red; */
 }
 
-.commentlist li .metadata .author,
-.commentlist li .metadata .date,
-.commentlist li .metadata .control {
+.widgetComments li .metadata .author,
+.widgetComments li .metadata .date,
+.widgetComments li .metadata .control {
 	display: block;
 }
 
-.commentlist li .metadata .author {
+
+.widgetComments li .metadata .author {
 	font-weight: bold;
-	font-family: Arial;
+	font-family: Helvetica, Arial, Verdana;
 }
 
-.commentlist li .metadata .author a {
-	color: navy;
+.widgetComments li .metadata .author a {
+	color: rgb(52, 107, 164);
 }
 
-.commentlist li .metadata .from, .commentlist li .metadata .from a {
-	color: grey;
-	font-size: .9em;
-	overflow: hidden;
-	font-family: Tahoma, Arial;
-}
-
-.commentlist li .metadata .from a:hover {
-	text-decoration: none;
-}
-
-.commentlist li .metadata .date {
+.widgetComments li .metadata .date {
 	margin-top: 1em;
+	margin-bottom: .3em;
+	font-size: .9em;
+	color: rgb(128,128,128);
 }
 
-.commentlist li .content {
+.widgetComments li .content {
 	float: right;
 	width: 69%;
 	/* border: 1px solid yellow; */
 }
 
-.commentlist li .content p {
+.widgetComments li .content p {
 	margin-top: 0;
+	font-family: Helvetica, Verdana, Arial;
+	font-size: .9em;
 }
 
 
@@ -517,7 +540,7 @@ body.home .post .readmore {
 /*********************************************
  *********************************************
  **
- ** Widget Comments (list) related classes
+ ** Widget Featured Post related classes
  **
  **/
 
@@ -606,8 +629,29 @@ body.home .post .readmore {
  *********************************************
  *********************************************/
 
+
+.widgetMain .widget {
+	padding: .5em;
+	/*border: 1px solid black; */
+}
+
+#widget-panel-home .widget {
+	margin-top: .2em;
+	margin-right: .2em;
+}
+
+
+.widget {
+	max-width: 100%;
+}
+
 .horizontal-panel .widget {
 	float: left;
+}
+
+.panel {
+	margin: 0px;
+	padding: 0px;
 }
 
 .horizontal-panel {
@@ -616,11 +660,12 @@ body.home .post .readmore {
 	clear: both;
 }
 
-#main-content .widget,
+.vertical-panel {
+}
+
+#panel-single .widget,
 #panel-home .widget {
 	background-color: white;
-	margin: .2%;
-	padding: 1%;
 }
 
 .widget .widgettitle {

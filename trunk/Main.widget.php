@@ -35,7 +35,7 @@ function Main_register($id,$name) {
 
 
 function Main_render($args,$id) {
-	global $Main_cssClassName, $Main_wpOptions;
+	global $Main_cssClassName, $Main_wpOptions, $PanelWidget_cssClassName;
 /*
 echo("\n<pre>\n");
 echo("id=$id :::: \n");
@@ -49,13 +49,18 @@ echo("</pre>\n");
 	echo(Panel_insert_widget_style($before_widget,$main[$id]) . "\n");
 */
 
-	if (is_single()) {
-		PanelWidget_render($args,'widget-panel-single');
-	} else if (is_home()) {
-		PanelWidget_render($args,'widget-panel-home');
-	} else if (is_archive()) {
-		PanelWidget_render($args,'widget-panel-archive');
-	} else echo("<b>no match</b>\n");
+	if (is_single()) $realid='widget-panel-single';
+	else if (is_home()) $realid='widget-panel-home';
+	else if (is_archive()) $realid='widget-panel-archive';
+	else {
+		echo("<b>no match</b>\n");
+		return;
+	}
+
+	$args['before_widget']=str_replace("id=\"$id\"","id=\"$realid\"",$args['before_widget']);
+	$args['before_widget']=str_replace("$Main_cssClassName","$Main_cssClassName $PanelWidget_cssClassName",$args['before_widget']);
+		
+	PanelWidget_render($args,$realid);
 
 /*
 	echo $after_widget . "\n";*/

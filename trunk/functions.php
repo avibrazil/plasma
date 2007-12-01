@@ -84,7 +84,7 @@ BestPosts_register("bestposts-homepage","Best Posts [home]");
 MultiPost_register("multipost","Flow of Posts");
 SinglePost_register("singlepost","One Post");
 ExpandableHeader_register("banner","Header Banner");
-CommentForm_register("commentform","Comment Form");
+CommentForm_register("commentinput","Comment Form");
 Comments_register("commentslist","Comments List");
 CommentBlock_register("commentblock","Comments & Reactions");
 FeaturedPost_register("featuredpost","Featured Post");
