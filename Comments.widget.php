@@ -59,7 +59,7 @@ function CommentForm_render($args,$instance) {
 		<?php } ?>
 			<p><small><strong>XHTML:</strong> <?php _e('You can use these tags:','theme');  echo allowed_tags(); ?></small></p>
 			<p>
-				<textarea name="comment" id="comment" cols="90%" rows="10" tabindex="4"></textarea>
+				<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
 			</p>
 			<p>
 				<input name="submit" type="submit" id="submit" tabindex="5" value="<?php _e('Submit Comment','theme'); ?>" />
@@ -104,9 +104,7 @@ function Comments_render($args,$instance) {
 
 	echo($before_title);
 
-	comments_rss_link('<span title="' .
-		__('Subscribe comments to this post','theme') .
-		'" class="subscribe">&nbsp;</span>');
+	?><a class="adm-commentsfeed" href="<?php echo(get_post_comments_feed_link()); ?>" title="<?php _e('Subscribe comments to this post','theme')?>">&nbsp;</a> <?php
 
 	$no=sprintf(__("No Responses to &#8220;%s&#8221;",'theme'),__(get_the_title(),'personal'));
 	$one=sprintf(__("One Response to &#8220;%s&#8221;",'theme'),__(get_the_title(),'personal'));
@@ -130,19 +128,21 @@ function Comments_render($args,$instance) {
 
 	echo("<ol class=\"commentlist\">");
 
-	foreach ($wp_query->comments as $comment) {?>
+	foreach ($wp_query->comments as $comment) {
+		$text="";
+		$type=get_comment_type();
+		if ( $type=='trackback' || $type=='pingback' ) {
+			$text=__("Via $type",'theme');
+		}?>
+
 		<li class="<?php sandbox_comment_class(); ?>" id="comment-<?php comment_ID() ?>">
 			<div class="metadata">
-				<span class="author"><?php comment_author_link() ?></span><?php
-				if (get_comment_author_url()) {
-					echo("<span class=\"from\">");
-					printf(__("from %s",'theme'), get_comment_author_url_link());
-					echo("</span>");
-				}?>
+				<a rel="external" class="author" href="<?php comment_author_url(); ?>"><?php comment_author(); ?> <?php
+					if (!empty($text)) echo('<span class="adm-trackback" title="' . $text . '">&nbsp;</span>');?></a>
 				<span class="date"><?php comment_date() ?></span>
-				<span class="control">
-					<a href="<?php get_comment_link() ?>" title="<?php _e('comment permalink','theme');?>"><img alt="<?php _e('comment permalink','theme');?>" src="<?php echo(get_bloginfo('template_directory') . '/img/permalink.png'); ?>"/></a>
-					<?php edit_comment_link('<img alt="edit" src="' . get_bloginfo('template_directory') . '/img/edit.png"/>'); ?>
+				<span class="admin">
+					<a class="adm-permalink" href="<?php get_comment_link() ?>" rel="bookmark" title="<?php _e('Comment permalink','theme'); ?>">&nbsp;</a>
+					<?php edit_comment_link('<span class="adm-editpost">&nbsp;</span>'); ?>
 				</span>
 			</div> <!-- class=metadata -->
 
@@ -190,10 +190,8 @@ function CommentBlock_render($args,$instance) {
 	extract($args);
 
 	$cmts=get_option($CommentBlock_wpOptions);
+
 	echo(Panel_insert_widget_style($before_widget,$cmts[$instance]) . "\n");
-
-
-	echo($before_widget . "\n");
 	comments_template();
 	echo($after_widget . "\n");
 }

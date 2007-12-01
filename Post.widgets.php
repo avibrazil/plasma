@@ -85,11 +85,11 @@ function SinglePost_renderPost($args,$instance) {
 		<span class="categories"><?php the_category(' &bull; '); ?></span>
 
 		<div class="admin">
-			<a class="esc-permalink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>">&nbsp;</a>
-			<a class="esc-trackback" href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>">&nbsp;</a>
-			<a class="esc-comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>">&nbsp;</a>
-			<a class="esc-commentsfeed" href="<?php echo(get_post_comments_feed_link()); ?>" title="<?php _e('Subscribe comments to this post','theme')?>">&nbsp;</a>
-			<?php edit_post_link('<span class="esc-editpost">&nbsp;</span>'); ?>
+			<a class="adm-permalink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>">&nbsp;</a>
+			<a class="adm-trackback" href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>">&nbsp;</a>
+			<a class="adm-comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>">&nbsp;</a>
+			<a class="adm-commentsfeed" href="<?php echo(get_post_comments_feed_link()); ?>" title="<?php _e('Subscribe comments to this post','theme')?>">&nbsp;</a>
+			<?php edit_post_link('<span class="adm-editpost">&nbsp;</span>'); ?>
 		</div> <!-- class=admin -->
 
 	</div> <!-- class=header --><?php
