@@ -51,7 +51,7 @@ function SinglePost_renderPost($args,$instance) {
 
 	<div class="header">
 
-		<a class="title" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title(",",0)); ?>"><?php the_title(); ?></a>
+		<a class="title" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',false)); ?>"><?php the_title(); ?></a>
 
 		<span class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></span><?php
 
