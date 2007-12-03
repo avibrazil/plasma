@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- $Id: htmlquickstart.kmdr 542833 2006-05-20 13:55:07Z amantia $ -->
+<head>
+  <title>Default CSS Structure for Soleil Pro</title>
+  <meta name="GENERATOR" content="Quanta Plus" /=true />
+  <meta name="AUTHOR" content="Avi Alkalay" /=true />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style type="text/css">
+  /* <![CDATA[ */
+	body {
+		font-family: Verdana, Arial, Helvetica;
+		font-size: 8pt;
+	}
+	
+	.layout {
+		float: left;
+		width: 45%;
+	}
+	
+  .box {
+		padding: .4em;
+		width: 90%;
+		border: 1px solid blue;
+		margin-bottom: 1em;
+	}
+
+	.class {
+		color: green;
+	}
+	
+	.id {
+		color: red;
+	}
+	
+	.tag {
+		color: navy
+	}
+	
+	.style {
+		font-family: Fixed;
+		display: block;
+	}
+	
+	.name {
+		font-weight: bold;
+	}
+  /* ]]> */
+  </style>
+</head>
+<body>
+	<div class="layout">
+		<h1>Master Layout for All Pages</h1>
+		<div class="box">
+			<span class="tag">body</span><span class="class">.(wordpress ...)</span>
+			<div class="box">
+				<span class="id">#master-layout</span><span class="class">.(panel vertical-panel)</span>
+				<div class="box"><span class="name">Header 1</span>
+					<span class="id">#header-1</span><span class="class">.(widget widgetPanel)</span>
+						<div class="box">
+							<span class="id">#panel-header-1</span><span class="class">.(panel horizontal-panel)</span>
+						</div>
+				</div>
+				<div class="box"><span class="name">Header 2</span>
+					<span class="id">#header-2</span><span class="class">.(widget widgetPanel)</span>
+					<div class="box">
+						<span class="id">#panel-header-2</span><span class="class">.(panel horizontal-panel)</span>
+					</div>
+				</div>
+				<div class="box"><span class="name">Virtual Main Content</span>
+				</div>
+				<div class="box"><span class="name">Footer 1</span>
+					<span class="id">#footer-1</span><span class="class">.(widget widgetPanel)</span>
+					<div class="box">
+						<span class="id">#panel-footer-1</span><span class="class">.(panel horizontal-panel)</span>
+					</div>
+				</div>
+				<div class="box"><span class="name">Footer 2</span>
+					<span class="id">#footer-2</span><span class="class">.(widget widgetPanel)</span>
+					<div class="box">
+						<span class="id">#panel-footer-2</span><span class="class">.(panel horizontal-panel)</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="layout">
+		<h1>Main Page (as Virtual Main Content)</h1>
+		<div class="box">
+			<span class="tag">body</span><span class="class">.(wordpress home ...)</span><br/>
+			Headers...
+			<div class="box">
+				<span class="id">#widget-panel-home</span><span class="class">.(widget widgetMain widgetPanel)</span>
+				<div class="box">
+					<span class="id">#panel-home</span><span class="class">.(panel horizontal-panel)</span>
+					<div class="box">
+						<span class="id">#widget-sidebar-1-1</span><span class="class">.(widget widgetPanel)</span>
+						<span class="style">style="float:right;width:30%;"</span>
+						<div class="box">
+							<span class="id">#sidebar-1</span><span class="class">.(panel vertical-panel)</span>
+						</div>
+					</div>
+					<div class="box">
+						<span class="id">#featured-post</span><span class="class">.(widget widgetFeaturedPost)</span>
+						<span class="style">style="float:left;width:67%;"</span>
+					</div>
+					<div class="box">
+						<span class="id">#multipost</span><span class="class">.(widget widgetMultiPost)</span>
+						<span class="style">style="float:left;width:33%;"</span>
+					</div>
+					<div class="box">
+						<span class="id">#bestposts-homepage</span><span class="class">.(widget widgetBestPosts)</span>
+						<span class="style">style="float:left;width:32.5%;"</span>
+					</div>
+				</div>
+			</div>
+			Footers...
+		</div>
+	</div>
+</body>
+</html>

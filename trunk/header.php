@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- $Id$ -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head profile="http://gmpg.org/xfn/1">
 	<title><?php
@@ -21,12 +22,11 @@
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" media="all" type="text/css"/>
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); echo("/style-print.css"); ?>" media="print" type="text/css"/>
 
-
 	<link rel="alternate" type="application/rss+xml" title="Whole blog feed: RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
 	<link rel="alternate" type="text/xml" title="Whole blog feed: RSS .92" href="<?php bloginfo('rss_url'); ?>" />
 	<link rel="alternate" type="application/atom+xml" title="Whole blog feed: Atom 0.3" href="<?php bloginfo('atom_url'); ?>" />
 	<?php if (is_category()) { ?>
-		<link rel="alternate" type="application/rss+xml" title="Channel feed: RSS 2.0" href="<?php echo get_category_rss_link(0, intval(get_query_var('cat')), ''); ?>" />
+	<link rel="alternate" type="application/rss+xml" title="Channel feed: RSS 2.0" href="<?php echo get_category_rss_link(0, intval(get_query_var('cat')), ''); ?>" />
 	<?php } ?>
 
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
@@ -37,18 +37,3 @@
 </head>
 
 <body class="<?php sandbox_body_class() ?>">
-<!--
-
-<div id="banner">
-	<div id="banner-inner">
-
-		
-		<div id="banner-header"><a href="<?php bloginfo('url'); ?>" title="<?php _e(get_bloginfo('name'),'personal'); ?>" accesskey="1"><?php _e(get_bloginfo('name'),'personal'); ?></a></div>
-
-		<div id="banner-description"><?php _e(get_bloginfo('description'),'personal');?></div>
-	</div>
-
-</div>
-
-<div id="main">
--->

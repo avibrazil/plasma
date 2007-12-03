@@ -568,43 +568,34 @@ input, textarea {
 }
 
 .widgetFeaturedPost .post .header .categories {
-	position: absolute;
-	font-family: Tahoma, Arial;
-	font-size: .9em;
-	display: block !important;
-	width: 30%;
-	top: 3em !important;
-	left: -42.5% !important;
-}
-
-.widgetFeaturedPost .post .header .categories a {
-	font-family: Tahoma, Arial;
-	text-decoration: none;
-	color: brown;
-}
-
-.widgetFeaturedPost .post .header .categories a:hover {
-	text-decoration: underline;
+	display: none;
 }
 
 .widgetFeaturedPost .post .header .short {
 	position: absolute !important;
 	left: -42.5% !important;
-	top: 6em !important;
+	top: 3em !important;
 	margin-left: 0 !important;
 }
 
 .widgetFeaturedPost .post .header .comments {
 	position: absolute !important;
-	left: -42.5% !important;
-	top: 7.5em !important;
+	left: -30% !important;
+	top: 3em !important;
 	margin-left: 0 !important;
+	background-repeat: no-repeat;
+	background-image: url('famfam/icons/comment.png');
+	padding-left: 18px;
+}
+
+.widgetFeaturedPost .post .header .comments .word {
+	display: none;
 }
 
 .widgetFeaturedPost .post .header .author {
 	position: absolute !important;
 	left: -42.5% !important;
-	top: 9em !important;
+	top: 5em !important;
 	margin-left: 0 !important;
 }
 
@@ -631,13 +622,13 @@ input, textarea {
 
 
 .widgetMain .widget {
-	padding: .5em;
+	padding: .5%;
+	margin-top: .2em;
 	/*border: 1px solid black; */
 }
 
 #widget-panel-home .widget {
-	margin-top: .2em;
-	margin-right: .2em;
+/* 	margin-right: .2em; */
 }
 
 
