@@ -4,17 +4,133 @@ $Id$
 */
 
 
-$BestPosts_cssClassName = "widgetBestPosts";
-$BestPosts_wpOptions = "widget_bestposts";
+$BestPosts=array();
+$BestPosts['baseID']           = "bestposts";
+$BestPosts['baseName']         = __("Best Posts",'theme');
+$BestPosts['wpOptions']        = "widget_bestposts";
+$BestPosts['cssClassName']     = "widgetBestPosts";
+$BestPosts['renderCallback']   = "BestPosts_render";
+$BestPosts['methodInit']       = "BestPosts_init";
+$BestPosts['methodSetup']      = "BestPosts_setup";
+$BestPosts['methodRegister']   = "BestPosts_register";
+$BestPosts['methodAdminSetup'] = "BestPosts_adminSetup";
+$BestPosts['controlCallback']  = "BestPosts_control";
+$BestPosts['controlSize']      = array('width' => 380, 'height' => 280);
 
+
+add_action('init', $BestPosts['methodInit'], 1);
+
+
+
+
+function BestPosts_register($instance,$name) {
+	global $BestPosts;
+	Widget_register($BestPosts,$instance,$name);
+}
+
+
+
+
+function BestPosts_init() {
+	global $BestPosts;
+	Widget_init($BestPosts);
+}
+
+
+
+
+function BestPosts_setup() {
+	global $BestPosts;
+	Widget_setup($BestPosts);
+}
+
+
+
+
+function BestPosts_adminSetup() {
+	global $BestPosts;
+	Widget_adminSetup($BestPosts);
+}
+
+
+
+
+function BestPosts_serialize($instance) {
+	global $BestPosts;
+
+	$string="";
+
+	$options = get_option($BestPosts['wpOptions']);
+
+	if (empty($options[$instance]['tabs'])) return $string;
+
+
+	/* Build $string="tag1~Title 1^tag2~Title 2^tag3~Title 3" */
+	foreach($options[$instance]['tabs'] as $fullTab) {
+		if (!empty($string)) $string.="^";
+		$string.=$fullTab['tag'] . "~" . $fullTab['title'];
+	}
+	return $string;
+}
+
+
+
+
+function BestPosts_unserialize($instance,$string) {
+	global $BestPosts;
+	
+	$final=array();
+	$final=array();
+	$unified=split("\^",$string);
+
+	$i=0;
+	foreach ($unified as $pair) {
+		$temp=split("\~",$pair);
+		$final[$i]['tag']=$temp[0];
+		$final[$i]['title']=$temp[1];
+		$i++;
+	}
+
+	return $final;
+}
+
+
+
+
+function BestPosts_appendTab($instance,$title,$tag) {
+	global $BestPosts;
+
+	$options=get_option($BestPosts['wpOptions']);
+	
+	if (!is_array($options));
+		$options=array();
+
+	if (!is_array($options[$instance]));
+		$options[$instance]=array();
+
+	if (!is_array($options[$instance]['tabs']));
+		$options[$instance]['tabs']=array();
+
+	$index=sizeof($options[$instance]['tabs']);
+	$options[$instance]['tabs'][$index]=array('title' => $title, 'tag' => $tag);
+
+	update_option($BestPosts['wpOptions'], $options);
+}
+
+
+
+
+
+
+/* Caution: starting beatifully designed but ugly organized code */
 
 
 function BestPosts_render($args,$instance) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
+	global $BestPosts;
 
 	extract($args);
 
-	$options = get_option($BestPosts_wpOptions);
+	$options = get_option($BestPosts['wpOptions']);
 
 	if (empty($options[$instance]['tabs'])) return;
 
@@ -88,89 +204,11 @@ function selectTab(widgetID,tabIndex) {
 
 
 
-function BestPosts_serialize($instance) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
-
-	$string="";
-
-	$options = get_option($BestPosts_wpOptions);
-
-	if (empty($options[$instance]['tabs'])) return $string;
-
-
-	/* Build $string="tag1~Title 1^tag2~Title 2^tag3~Title 3" */
-	foreach($options[$instance]['tabs'] as $fullTab) {
-		if (!empty($string)) $string.="^";
-		$string.=$fullTab['tag'] . "~" . $fullTab['title'];
-	}
-	return $string;
-}
-
-
-function BestPosts_unserialize($instance,$string) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
-	
-	$final=array();
-	$final=array();
-	$unified=split("\^",$string);
-
-	$i=0;
-	foreach ($unified as $pair) {
-		$temp=split("\~",$pair);
-		$final[$i]['tag']=$temp[0];
-		$final[$i]['title']=$temp[1];
-		$i++;
-	}
-
-	return $final;
-}
-
-
-
-
-
-
-function BestPosts_appendTab($instance,$title,$tag) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
-
-	$options=get_option($BestPosts_wpOptions);
-	
-	if (!is_array($options));
-		$options=array();
-
-	if (!is_array($options[$instance]));
-		$options[$instance]=array();
-
-	if (!is_array($options[$instance]['tabs']));
-		$options[$instance]['tabs']=array();
-
-	$index=sizeof($options[$instance]['tabs']);
-	$options[$instance]['tabs'][$index]=array('title' => $title, 'tag' => $tag);
-
-	update_option($BestPosts_wpOptions, $options);
-}
-
-
-
-
-function BestPosts_register($instance,$name) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
-
-	$opt['classname']=$BestPosts_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'BestPosts_render',$opt);
-
-	$dims = array('width' => 380, 'height' => 280);
-	Panel_add_style_control($instance,$name,$BestPosts_wpOptions,'BestPosts_control',$dims);
-}
-
-
-
 
 function BestPosts_control($id) {
-	global $BestPosts_cssClassName, $BestPosts_wpOptions;
+	global $BestPosts;
 
-	$options = get_option($BestPosts_wpOptions);
+	$options = get_option($BestPosts['wpOptions']);
 
 	if (! is_array($options))
 		$options = array();
@@ -189,7 +227,7 @@ function BestPosts_control($id) {
 
 	if ( is_array($newoptions) && $options[$id]['tabs']!=$newoptions ) {
 		$options[$id]['tabs'] = $newoptions;
-		update_option($BestPosts_wpOptions, $options);
+		update_option($BestPosts['wpOptions'], $options);
 	}?>
 
 <script type="text/javascript">

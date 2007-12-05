@@ -22,6 +22,91 @@ load_plugin_textdomain('personal','wp-content/themes/soleilpro/languages');
 
 
 
+
+function Widget_register(array $current,$id,$name) {
+	$opt['classname']=$current['cssClassName'];
+	$opt['params']=$id;
+	wp_register_sidebar_widget($id,$name,$current['renderCallback'],$opt);
+
+	Panel_add_style_control($id,$name,$current['wpOptions'],
+		$current['controlCallback'],$current['controlSize']);
+}
+
+
+
+function Widget_setup(array $current) {
+	$options = $newoptions = get_option($current['wpOptions']);
+	$name=$current['baseID'] . "-number";
+
+	if ( isset($_POST[$name . '-submit']) ) {
+		$number = (int) $_POST[$name];
+		if ( $number > 9 ) $number = 9;
+		if ( $number < 1 ) $number = 1;
+
+		if (sizeof($options) > $number) array_splice($newoptions,$number);
+		if (sizeof($options) < $number) {
+			for ($i=sizeof($options); $i<$number; $i++) {
+				$previousSize=sizeof($newoptions);
+				$newoptions[$current['baseID'] . "-" . ($previousSize+1)]=array();
+			}
+		}
+	}
+
+	if ( $options != $newoptions ) {
+		$options = $newoptions;
+		update_option($current['wpOptions'], $options);
+		Widget_init($current);
+	}
+}
+
+
+
+
+function Widget_init(array $current) {
+	$options = get_option($current['wpOptions']);
+	if (! is_array($options)) {
+		$options=array();
+		$options[$current['baseID'] . "-1"]=array();
+		update_option($current['wpOptions'], $options);
+	}
+
+	$i=1;
+	foreach ($options as $id => $params) {
+		Widget_register($current,$id,$current['baseName'] . " [$i]");
+		$i++;
+	}
+
+	add_action('sidebar_admin_setup', $current['methodSetup']);
+	add_action('sidebar_admin_page',  $current['methodAdminSetup']);
+}
+
+
+
+function Widget_adminSetup(array $current) {
+	$options = get_option($current['wpOptions']);
+	$name=$current['baseID'] . "-number";
+	$size=sizeof($options);?>
+
+	<div class="wrap">
+		<form method="POST">
+			<h2><?php printf(__('%s Widgets','theme'),$current['baseName']); ?></h2>
+			<p style="line-height: 30px;"><?php
+				printf(__('How many <strong>%s</strong> widgets would you like?','theme'),$current['baseName']);
+				echo("<select id=\"$name\" name=\"$name\" value=\"$size\">\n");
+				for ( $i = 1; $i < 10; ++$i )
+					echo("<option value='$i' ".($size==$i ? "selected='selected'" : '').">$i</option>");?>
+				</select>
+				<span class="submit">
+					<input type="submit" name="<?php echo($name)?>-submit" id="<?php echo($name)?>-submit" value="<?php echo attribute_escape(__('Save')); ?>" />
+				</span>
+			</p>
+		</form>
+	</div><?php
+}
+
+
+
+
 require_once('BestPosts.widget.php');
 require_once('Post.widgets.php');
 require_once('Panel.widget.php');
@@ -80,13 +165,17 @@ Panel_register("comments","Comments & Reactions");
 
 
 // Now register all blog elements as widgets.
-BestPosts_register("bestposts-homepage","Best Posts [home]");
-MultiPost_register("multipost","Flow of Posts");
-SinglePost_register("singlepost","One Post");
+//BestPosts_register("bestposts-1","Best Posts [1]");
+//BestPosts_register("bestposts-2","Best Posts [2]");
+//BestPosts_register("bestposts-3","Best Posts [3]");
+//MultiPost_register("multipost","Flow of Posts");
+//SinglePost_register("singlepost","One Post");
 ExpandableHeader_register("banner","Header Banner");
 CommentForm_register("commentinput","Comment Form");
 Comments_register("commentslist","Comments List");
 CommentBlock_register("commentblock","Comments & Reactions");
-FeaturedPost_register("featuredpost","Featured Post");
+//FeaturedPost_register("featuredpost-1","Featured Post [1]");
+//FeaturedPost_register("featuredpost-2","Featured Post [2]");
+//FeaturedPost_register("featuredpost-3","Featured Post [3]");
 
 ?>

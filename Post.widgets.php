@@ -5,16 +5,27 @@ $Id$
 */
 
 
-$SinglePost_cssClassName = "widgetSinglePost";
-$SinglePost_wpOptions = "widget_singlepost";
+$SinglePost=array();
+$SinglePost['baseID']           = "singlepost";
+$SinglePost['baseName']         = __("Single Post",'theme');
+$SinglePost['wpOptions']        = "widget_singlepost";
+$SinglePost['cssClassName']     = "widgetSinglePost";
+$SinglePost['renderCallback']   = "SinglePost_render";
+$SinglePost['methodInit']       = "SinglePost_init";
+$SinglePost['methodSetup']      = "SinglePost_setup";
+$SinglePost['methodRegister']   = "SinglePost_register";
+$SinglePost['methodAdminSetup'] = "SinglePost_adminSetup";
 
+add_action('init', $SinglePost['methodInit'], 1);
 
 
 function SinglePost_render($args,$instance) {
-	global $SinglePost_cssClassName, $SinglePost_wpOptions;
+	global $SinglePost;
+	$current=$SinglePost;
+
 	extract($args);
 
-	$singles=get_option($SinglePost_wpOptions);
+	$singles=get_option($current['wpOptions']);
 
 	if (! $wrapped) {
 		echo(Panel_insert_widget_style($before_widget,$singles[$instance]) . "\n");
@@ -30,23 +41,195 @@ function SinglePost_render($args,$instance) {
 
 
 
-
 function SinglePost_register($instance, $name) {
-	global $SinglePost_cssClassName, $SinglePost_wpOptions;
+	global $SinglePost;
+	Widget_register($SinglePost,$instance,$name);
+}
 
-	$opt['classname']=$SinglePost_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'SinglePost_render',$opt);
 
-	Panel_add_style_control($instance,$name,$SinglePost_wpOptions);
+
+function SinglePost_setup() {
+	global $SinglePost;
+	Widget_setup($SinglePost);
+}
+
+
+
+function SinglePost_adminSetup() {
+	global $SinglePost;
+	Widget_adminSetup($SinglePost);
+}
+
+
+
+function SinglePost_init() {
+	global $SinglePost;
+	Widget_init($SinglePost);
 }
 
 
 
 
 
+
+
+
+
+
+
+
+$FeaturedPost=array();
+$FeaturedPost['baseID']           = "featuredpost";
+$FeaturedPost['baseName']         = __("Featured Post",'theme');
+$FeaturedPost['wpOptions']        = "widget_featuredpost";
+$FeaturedPost['cssClassName']     = "widgetFeaturedPost";
+$FeaturedPost['renderCallback']   = "FeaturedPost_render";
+$FeaturedPost['methodInit']       = "FeaturedPost_init";
+$FeaturedPost['methodSetup']      = "FeaturedPost_setup";
+$FeaturedPost['methodRegister']   = "FeaturedPost_register";
+$FeaturedPost['methodAdminSetup'] = "FeaturedPost_adminSetup";
+
+add_action('init', $FeaturedPost['methodInit'], 1);
+
+
+function FeaturedPost_register($instance,$name) {
+	global $FeaturedPost;
+	Widget_register($FeaturedPost,$instance,$name);
+}
+
+
+
+function FeaturedPost_setup() {
+	global $FeaturedPost;
+	Widget_setup($FeaturedPost);
+}
+
+
+
+function FeaturedPost_adminSetup() {
+	global $FeaturedPost;
+	Widget_adminSetup($FeaturedPost);
+}
+
+
+
+function FeaturedPost_init() {
+	global $FeaturedPost;
+	Widget_init($FeaturedPost);
+}
+
+
+
+
+
+$MultiPost=array();
+$MultiPost['baseID']           = "multipost";
+$MultiPost['baseName']         = __("Flow of Posts",'theme');
+$MultiPost['wpOptions']        = "widget_multipost";
+$MultiPost['cssClassName']     = "widgetMultiPost";
+$MultiPost['renderCallback']   = "MultiPost_render";
+$MultiPost['methodInit']       = "MultiPost_init";
+$MultiPost['methodSetup']      = "MultiPost_setup";
+$MultiPost['methodRegister']   = "MultiPost_register";
+$MultiPost['methodAdminSetup'] = "MultiPost_adminSetup";
+
+add_action('init', $MultiPost['methodInit'], 1);
+
+
+function MultiPost_register($instance, $name) {
+	global $MultiPost;
+	Widget_register($MultiPost,$instance,$name);
+}
+
+
+
+function MultiPost_setup() {
+	global $MultiPost;
+	Widget_setup($MultiPost);
+}
+
+
+
+function MultiPost_adminSetup() {
+	global $MultiPost;
+	Widget_adminSetup($MultiPost);
+}
+
+
+
+function MultiPost_init() {
+	global $MultiPost;
+	Widget_init($MultiPost);
+}
+
+
+
+function MultiPost_render($args,$instance) {
+	global $MultiPost;
+
+	extract($args);
+
+	query_posts(0);
+
+	$multi=get_option($MultiPost['wpOptions']);
+	echo(Panel_insert_widget_style($before_widget,$multi[$instance]) . "\n");
+
+	echo($before_title . __("Recently at the Blog",'theme') . $after_title . "\n");
+
+	$options=array();
+	$options['wrapped']=true;
+
+	if (is_home() || is_search())
+		$options['content']='excerpt';
+
+	while (have_posts()) {
+		the_post();
+		SinglePost_render($options,0);
+	}
+
+	echo($after_widget . "\n");
+}
+
+
+
+function FeaturedPost_render($args,$instance) {
+	global $FeaturedPost;
+	$current=$FeaturedPost;
+
+	extract($args);
+
+	$myoptions=get_option($current['wpOptions']);
+
+	$query='posts_per_page=1&orderby=date&tag=en';
+	if (is_category()) $query.='&cat='.get_the_category();
+
+	query_posts($query);
+
+	if (! have_posts()) return;
+
+	echo(Panel_insert_widget_style($before_widget,$myoptions[$instance]) . "\n");
+
+	echo($before_title);
+	echo($current['baseName']);
+	echo($after_title . "\n");
+
+	$params=array();
+	$params['wrapped']=true;
+	$params['content']='excerpt';
+
+	while (have_posts()) {
+		the_post();
+		SinglePost_render($params,0);
+	}
+
+	echo($after_widget . "\n");
+}
+
+
+
 function SinglePost_renderPost($args,$instance) {
-	global $SinglePost_cssClassName, $SinglePost_wpOptions;
+	global $SinglePost;
+	$current=$SinglePost;
 	extract($args);?>
 
 	<div class="header">
@@ -117,101 +300,6 @@ function SinglePost_renderPost($args,$instance) {
 		echo("<div class=\"info\">" . wp_link_pages() . "</div>");
 	}
 }
-
-
-
-$FeaturedPost_cssClassName = "widgetFeaturedPost";
-$FeaturedPost_wpOptions = "widget_featuredpost";
-
-
-function FeaturedPost_register($instance,$name) {
-	global $FeaturedPost_cssClassName, $FeaturedPost_wpOptions;
-
-	$opt['classname']=$FeaturedPost_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'FeaturedPost_render',$opt);
-
-	Panel_add_style_control($instance,$name,$FeaturedPost_wpOptions);
-}
-
-
-function FeaturedPost_render($args,$instance) {
-	global $FeaturedPost_cssClassName, $FeaturedPost_wpOptions;
-	extract($args);
-
-	$myoptions=get_option($FeaturedPost_wpOptions);
-
-	$query='posts_per_page=1&orderby=date&tag=en';
-	if (is_category()) $query.='&cat='.get_the_category();
-
-	query_posts($query);
-
-	if (! have_posts()) return;
-
-	echo(Panel_insert_widget_style($before_widget,$myoptions[$instance]) . "\n");
-
-	echo($before_title);
-	_e("Featured Post",'theme');
-	echo($after_title . "\n");
-
-	$params=array();
-	$params['wrapped']=true;
-	$params['content']='excerpt';
-
-	while (have_posts()) {
-		the_post();
-		SinglePost_render($params,0);
-	}
-
-	echo($after_widget . "\n");
-}
-
-
-
-
-$MultiPost_cssClassName = "widgetMultiPost";
-$MultiPost_wpOptions = "widget_multipost";
-
-
-function MultiPost_render($args,$instance) {
-	global $MultiPost_cssClassName, $MultiPost_wpOptions;
-
-	extract($args);
-
-	query_posts(0);
-
-	$multi=get_option($MultiPost_wpOptions);
-	echo(Panel_insert_widget_style($before_widget,$multi[$instance]) . "\n");
-
-	echo($before_title . __("Recently at the Blog",'theme') . $after_title . "\n");
-
-	$options=array();
-	$options['wrapped']=true;
-
-	if (is_home() || is_search())
-		$options['content']='excerpt';
-
-	while (have_posts()) {
-		the_post();
-		SinglePost_render($options,0);
-	}
-
-	echo($after_widget . "\n");
-}
-
-
-
-
-function MultiPost_register($instance, $name) {
-	global $MultiPost_cssClassName, $MultiPost_wpOptions;
-
-	$opt['classname']=$MultiPost_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'MultiPost_render',$opt);
-
-	Panel_add_style_control($instance,$name,$MultiPost_wpOptions);
-}
-
 
 
 
