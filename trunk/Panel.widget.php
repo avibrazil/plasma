@@ -23,7 +23,6 @@ function Panel_register($id,$name,$horizontal=false) {
 }
 
 
-
 function Panel_render($instance) {
 	global $wp_registered_sidebars;
 
@@ -53,7 +52,7 @@ function Panel_add_style_control($instance,$name,$wpOptionName,$callback=0,$dims
 	if ($callback) $params['semanticCallback']=$callback;
 
 	if ($dims) $params=array_merge($params,$dims);
-	$params['height']+=230;
+	$params['height']+=250;
 
 	wp_register_widget_control($instance,$name,'Panel_widget_style_control',$params,$params);
 }
@@ -114,6 +113,9 @@ function Panel_widget_style_control($params) {
 	}?>
 <hr/>
 <b style="text-decoration: underline">Positioning options</b><br/>
+<b>Widget ID:</b> <?php echo($id); ?><br/>
+<b>Widget Name:</b> <?php echo($name); ?><br/>
+<hr/>
 <label for="<?php echo($id); ?>-float"><b>Align widget on</b></label><br/>
 <select name="<?php echo($id); ?>-float">
 	<option value="default" <?php if (!isset($options[$id]['pos']['float']) || $options[$id]['pos']['float']=="default") echo("selected=\"selected\""); ?>>Default</option>
@@ -187,7 +189,26 @@ function PanelWidget_register($instance, $name, $panelID="", $panelName="",$hori
 	}
 }
 
+/*
+function PanelWidget_ask_number($instance) {
+	global $PanelWidget_cssClassName, $PanelWidget_wpOptions;
 
+	$options = $newoptions = get_option($PanelWidget_wpOptions);?>
+
+	<div class="wrap">
+		<form method="POST">
+			<h2><?php printf(__("Panel %s",'theme'),$options[$instance]['panel']); ?></h2>
+			<p style="line-height: 30px;"><?php printf(__('How many %s you would like?','theme'),$options[$instance]['panel']); ?>
+				<select id="<?php echo($options[$instance]['panel']); ?>-number" name="<?php echo($options[$instance]['panel']); ?>-number" value="<?php echo $options['number']; ?>"><?php
+					for ( $i = 1; $i < 10; ++$i )
+						echo("<option value='$i' ".($options['number']==$i ? "selected='selected'" : '').">$i</option>");?>
+				</select>
+				<span class="submit"><input type="submit" name="text-number-submit" id="text-number-submit"
+					value="<?php echo attribute_escape(__('Save')); ?>" /></span></p>
+		</form>
+	</div><?php
+}
+*/
 
 /* Old stuff
 
