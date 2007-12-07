@@ -10,17 +10,89 @@ $PanelWidget_wpOptions = "widget_panel";
 
 
 
+
+
+
+/*****************************************************************
+ *
+ * The Panel-as-a-Widget (a.k.a. Sidebar-as-a-Widget) methods
+ *
+ *****************************************************************/
+
+
+function PanelWidget_render($args,$instance) {
+	global $PanelWidget_cssClassName, $PanelWidget_wpOptions;
+
+	extract($args);
+	
+	$panels=get_option($PanelWidget_wpOptions);
+
+	if (empty($panels[$instance]['panel'])) return;
+
+	echo(Panel_insert_widget_style($before_widget,$panels[$instance]) . "\n");
+
+	Panel_render($panels[$instance]['panel']);
+
+	echo($after_widget . "\n");
+}
+
+
+function PanelWidget_register($instance, $name, $panelID="", $panelName="",$horizontal=false) {
+	global $PanelWidget_cssClassName, $PanelWidget_wpOptions;
+	global $wp_registered_sidebars;
+
+	$opt['classname']=$PanelWidget_cssClassName;
+	$opt['params']=$instance;
+	wp_register_sidebar_widget($instance,$name,'PanelWidget_render',$opt);
+
+	Panel_add_style_control($instance,$name,$PanelWidget_wpOptions);
+
+	if (empty($panelID)) $panelID="panel-" . $instance;
+
+	if (empty($wp_registered_sidebars[$panelID])) {
+		// Panel (a.k.a. sidebar) doesn't exist. Register a new panel.
+		if (empty($panelName)) $panelName=$name;
+		Panel_register($panelID,$panelName,$horizontal);
+	}
+
+	// Bind this widget to its panel
+	$options=$newoptions=get_option($PanelWidget_wpOptions);
+	if ( !is_array($options) ) $options = $newoptions = array();
+
+	$newoptions[$instance]['panel']=$panelID;
+
+	if ($options != $newoptions) {
+		$options = $newoptions;
+		update_option($PanelWidget_wpOptions, $options);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 function Panel_register($id,$name,$horizontal=false) {
 	$params['name']=$name;
 	if ($id) $params['id']=$id;
 
 	if ($horizontal) $params['horizontal']=1;
 
+
+	// Creates a widget wrapper than can receive embedded style.
+	// The empty style="" will be subtituted by what user configures
+	// in the widgets admin interface.
 	$params['before_widget']='<div id="%1$s" class="widget %2$s" style="">';
 	$params['after_widget']='</div>';
 
 	register_sidebar($params);
 }
+
 
 
 function Panel_render($instance) {
@@ -32,7 +104,9 @@ echo("instance=$instance :::: \n");
 print_r($wp_registered_sidebars[$instance]);
 echo("</pre>");
 */
-	if (isset($wp_registered_sidebars[$instance]['horizontal']) && $wp_registered_sidebars[$instance]['horizontal']) $class='horizontal-panel';
+	if (isset($wp_registered_sidebars[$instance]['horizontal']) &&
+			$wp_registered_sidebars[$instance]['horizontal'])
+		$class='horizontal-panel';
 	else $class='vertical-panel';
 
 	echo "<div class=\"panel $class\" id=\"$instance\">\n";
@@ -42,7 +116,11 @@ echo("</pre>");
 
 
 
-
+/**
+ * This method should be called by all widgets at registration time.
+ * It adds a default control to widget admin UI to let user define
+ * widget positioning.
+ */
 function Panel_add_style_control($instance,$name,$wpOptionName,$callback=0,$dims=0) {
 	$params=array();
 	$params['id']=$instance;
@@ -59,6 +137,15 @@ function Panel_add_style_control($instance,$name,$wpOptionName,$callback=0,$dims
 
 
 
+
+/**
+ * This method should be called by widgets in rendering time.
+ * It will embed the positioning style in $before_widget, as defined
+ * by the user in the widget admin interface.
+ *
+ * @see Panel_add_style_control(), Panel_widget_style_control()
+ *
+ */
 function Panel_insert_widget_style($string,$options) {
 	$style="";
 
@@ -78,7 +165,12 @@ function Panel_insert_widget_style($string,$options) {
 
 
 
-
+/**
+ * The business logic that creates and handles the default widget
+ * positioning controls in the widgets UI interface.
+ *
+ * @see Panel_insert_widget_style(),Panel_add_style_control()
+ */
 function Panel_widget_style_control($params) {
 	extract($params);
 
@@ -137,57 +229,6 @@ function Panel_widget_style_control($params) {
 
 
 
-
-
-
-
-
-function PanelWidget_render($args,$instance) {
-	global $PanelWidget_cssClassName, $PanelWidget_wpOptions;
-
-	extract($args);
-	
-	$panels=get_option($PanelWidget_wpOptions);
-
-	if (empty($panels[$instance]['panel'])) return;
-
-	echo(Panel_insert_widget_style($before_widget,$panels[$instance]) . "\n");
-
-	Panel_render($panels[$instance]['panel']);
-
-	echo($after_widget . "\n");
-}
-
-
-function PanelWidget_register($instance, $name, $panelID="", $panelName="",$horizontal=false) {
-	global $PanelWidget_cssClassName, $PanelWidget_wpOptions;
-	global $wp_registered_sidebars;
-
-	$opt['classname']=$PanelWidget_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'PanelWidget_render',$opt);
-
-	Panel_add_style_control($instance,$name,$PanelWidget_wpOptions);
-
-	if (empty($panelID)) $panelID="panel-" . $instance;
-
-	if (empty($wp_registered_sidebars[$panelID])) {
-		// Panel (a.k.a. sidebar) doesn't exist. Register a new panel.
-		if (empty($panelName)) $panelName=$name;
-		Panel_register($panelID,$panelName,$horizontal);
-	}
-
-	// Bind this widget to its panel
-	$options=$newoptions=get_option($PanelWidget_wpOptions);
-	if ( !is_array($options) ) $options = $newoptions = array();
-
-	$newoptions[$instance]['panel']=$panelID;
-
-	if ($options != $newoptions) {
-		$options = $newoptions;
-		update_option($PanelWidget_wpOptions, $options);
-	}
-}
 
 /*
 function PanelWidget_ask_number($instance) {
