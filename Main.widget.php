@@ -10,32 +10,47 @@ $Main_cssClassName="widgetMain";
 $Main_wpOptions="widget_main";
 
 
+$Main=array();
+$Main['baseID']           = "main";
+$Main['baseName']         = __("Virtual Main Content",'theme');
+$Main['wpOptions']        = "widget_main";
+$Main['cssClassName']     = "widgetMain";
+$Main['renderCallback']   = "Main_render";
+$Main['methodInit']       = "Main_init";
+$Main['methodSetup']      = "Main_setup";
+$Main['methodRegister']   = "Main_register";
+$Main['methodAdminSetup'] = "Main_adminSetup";
+//$Main['controlCallback']  = "Main_control";
+//$Main['controlSize']      = array('width' => 380, 'height' => 280);
+
+//add_action('init', $Main['methodInit'], 1);
+
+
+
 function Main_register($id,$name) {
-	global $Main_cssClassName, $Main_wpOptions;
+	global $Main;
 
-	$opt['classname']=$Main_cssClassName;
-	$opt['params']=$id;
-	wp_register_sidebar_widget($id,$name,'Main_render',$opt);
-
-	Panel_add_style_control($id,$name,$Main_wpOptions);
+	Widget_register($Main,$id,$name);
 
 	// Main WP pages are now Panels (a.k.a. sidebars).
 	// The "true" means they are horizontal Panels.
 	// See also http://codex.wordpress.org/Templates_Hierarchy
-	Panel_register("panel-home","Home main",true);
-	PanelWidget_register("widget-panel-home","Home main","panel-home","Home main");
+	Panel_register("panel-home","Home main panel",true);
+//	PanelWidget_register("widget-panel-home","Panel Home main","panel-home","Home main");
 
-	Panel_register("panel-single", "Single main",true);
-	PanelWidget_register("widget-panel-single","Single main","panel-single","Single main");
+	Panel_register("panel-single", "Single main panel",true);
+//	PanelWidget_register("widget-panel-single","Panel Single main","panel-single","Single main");
 
-	Panel_register("panel-archive", "Archive main",true);
-	PanelWidget_register("widget-panel-archive","Archive main","panel-archive","Archive main");
+	Panel_register("panel-archive", "Archive main panel",true);
+//	PanelWidget_register("widget-panel-archive","Panel Archive main","panel-archive","Archive main");
 }
 
 
 
 function Main_render($args,$id) {
-	global $Main_cssClassName, $Main_wpOptions, $PanelWidget_cssClassName;
+	global $Main, $PanelWidget;
+	global $wp_registered_sidebars;
+
 /*
 echo("\n<pre>\n");
 echo("id=$id :::: \n");
@@ -43,27 +58,36 @@ print_r($args);
 echo("</pre>\n");
 */
 
-/*	extract($args);
+/*	extract($args); */
 
 	$main=get_option($Main_wpOptions);
-	echo(Panel_insert_widget_style($before_widget,$main[$id]) . "\n");
-*/
 
-	if (is_single()) $realid='widget-panel-single';
-	else if (is_home()) $realid='widget-panel-home';
-	else if (is_archive()) $realid='widget-panel-archive';
+
+	if (is_single()) $realid='panel-single';
+	else if (is_home()) $realid='panel-home';
+	else if (is_archive()) $realid='panel-archive';
 	else {
 		echo("<b>no match</b>\n");
 		return;
 	}
 
-	$args['before_widget']=str_replace("id=\"$id\"","id=\"$realid\"",$args['before_widget']);
-	$args['before_widget']=str_replace("$Main_cssClassName","$Main_cssClassName $PanelWidget_cssClassName",$args['before_widget']);
-		
-	PanelWidget_render($args,$realid);
+	//$args['before_widget']=str_replace("id=\"$id\"","id=\"$realid\"",$args['before_widget']);
+	$args['before_widget']=str_replace($Main['cssClassName'],$Main['cssClassName'] . " " . $PanelWidget['cssClassName'],$args['before_widget']);
 
+	echo(Panel_insert_widget_style($args['before_widget'],$id) . "\n");
 /*
-	echo $after_widget . "\n";*/
+echo("<pre>");
+print_r($realid);
+echo("\n");
+print_r($args);
+echo("\n");
+echo htmlentities(print_r($wp_registered_sidebars,true));
+echo("</pre>");
+*/
+
+	Panel_render($realid);
+
+	echo($args['after_widget'] . "\n");
 }
 
 ?>

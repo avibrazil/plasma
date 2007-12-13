@@ -142,9 +142,9 @@ require_once('classbuilder.php');
 Panel_register("sidebar-1","Sidebar 1");
 
 // Then instantiate it as (wrap it in) 3 different widgets
-PanelWidget_register("widget-sidebar-1-1","Sidebar 1 [1]","sidebar-1","Sidebar 1");
-PanelWidget_register("widget-sidebar-1-2","Sidebar 1 [2]","sidebar-1","Sidebar 1");
-PanelWidget_register("widget-sidebar-1-3","Sidebar 1 [3]","sidebar-1","Sidebar 1");
+//PanelWidget_register("widget-sidebar-1-1","Sidebar 1 [1]","sidebar-1","Sidebar 1");
+//PanelWidget_register("widget-sidebar-1-2","Sidebar 1 [2]","sidebar-1","Sidebar 1");
+//PanelWidget_register("widget-sidebar-1-3","Sidebar 1 [3]","sidebar-1","Sidebar 1");
 
 
 
@@ -152,16 +152,21 @@ PanelWidget_register("widget-sidebar-1-3","Sidebar 1 [3]","sidebar-1","Sidebar 1
 Panel_register("sidebar-2","Sidebar 2");
 
 // Then instantiate it as (wrap it in) 3 different widgets
-PanelWidget_register("widget-sidebar-2-1","Sidebar 2 [1]","sidebar-2","Sidebar 2");
-PanelWidget_register("widget-sidebar-2-2","Sidebar 2 [2]","sidebar-2","Sidebar 2");
-PanelWidget_register("widget-sidebar-2-3","Sidebar 2 [3]","sidebar-2","Sidebar 2");
+//PanelWidget_register("widget-sidebar-2-1","Sidebar 2 [1]","sidebar-2","Sidebar 2");
+//PanelWidget_register("widget-sidebar-2-2","Sidebar 2 [2]","sidebar-2","Sidebar 2");
+//PanelWidget_register("widget-sidebar-2-3","Sidebar 2 [3]","sidebar-2","Sidebar 2");
 
 
 // Other Panels (a.k.a. sidebars)
-PanelWidget_register("header-1","Header 1","header-1","Header 1",true);
-PanelWidget_register("header-2","Header 2","header-2","Header 2",true);
-PanelWidget_register("footer-1","Footer 1","footer-1","Footer 1",true);
-PanelWidget_register("footer-2","Footer 2","footer-2","Footer 2",true);
+//PanelWidget_register("header-1","Header 1","header-1","Header 1",true);
+//PanelWidget_register("header-2","Header 2","header-2","Header 2",true);
+//PanelWidget_register("footer-1","Footer 1","footer-1","Footer 1",true);
+//PanelWidget_register("footer-2","Footer 2","footer-2","Footer 2",true);
+
+
+// The Master Layout is a panel that contains everything but headers
+// and footers.
+Panel_register("master-layout","Master Layout for All Pages");
 
 
 
@@ -172,10 +177,6 @@ PanelWidget_register("footer-2","Footer 2","footer-2","Footer 2",true);
 // content of the page.
 // See also http://codex.wordpress.org/Templates_Hierarchy
 Main_register("main-content","Virtual Main Content");
-
-// The Master Layout is a panel that contains everything but headers
-// and footers.
-Panel_register("master-layout","Master Layout for All Pages");
 
 
 // Define a panel to hold all comment-related elements as form,
