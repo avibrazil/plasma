@@ -42,7 +42,7 @@ function PanelWidget_render($args,$instance) {
 
 	echo(Panel_insert_widget_style($before_widget,$panels[$instance]) . "\n");
 
-	Panel_render($panels[$instance]['panel']);
+	Panel_render($panels[$instance]['panelID']);
 
 	echo($after_widget . "\n");
 }
@@ -64,33 +64,29 @@ function PanelWidget_setup() {
 
 
 
-function PanelWidget_register($instance, $name, $panelID="", $panelName="",$horizontal=false) {
+
+function PanelWidget_adminSetup() {
+	global $PanelWidget;
+	Widget_adminSetup($PanelWidget);
+}
+
+
+function PanelWidget_register($instance, $name , $panelID="", $panelName="",$horizontal=false) {
 	global $PanelWidget;
 	global $wp_registered_sidebars;
 
-	$opt['classname']=$PanelWidget['cssClassName'];
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'PanelWidget_render',$opt);
+	$options = get_option($PanelWidget['wpOptions']);
 
-	Panel_add_style_control($instance,$name,$PanelWidget['wpOptions']);
-
-	if (empty($panelID)) $panelID="panel-" . $instance;
-
-	if (empty($wp_registered_sidebars[$panelID])) {
-		// Panel (a.k.a. sidebar) doesn't exist. Register a new panel.
-		if (empty($panelName)) $panelName=$name;
-		Panel_register($panelID,$panelName,$horizontal);
+	if (! isset($options[$instance]['panelName'])) {
+		$options[$instance]['panelName']=$name;
+		update_option($PanelWidget['wpOptions'],$options);
 	}
 
-	// Bind this widget to its panel
-	$options=$newoptions=get_option($PanelWidget['wpOptions']);
-	if ( !is_array($options) ) $options = $newoptions = array();
+	Widget_register($PanelWidget,$instance,$options[$instance]['panelName']);
 
-	$newoptions[$instance]['panel']=$panelID;
-
-	if ($options != $newoptions) {
-		$options = $newoptions;
-		update_option($PanelWidget['wpOptions'], $options);
+	if (!array_key_exists($options[$instance]['panelID'],$wp_registered_sidebars)) {
+		// Panel was not previously registered. Register.
+		Panel_register($options[$instance]['panelID'],$options[$instance]['panelName'],FALSE);
 	}
 }
 
@@ -138,11 +134,11 @@ function PanelWidget_control($id) {
 
 ?>
 
-<b><input type="radio" name="<?php echo($id); ?>-source" id="<?php echo($id); ?>-source-existing" value="<?php echo($id); ?>-existing" />
+<b><input type="radio" checked="checked" name="<?php echo($id); ?>-source" id="<?php echo($id); ?>-source-existing" value="<?php echo($id); ?>-existing" />
 <label for="<?php echo($id); ?>-source-existing">This widget renders the panel:</label></b><br/>
 <select name="<?php echo($id); ?>-panelID-existing" style="width: 90%" size="5"><?php
 	foreach ($wp_registered_sidebars as $p) {
-		if ($options[$id]['panel']==$p['id']) $selected='selected="selected"';
+		if ($options[$id]['panelID']==$p['id']) $selected='selected="selected"';
 		else $selected="";
 		printf("<option %s value=\"%s\">%s &lt;%s&gt;</option>",$selected,$p['id'],$p['name'],$p['id']);
 	}?>
@@ -187,8 +183,8 @@ echo("instance=$instance :::: \n");
 print_r($wp_registered_sidebars[$instance]);
 echo("</pre>");
 */
-	if (isset($wp_registered_sidebars[$instance]['horizontal']) &&
-			$wp_registered_sidebars[$instance]['horizontal'])
+	if (isset($wp_registered_sidebars[$instance]) &&
+			$wp_registered_sidebars[$instance]['horizontal']==1)
 		$class='horizontal-panel';
 	else $class='vertical-panel';
 
