@@ -93,16 +93,24 @@ function WPInspector_render($args,$instance) {
 	_e("Inspect WordPress options",'theme');
 	echo($after_title . "\n");?>
 
-	Use it to debug WordPress options in wp_options table.<br/>
+	Use it to debug WordPress options in wp_options table or internal variables.<br/>
 	<form method="POST">
 		<input type="text" name="option_name" value="<?php echo($_POST['option_name']); ?>"/>
+		<input type="text" name="var_name" value="<?php echo($_POST['var_name']); ?>"/>
 		<input type="submit" value="Inspect"/>
 	</form><?php
 
 	if ( isset($_POST['option_name']) ) {?>
-		<pre style="border: 1px solid black; background: white; overflow: scroll">
+		<pre style="border: 1px solid red; background: white; overflow: scroll">
 Inspecting <?php echo($_POST['option_name']); ?><br/>
 <?php print_r(get_option($_POST['option_name']));?>
+		</pre><?php
+	}
+
+	if ( isset($_POST['var_name']) ) {?>
+		<pre style="border: 1px solid blue; background: white; overflow: scroll">
+Inspecting <?php echo($_POST['var_name']); ?><br/>
+<?php eval("global \$" . $_POST['var_name'] . "; echo(htmlentities(print_r(\$" . $_POST['var_name'] . ",true)));") ;?>
 		</pre><?php
 	}
 

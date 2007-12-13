@@ -419,7 +419,7 @@ function actionSelectTab(id) {
 <b>Current Tabs</b>
 <table border="0"><tr><td style="width: 90%">
 <select id="<?php echo("$id"); ?>-tabs"
-	onchange="actionSelectTab('<?php echo("$id"); ?>')"
+	onchange="actionSelectTab('<?php echo($id); ?>')"
 	style="width: 100%" size="5"></select>
 </td>
 

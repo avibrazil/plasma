@@ -22,7 +22,10 @@ load_plugin_textdomain('personal','wp-content/themes/soleilpro/languages');
 
 
 
-
+/**
+ * General single widget registration logic.
+ *
+ */
 function Widget_register(array $current,$id,$name) {
 	$opt['classname']=$current['cssClassName'];
 	$opt['params']=$id;
@@ -33,7 +36,10 @@ function Widget_register(array $current,$id,$name) {
 }
 
 
-
+/**
+ * Redefines the number of same widgets the user wants based on the admin GUI.
+ *
+ */
 function Widget_setup(array $current) {
 	$options = $newoptions = get_option($current['wpOptions']);
 	$name=$current['baseID'] . "-number";
@@ -61,7 +67,10 @@ function Widget_setup(array $current) {
 
 
 
-
+/**
+ * General logic to register widgets based on their parameters fetched from DB.
+ *
+ */
 function Widget_init(array $current) {
 	$options = get_option($current['wpOptions']);
 	if (! is_array($options)) {
@@ -72,7 +81,9 @@ function Widget_init(array $current) {
 
 	$i=1;
 	foreach ($options as $id => $params) {
-		Widget_register($current,$id,$current['baseName'] . " [$i]");
+//		Widget_register($current,$id,$current['baseName'] . " [$i]");
+		call_user_func_array($current['methodRegister'],
+			array(&$id,$current['baseName'] . " [$i]"));
 		$i++;
 	}
 
@@ -82,6 +93,14 @@ function Widget_init(array $current) {
 
 
 
+
+
+
+/**
+ * Adds in the GUI the question about the number of widgets user wants,
+ * for each widget.
+ *
+ */
 function Widget_adminSetup(array $current) {
 	$options = get_option($current['wpOptions']);
 	$name=$current['baseID'] . "-number";
