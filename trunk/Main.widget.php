@@ -60,7 +60,7 @@ echo("</pre>\n");
 
 /*	extract($args); */
 
-	$main=get_option($Main_wpOptions);
+	$main=get_option($Main['wpOptions']);
 
 
 	if (is_single()) $realid='panel-single';
@@ -74,7 +74,7 @@ echo("</pre>\n");
 	//$args['before_widget']=str_replace("id=\"$id\"","id=\"$realid\"",$args['before_widget']);
 	$args['before_widget']=str_replace($Main['cssClassName'],$Main['cssClassName'] . " " . $PanelWidget['cssClassName'],$args['before_widget']);
 
-	echo(Panel_insert_widget_style($args['before_widget'],$id) . "\n");
+	echo(Panel_insert_widget_style($args['before_widget'],$main[$id]) . "\n");
 /*
 echo("<pre>");
 print_r($realid);
