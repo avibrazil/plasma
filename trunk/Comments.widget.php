@@ -5,22 +5,32 @@ $Id$
 */
 
 
-$CommentForm_cssClassName = "widgetCommentForm";
-$CommentForm_wpOptions = "widget_commentform";
+$CommentForm=array();
+$CommentForm['baseID']           = "commentform";
+$CommentForm['baseName']         = __("Comment Form",'theme');
+$CommentForm['wpOptions']        = "widget_commentform";
+$CommentForm['cssClassName']     = "widgetCommentForm";
+$CommentForm['renderCallback']   = "CommentForm_render";
+//$CommentForm['methodInit']       = "CommentForm_init";
+//$CommentForm['methodSetup']      = "CommentForm_setup";
+$CommentForm['methodRegister']   = "CommentForm_register";
+//$CommentForm['methodAdminSetup'] = "CommentForm_adminSetup";
+//$CommentForm['controlCallback']  = "CommentForm_control";
+//$CommentForm['controlSize']      = array('width' => 380, 'height' => 280);
 
 
 
 function CommentForm_render($args,$instance) {
-	global $CommentForm_cssClassName, $CommentForm_wpOptions;
+	global $CommentForm;
 	global $post, $user_ID, $req, $user_identity;
 	global $comment_author, $comment_author_email, $comment_author_url;
 	global $wp_query;
 
+	if ('open' != $post->comment_status) return;
+
 	extract($args);
 
-	$cforms=get_option($CommentForm_wpOptions);
-
-	if ('open' != $post->comment_status) return;
+	$cforms=get_option($CommentForm['wpOptions']);
 
 	echo(Panel_insert_widget_style($before_widget,$cforms[$instance]) . "\n");
 	echo($before_title . __('Leave a Reply','theme') . $after_title);
@@ -73,13 +83,8 @@ function CommentForm_render($args,$instance) {
 
 
 function CommentForm_register($instance, $name) {
-	global $CommentForm_cssClassName, $CommentForm_wpOptions;
-
-	$opt['classname']=$CommentForm_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'CommentForm_render',$opt);
-
-	Panel_add_style_control($instance,$name,$CommentForm_wpOptions);
+	global $CommentForm;
+	Widget_register($CommentForm,$instance,$name);
 }
 
 
@@ -87,19 +92,28 @@ function CommentForm_register($instance, $name) {
 
 
 
-$Comments_cssClassName = "widgetComments";
-$Comments_wpOptions = "widget_comments";
-
+$Comments=array();
+$Comments['baseID']           = "comments";
+$Comments['baseName']         = __("Flow of Comments",'theme');
+$Comments['wpOptions']        = "widget_comments";
+$Comments['cssClassName']     = "widgetComments";
+$Comments['renderCallback']   = "Comments_render";
+//$Comments['methodInit']       = "Comments_init";
+//$Comments['methodSetup']      = "Comments_setup";
+$Comments['methodRegister']   = "Comments_register";
+//$Comments['methodAdminSetup'] = "Comments_adminSetup";
+//$Comments['controlCallback']  = "Comments_control";
+//$Comments['controlSize']      = array('width' => 380, 'height' => 280);
 
 
 
 function Comments_render($args,$instance) {
-	global $Comments_cssClassName, $Comments_wpOptions;
+	global $Comments;
 	global $wp_query, $comment;
 
 	extract($args);
 
-	$cmts=get_option($Comments_wpOptions);
+	$cmts=get_option($Comments['wpOptions']);
 	echo(Panel_insert_widget_style($before_widget,$cmts[$instance]) . "\n");
 
 	echo($before_title);
@@ -163,13 +177,8 @@ function Comments_render($args,$instance) {
 
 
 function Comments_register($instance, $name) {
-	global $Comments_cssClassName, $Comments_wpOptions;
-
-	$opt['classname']=$Comments_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'Comments_render',$opt);
-
-	Panel_add_style_control($instance,$name,$Comments_wpOptions);
+	global $Comments;
+	Widget_register($Comments,$instance,$name);
 }
 
 
@@ -183,9 +192,25 @@ $CommentBlock_wpOptions = "widget_commentblock";
 
 
 
+$CommentBlock=array();
+$CommentBlock['baseID']           = "commentblock";
+$CommentBlock['baseName']         = __("Comments & Reactions",'theme');
+$CommentBlock['wpOptions']        = "widget_commentblock";
+$CommentBlock['cssClassName']     = "widgetCommentBlock";
+$CommentBlock['renderCallback']   = "CommentBlock_render";
+$CommentBlock['methodInit']       = "CommentBlock_init";
+$CommentBlock['methodSetup']      = "CommentBlock_setup";
+$CommentBlock['methodRegister']   = "CommentBlock_register";
+$CommentBlock['methodAdminSetup'] = "CommentBlock_adminSetup";
+//$CommentBlock['controlCallback']  = "CommentBlock_control";
+//$CommentBlock['controlSize']      = array('width' => 380, 'height' => 280);
+
+
+add_action('init', $CommentBlock['methodInit'], 1);
+
 
 function CommentBlock_render($args,$instance) {
-	global $CommentBlock_cssClassName, $CommentBlock_wpOptions;
+	global $CommentBlock;
 
 	extract($args);
 
@@ -199,14 +224,36 @@ function CommentBlock_render($args,$instance) {
 
 
 function CommentBlock_register($instance, $name) {
-	global $CommentBlock_cssClassName, $CommentBlock_wpOptions;
-
-	$opt['classname']=$CommentBlock_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'CommentBlock_render',$opt);
-
-	Panel_add_style_control($instance,$name,$CommentBlock_wpOptions);
+	global $CommentBlock;
+	Widget_register($CommentBlock,$instance,$name);
 }
+
+
+
+
+function CommentBlock_init() {
+	global $CommentBlock;
+	Widget_init($CommentBlock);
+}
+
+
+
+
+function CommentBlock_setup() {
+	global $CommentBlock;
+	Widget_setup($CommentBlock);
+}
+
+
+
+
+function CommentBlock_adminSetup() {
+	global $CommentBlock;
+	Widget_adminSetup($CommentBlock);
+}
+
+
+
 
 
 ?>

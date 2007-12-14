@@ -1,5 +1,5 @@
 <?php /** ?>
-<!-- $Id -->
+<!-- $Id$ -->
 <!--
 <div id="footer">
 
@@ -21,6 +21,8 @@
 	</small></p>
 -->
 <?php */ ?>
+
+
 <?php wp_footer(); ?>
 </body>
 </html>

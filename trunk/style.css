@@ -25,18 +25,23 @@ body {
  **
  **/
 
-#banner {
+/* Global, non-style related */
+.widgetExpandableBanner {
+	width: 100%
+}
+
+/* Style related */
+.widgetExpandableBanner {
 	/* The nice and exapandable blue and green bar */
 	
+	position: relative;
 	height: 177px;
 	background: url(img/banner-background.png) no-repeat top right;
-	position: relative;
-	width: 100%;
 }
 
 
 
-#banner-inner {
+.widgetExpandableBanner .inner {
 	/* The nice and fixed orange, blue an green banner, with star */
 	
 	height: 177px;
@@ -46,36 +51,34 @@ body {
 }
 
 
-#banner-header {
+.widgetExpandableBanner .name {
 	/* Blog title */
 	
-	font-size: 46px;
-	color: white;
-	font-family: Arial Black;
-	font-variant:small-caps;
 	position: absolute;
 	left: 430px;
 	top: 1em;
-	text-align: left;
-}
-
-#banner-header a {
-	color: white;
+	font-size: 5em;
+	font-family: Arial Black, Helvetica, Bitstream Vera Sans;
+	font-variant:small-caps;
+	font-weight: bold
 	text-decoration: none;
+	text-align: left;
+	color: white;
 }
 
-#banner-description {
+
+.widgetExpandableBanner .description {
 	/* Blog subtitle or description */
 	
-	font-family: Arial;
-	color: white;
+	position: absolute;
+	bottom: 3px;
+	right: 1em;
+	font-family: Arial, Helvetica, Bitstream Vera Sans;
 	font-weight: normal !important;
-	font-size: 18px;
+	font-size: 2em;
+	color: white;
 	/*letter-spacing:1px;*/
 	/* font-variant:small-caps; */
-	bottom: 3px;
-	right: 10px;
-	position: absolute;
 }
 
 

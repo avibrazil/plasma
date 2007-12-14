@@ -6,19 +6,35 @@ Template Name: Various Widgets
 $Id$
 */
 
-$ExpandableHeader_cssClassName="widgetExpandableHeader";
-$ExpandableHeader_wpOptions="widget_expandableheader";
+
+$ExpandableBanner=array();
+$ExpandableBanner['baseID']           = "expandablebanner";
+$ExpandableBanner['baseName']         = __("Expandable Banner",'theme');
+$ExpandableBanner['wpOptions']        = "widget_expandablebanner";
+$ExpandableBanner['cssClassName']     = "widgetExpandableBanner";
+$ExpandableBanner['renderCallback']   = "ExpandableBanner_render";
+$ExpandableBanner['methodInit']       = "ExpandableBanner_init";
+$ExpandableBanner['methodSetup']      = "ExpandableBanner_setup";
+$ExpandableBanner['methodRegister']   = "ExpandableBanner_register";
+$ExpandableBanner['methodAdminSetup'] = "ExpandableBanner_adminSetup";
+$ExpandableBanner['controlCallback']  = "ExpandableBanner_control";
+//$ExpandableBanner['controlSize']      = array('width' => 380, 'height' => 280);
+
+
+add_action('init', $ExpandableBanner['methodInit'], 1);
 
 
 
-function ExpandableHeader_render($args,$instance) {
-	global $ExpandableHeader_cssClassName, $ExpandableHeader_wpOptions;
+function ExpandableBanner_render($args,$instance) {
+	global $ExpandableBanner;
+
 	extract($args);
+	$options = get_option($ExpandableBanner['wpOptions']);
 
-	echo($before_widget . "\n");?>
-	<div id="banner-inner">
-		<div id="banner-header"><a href="<?php bloginfo('url'); ?>" title="<?php _e(get_bloginfo('name'),'personal'); ?>" accesskey="1"><?php _e(get_bloginfo('name'),'personal'); ?></a></div>
-		<div id="banner-description"><?php _e(get_bloginfo('description'),'personal');?></div>
+	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");
+	<div class="inner">
+		<a class="name" href="<?php bloginfo('url'); ?>" title="<?php _e(get_bloginfo('name'),'personal'); ?>" accesskey="1"><?php _e(get_bloginfo('name'),'personal'); ?></a></div>
+		<span class="description"><?php _e(get_bloginfo('description'),'personal');?></span>
 	</div><?php
 	echo($after_widget . "\n");
 }
@@ -26,12 +42,29 @@ function ExpandableHeader_render($args,$instance) {
 
 
 
-function ExpandableHeader_register($instance, $name) {
-	global $ExpandableHeader_cssClassName, $ExpandableHeader_wpOptions;
+function ExpandableBanner_register($instance, $name) {
+	global $ExpandableBanner;
+	Widget_register($ExpandableBanner,$instance,$name);
+}
 
-	$opt['classname']=$ExpandableHeader_cssClassName;
-	$opt['params']=$instance;
-	wp_register_sidebar_widget($instance,$name,'ExpandableHeader_render',$opt);
+
+function ExpandableBanner_init() {
+	global $ExpandableBanner;
+	Widget_init($ExpandableBanner);
+}
+
+
+
+function ExpandableBanner_setup() {
+	global $ExpandableBanner;
+	Widget_setup($ExpandableBanner);
+}
+
+
+
+function ExpandableBanner_adminSetup() {
+	global $ExpandableBanner;
+	Widget_adminSetup($ExpandableBanner);
 }
 
 
