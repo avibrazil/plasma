@@ -16,10 +16,10 @@ $Main['baseName']         = __("Virtual Main Content",'theme');
 $Main['wpOptions']        = "widget_main";
 $Main['cssClassName']     = "widgetMain";
 $Main['renderCallback']   = "Main_render";
-$Main['methodInit']       = "Main_init";
+//$Main['methodInit']       = "Main_init";
 $Main['methodSetup']      = "Main_setup";
 $Main['methodRegister']   = "Main_register";
-$Main['methodAdminSetup'] = "Main_adminSetup";
+//$Main['methodAdminSetup'] = "Main_adminSetup";
 //$Main['controlCallback']  = "Main_control";
 //$Main['controlSize']      = array('width' => 380, 'height' => 280);
 
