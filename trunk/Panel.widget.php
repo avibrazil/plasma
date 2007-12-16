@@ -44,7 +44,7 @@ function PanelWidget_render($args,$instance) {
 
 	Panel_render($panels[$instance]['panelID']);
 
-	echo($after_widget . "\n");
+	echo($after_widget . "<!-- id=$instance -->\n");
 }
 
 
@@ -86,7 +86,9 @@ function PanelWidget_register($instance, $name , $panelID="", $panelName="",$hor
 
 	if (!array_key_exists($options[$instance]['panelID'],$wp_registered_sidebars)) {
 		// Panel was not previously registered. Register.
-		Panel_register($options[$instance]['panelID'],$options[$instance]['panelName'],FALSE);
+		Panel_register($options[$instance]['panelID'],
+			$options[$instance]['panelName'],
+			$options[$instance]['panelStyle']=="h");
 	}
 }
 
@@ -117,6 +119,7 @@ function PanelWidget_control($id) {
 		if ($_POST["$id-panelID-existing"]) {
 			$newoptions['panelID']=stripslashes($_POST["$id-panelID-existing"]);
 			$newoptions['panelName']=$wp_registered_sidebars[$newoptions['panelID']]['name'];
+			$newoptions['panelStyle']=$wp_registered_sidebars[$newoptions['panelID']]['horizontal']?"h":"v";
 		}
 	} else if ($_POST["$id-source"]=="$id-new") {
 		if ($_POST["$id-panelID-new"])
@@ -125,6 +128,9 @@ function PanelWidget_control($id) {
 		if ($_POST["$id-panelName-new"])
 			$newoptions['panelName']=stripslashes($_POST["$id-panelName-new"]);
 		else $newoptions['panelName']=$newoptions['panelID'];
+
+		if ($_POST["$id-panelStyle-new"])
+			$newoptions['panelStyle']=stripslashes($_POST["$id-panelStyle-new"]);
 	}
 
 	if ($options[$id] != $newoptions) {
@@ -140,7 +146,11 @@ function PanelWidget_control($id) {
 	foreach ($wp_registered_sidebars as $p) {
 		if ($options[$id]['panelID']==$p['id']) $selected='selected="selected"';
 		else $selected="";
-		printf("<option %s value=\"%s\">%s &lt;%s&gt;</option>",$selected,$p['id'],$p['name'],$p['id']);
+		printf('<option %1$s value="%2$s">%3$s (%4$s) &lt;%2$s&gt;</option>',
+			$selected,
+			$p['id'],
+			$p['name'],
+			$p['horizontal'] ? "h" : "v");
 	}?>
 </select>
 <br/>
@@ -148,15 +158,16 @@ function PanelWidget_control($id) {
 <label for="<?php echo($id); ?>-source-new">Or create a new panel (a.k.a. sidebar):</label></b><br/>
 <input type="text" name="<?php echo($id); ?>-panelID-new"> ID (required)<br/>
 <input type="text" name="<?php echo($id); ?>-panelName-new"> Name in widget admin interface<br/>
-
-
-<?php
+<select name="<?php echo($id); ?>-panelStyle-new">
+	<option value="h" selected="selected">Horizontal, side by side</option>
+	<option value="v">Vertical, as a sidebar</option>
+</select> Alignment for contained widgets<?php
 }
 
 
 
 
-function Panel_register($id,$name,$horizontal=false) {
+function Panel_register($id,$name,$horizontal=true) {
 	$params['name']=$name;
 	if ($id) $params['id']=$id;
 
@@ -190,7 +201,7 @@ echo("</pre>");
 
 	echo "<div class=\"panel $class\" id=\"$instance\">\n";
 	dynamic_sidebar($instance);
-	echo("</div>\n\n");
+	echo("</div> <!-- id=$instance -->\n\n");
 }
 
 

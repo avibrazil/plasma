@@ -87,7 +87,7 @@ echo("</pre>");
 
 	Panel_render($realid);
 
-	echo($args['after_widget'] . "\n");
+	echo($args['after_widget'] . "<!-- id=$id -->\n");
 }
 
 ?>

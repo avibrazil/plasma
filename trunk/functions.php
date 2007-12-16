@@ -139,7 +139,7 @@ require_once('classbuilder.php');
 
 
 // Create "Sidebar 1"
-Panel_register("sidebar-1","Sidebar 1");
+Panel_register("sidebar-1","Sidebar 1",FALSE);
 
 // Then instantiate it as (wrap it in) 3 different widgets
 //PanelWidget_register("widget-sidebar-1-1","Sidebar 1 [1]","sidebar-1","Sidebar 1");
@@ -149,7 +149,7 @@ Panel_register("sidebar-1","Sidebar 1");
 
 
 // Create "Sidebar 2"
-Panel_register("sidebar-2","Sidebar 2");
+Panel_register("sidebar-2","Sidebar 2",FALSE);
 
 // Then instantiate it as (wrap it in) 3 different widgets
 //PanelWidget_register("widget-sidebar-2-1","Sidebar 2 [1]","sidebar-2","Sidebar 2");
@@ -181,19 +181,20 @@ Main_register("main-content","Virtual Main Content");
 
 // Define a panel to hold all comment-related elements as form,
 // flow of comments, lists of trackbacks, reactions, etc.
-Panel_register("comments","Comments & Reactions");
+Panel_register("comments","Comments & Reactions",FALSE);
 
 
 // Now register all blog elements as widgets.
+
 //BestPosts_register("bestposts-1","Best Posts [1]");
 //BestPosts_register("bestposts-2","Best Posts [2]");
 //BestPosts_register("bestposts-3","Best Posts [3]");
 //MultiPost_register("multipost","Flow of Posts");
 //SinglePost_register("singlepost","One Post");
-ExpandableHeader_register("banner","Header Banner");
+//ExpandableHeader_register("banner","Header Banner");
 CommentForm_register("commentinput","Comment Form");
 Comments_register("commentslist","Comments List");
-CommentBlock_register("commentblock","Comments & Reactions");
+//CommentBlock_register("commentblock","Comments & Reactions");
 //FeaturedPost_register("featuredpost-1","Featured Post [1]");
 //FeaturedPost_register("featuredpost-2","Featured Post [2]");
 //FeaturedPost_register("featuredpost-3","Featured Post [3]");
