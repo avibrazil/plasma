@@ -17,7 +17,7 @@ $ExpandableBanner['methodInit']       = "ExpandableBanner_init";
 $ExpandableBanner['methodSetup']      = "ExpandableBanner_setup";
 $ExpandableBanner['methodRegister']   = "ExpandableBanner_register";
 $ExpandableBanner['methodAdminSetup'] = "ExpandableBanner_adminSetup";
-$ExpandableBanner['controlCallback']  = "ExpandableBanner_control";
+//$ExpandableBanner['controlCallback']  = "ExpandableBanner_control";
 //$ExpandableBanner['controlSize']      = array('width' => 380, 'height' => 280);
 
 
@@ -31,12 +31,14 @@ function ExpandableBanner_render($args,$instance) {
 	extract($args);
 	$options = get_option($ExpandableBanner['wpOptions']);
 
-	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");
+	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");?>
+
 	<div class="inner">
-		<a class="name" href="<?php bloginfo('url'); ?>" title="<?php _e(get_bloginfo('name'),'personal'); ?>" accesskey="1"><?php _e(get_bloginfo('name'),'personal'); ?></a></div>
+		<a class="name" href="<?php bloginfo('url'); ?>" title="<?php _e(get_bloginfo('name'),'personal'); ?>" accesskey="1"><?php _e(get_bloginfo('name'),'personal'); ?></a>
 		<span class="description"><?php _e(get_bloginfo('description'),'personal');?></span>
 	</div><?php
-	echo($after_widget . "\n");
+
+	echo("$after_widget <!-- id=$instance -->\n");
 }
 
 
@@ -133,14 +135,14 @@ function WPInspector_render($args,$instance) {
 		<input type="submit" value="Inspect"/>
 	</form><?php
 
-	if ( isset($_POST['option_name']) ) {?>
+	if ( isset($_POST['option_name']) && !empty($_POST['option_name']) ) {?>
 		<pre style="border: 1px solid red; background: white; overflow: scroll">
 Inspecting <?php echo($_POST['option_name']); ?><br/>
 <?php print_r(get_option($_POST['option_name']));?>
 		</pre><?php
 	}
 
-	if ( isset($_POST['var_name']) ) {?>
+	if ( isset($_POST['var_name']) && !empty($_POST['var_name'])) {?>
 		<pre style="border: 1px solid blue; background: white; overflow: scroll">
 Inspecting <?php echo($_POST['var_name']); ?><br/>
 <?php eval("global \$" . $_POST['var_name'] . "; echo(htmlentities(print_r(\$" . $_POST['var_name'] . ",true)));") ;?>

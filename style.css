@@ -12,7 +12,7 @@ $Id$
 
 body {
 	font: 9pt Tahoma;
-	background-color: rgb(238, 237, 223);
+	background-color: #FFF0D0;
 
 /*	background: url(img/content_bg.gif) */
 }
@@ -56,11 +56,11 @@ body {
 	
 	position: absolute;
 	left: 430px;
-	top: 1em;
+	top: .5em;
 	font-size: 5em;
 	font-family: Arial Black, Helvetica, Bitstream Vera Sans;
 	font-variant:small-caps;
-	font-weight: bold
+	font-weight: bold;
 	text-decoration: none;
 	text-align: left;
 	color: white;
@@ -71,7 +71,7 @@ body {
 	/* Blog subtitle or description */
 	
 	position: absolute;
-	bottom: 3px;
+	bottom: 0;
 	right: 1em;
 	font-family: Arial, Helvetica, Bitstream Vera Sans;
 	font-weight: normal !important;
@@ -622,6 +622,130 @@ input, textarea {
  **
  *********************************************
  *********************************************/
+
+
+
+
+/***********************************************************
+ ***********************************************************
+ **
+ ** General definitions for the widgets on the a footer
+ **
+ **/
+
+
+#footer-1 .widget {
+	font-family: Verdana,Helvetica,Bitstream Vera Sans;
+	font-size: .9em;
+	margin-right: 1em;
+	margin-bottom: 1em;
+
+	max-width: 25%;
+
+	background-color: #FFF7E7;
+	padding-left: 1em;
+	padding-right: 1em;
+	-moz-border-radius: 1.5em;
+}
+
+#footer-1 .widget .widgettitle {
+	font-family: Arial,Helvetica,Bitstream Vera Sans;
+	color: rgb(84, 178, 240);
+	font-size: 1.3em;
+}
+
+#footer-1 .widget ul {
+	padding-left: 1.5em;
+}
+
+#footer-1 .widget li {
+	list-style-type: none;
+	list-style-image: url(img/bullet_blue.png);
+}
+
+#footer-1 .widget a {
+	color: rgb(80, 150, 10);
+	text-decoration: none;
+}
+
+#footer-1 .widget a:hover {
+	text-decoration: underline;
+}
+
+#footer-1 img {
+	border: 0;
+}
+
+
+/**
+ ** End of general definitions for the footer
+ **
+ ***********************************************************
+ ***********************************************************/
+
+
+
+
+
+
+
+
+/*********************************************
+ *********************************************
+ **
+ ** widget_categories related classes
+ **
+ **/
+
+
+.widget_categories {
+	font-family: Verdana, Helvetica, Bitstream Vera Sans;
+	background-color: #FFF7E7;
+	padding-left: 1em;
+	padding-right: 1em;
+	-moz-border-radius: 1.5em;
+}
+
+.widget_categories ul {
+	padding-left: 1em;
+}
+
+.widget_categories a {
+	font-weight: bold;
+	text-decoration: none;
+	color: green;
+}
+
+.widget_categories .children a {
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.widget_categories .children {
+	padding-left: 1em;
+}
+
+.widget_categories li:hover {
+}
+
+.widget_categories a:hover {
+	text-decoration: underline;
+}
+
+/**
+ ** End of widget_category related classes
+ **
+ *********************************************
+ *********************************************/
+
+
+
+
+
+.widgetMain {
+	background-color: white;
+	margin-bottom: 1em;
+}
 
 
 .widgetMain .widget {

@@ -187,11 +187,6 @@ function Comments_register($instance, $name) {
 
 
 
-$CommentBlock_cssClassName = "widgetCommentBlock";
-$CommentBlock_wpOptions = "widget_commentblock";
-
-
-
 $CommentBlock=array();
 $CommentBlock['baseID']           = "commentblock";
 $CommentBlock['baseName']         = __("Comments & Reactions",'theme');
@@ -214,7 +209,7 @@ function CommentBlock_render($args,$instance) {
 
 	extract($args);
 
-	$cmts=get_option($CommentBlock_wpOptions);
+	$cmts=get_option($CommentBlock['wpOptions']);
 
 	echo(Panel_insert_widget_style($before_widget,$cmts[$instance]) . "\n");
 	comments_template();
