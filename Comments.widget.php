@@ -158,7 +158,7 @@ function Comments_render($args,$instance) {
 					<a class="adm-permalink" href="<?php get_comment_link() ?>" rel="bookmark" title="<?php _e('Comment permalink','theme'); ?>">&nbsp;</a>
 					<?php edit_comment_link('<span class="adm-editpost">&nbsp;</span>'); ?>
 				</span>
-			</div> <!-- class=metadata -->
+			</div>
 
 			<div class="content"><?php
 				if ($comment->comment_approved == '0') {
