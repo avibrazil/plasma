@@ -121,18 +121,26 @@ function NavigationLinks_render($args,$id) {
 
 	echo(Panel_insert_widget_style($args['before_widget'],$config[$id]) . "\n");
 
-	echo('<div class="pages">');
-	wp_link_pages(array(
-		'before' => '<p><strong>'.__("Pages:",'theme') . '</strong> ',
-		'after' => '</p>',
-		'next_or_number' => 'number'));
-	echo('</div>');
+	if (is_single()) {
+		echo('<div class="pages">');
+		wp_link_pages(array(
+			'before' => '<p><strong>'.__("Pages:",'theme') . '</strong> ',
+			'after' => '</p>',
+			'next_or_number' => 'number'));
+		echo('</div>');
 
-	echo('<div class="posts">');
-	previous_post_link('%link','&laquo; %title');
-	echo(" | ");
-	next_post_link('%link','%title &raquo;');
-	echo('</div>');
+		echo('<div class="posts">');
+		previous_post_link('%link','&laquo; %title');
+		echo(" | ");
+		next_post_link('%link','%title &raquo;');
+		echo('</div>');
+	}
+
+	if (is_archive()) {
+		echo('<div class="navigation">');
+		posts_nav_link(' | ', __('&laquo; Previous Entries','theme'), __('Next Entries &raquo;','theme'));
+		echo('</div>');
+	} else echo("Not archive");
 
 	echo($args['after_widget'] . "<!-- id=$id -->\n");
 }

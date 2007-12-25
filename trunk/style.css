@@ -98,27 +98,30 @@ body {
  **
  **/
 
-body.single .post {
+.post {
 	border-bottom: 1px dotted rgb(204, 204, 204);
 }
 
+.archive .post {
+	margin-bottom: 4em;
+}
 
-body.single .post .header {
+.post .header {
 	clear: both;
 	width: 100%;
 	overflow: hidden;
 	position: relative;
-	border-bottom: 1px solid rgb(128,128,128);
+/*	border-bottom: 1px solid rgb(128,128,128); */
 	padding-bottom: 2em;
 }
 
-body.single .post .header .categories {
+.post .header .categories {
 	left: 0em;
 	top: 0em;
 	position: absolute;
 }
 
-body.single .post .header .categories a {
+.post .header .categories a {
 	font-family: Verdana;
 	font-weight: bold;
 	font-variant: small-caps;
@@ -126,14 +129,14 @@ body.single .post .header .categories a {
 	color: brown;
 }
 
-body.single .post .header .categories a:hover {
+.post .header .categories a:hover {
 	text-decoration: underline;
 	background-color: yellow;
 	-moz-border-radius-topright: 10px;
 	-moz-border-radius-bottomleft: 10px;
 }
 
-body.single .post .header .comments {
+.post .header .comments {
 	text-align: center;
 	color: brown;
 	text-decoration: none;
@@ -150,17 +153,17 @@ body.single .post .header .comments {
 	-moz-border-radius-bottomleft: 15px;
 }
 
-body.single .post .header .comments .word {
+.post .header .comments .word {
 	font-size: .8em;
 }
 
-body.single .post .header .comments .number {
+.post .header .comments .number {
 	font-size: 2em;
 	font-weight: bold;
 	display: block;
 }
 
-body.single .post .header .title {
+.post .header .title {
 	color: orange;
 	font-size: 1.8em;
 	font-family: Arial;
@@ -173,7 +176,7 @@ body.single .post .header .title {
 	top: .7em;
 }
 
-body.single .post .header .date {
+.post .header .date {
 	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
@@ -182,7 +185,7 @@ body.single .post .header .date {
 	top: 1.3em;
 }
 
-body.single .post .header .date-modified {
+.post .header .date-modified {
 	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
@@ -190,14 +193,14 @@ body.single .post .header .date-modified {
 	top: 1.3em;
 }
 
-body.single .post .header .short,
-body.single .post .header .default {
+.post .header .short,
+.post .header .default {
 	display: none;
 }
 
 
 
-body.single .post .header .author {
+.post .header .author {
 	color: rgb(128,128,128);
 	font-family: Arial, Tahoma;
 	font-size: .9em;
@@ -208,7 +211,7 @@ body.single .post .header .author {
 }
 
 
-body.single .post .header .admin {
+.post .header .admin {
 	position: absolute;
 	right: 0;
 	top: 1.3em;
@@ -243,7 +246,7 @@ body.single .post .header .admin {
 }
 
 
-body.single .post .content {
+.post .content {
 	clear: both;
 	display: table-cell;
 	font-family: Verdana, Helvetica, Arial, Bitstream Vera Sans;
@@ -460,12 +463,6 @@ body.home .post .readmore {
 	padding-right: 3px;
 }
 
-.widgetBestPosts .post .header {
-	margin-bottom: 0 !important;
-	padding-bottom: 1em !important;
-	border-bottom: 1px dotted rgb(213,213,213);
-}
-
 .widgetBestPosts .tabs {
 	padding-left: 3px;
 	margin-bottom: 1px;
@@ -502,6 +499,13 @@ body.home .post .readmore {
 	border: 1px solid rgb(213,213,213);
 }
 
+
+.widgetBestPosts .post .header {
+	margin-bottom: 0 !important;
+	padding-bottom: 1em !important;
+	border-bottom: 1px dotted rgb(213,213,213) !important;
+}
+
 .widgetBestPosts .post .header {
 	width: 95% !important;
 	margin-left: .5em !important;
@@ -516,7 +520,7 @@ body.home .post .readmore {
 .widgetBestPosts .post .header .date-modified,
 .widgetBestPosts .post .header .admin,
 .widgetBestPosts .lists .unselected {
-	display: none;
+	display: none !important;
 }
 
 
@@ -535,7 +539,7 @@ body.home .post .readmore {
 
 .widgetBestPosts .post .header .title:hover {
 	color: rgb(0, 0, 238) !important;
-	text-decoration: underline;
+	text-decoration: underline !important;
 }
 
 /**

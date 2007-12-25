@@ -18,7 +18,17 @@ $SinglePost['methodAdminSetup'] = "SinglePost_adminSetup";
 
 add_action('init', $SinglePost['methodInit'], 1);
 
-
+/**
+ * Wraps a single post rendering logic. This method makes decisions about
+ * header, CSS classes, and DIVs only. Actual content, title, category etc
+ * rendering is done by SinglePost_renderPost() method bellow.
+ *
+ * The $args['content'] parameter can be:
+ * - no: Do not render content. Only header will be rendered.
+ * - excerpt: Render only the excerpt, no content.
+ * - [empty]: Render the full content of post.
+ *
+ */
 function SinglePost_render($args,$instance) {
 	global $SinglePost;
 	$current=$SinglePost;
@@ -32,7 +42,20 @@ function SinglePost_render($args,$instance) {
 		the_post();
 	}
 
-	echo("<div class=\"" . sandbox_post_class(0) . "\" id=\"post-" . get_the_ID() . "\">\n");
+	$cssClasses=sandbox_post_class(0);
+	switch($content) {
+		case "no":
+			$cssClasses.=" postnocontent";
+			break;
+		case "excerpt":
+			$cssClasses.=" postexcerpt";
+			break;
+		default:
+			$cssClasses.=" postdefault";
+			break;
+	}
+
+	echo("<div class=\"$cssClasses\" id=\"post-" . get_the_ID() . "\">\n");
 	SinglePost_renderPost($args,$instance);
 	echo("</div>");
 
@@ -169,12 +192,46 @@ function MultiPost_render($args,$instance) {
 
 	extract($args);
 
-	query_posts(0);
+	//query_posts(0);
 
 	$multi=get_option($MultiPost['wpOptions']);
 	echo(Panel_insert_widget_style($before_widget,$multi[$instance]) . "\n");
 
-	echo($before_title . __("Recently at the Blog",'theme') . $after_title . "\n");
+	if (is_category() || is_tag()) {
+		$finalTitle=sprintf(__("Archive for %s",'theme'),__(single_cat_title('',false),'personal'));
+
+		$tmpcat=get_query_var('cat');
+		$myCategory=get_category($tmpcat);
+
+		if ($myCategory->category_description) {
+			$finalSubTitle1='<h3 class="archive-subtitle">';
+			$finalSubTitle1.=__($myCategory->category_description,'personal');
+			$finalSubTitle1.='</h3>';
+		}
+
+		$finalSubTitle2='<h3 class="archive-subscribe">';
+		$finalSubTitle2.='<a href="' . get_category_rss_link(0, $myCategory->cat_ID, '') . '">' .
+					__('Subscribe to this tag or category','theme') . '</a></h3>';
+
+	} elseif (is_day()) { /* If this is a daily archive */
+		$finalTitle=sprintf(__("Archive for %s",'theme'),get_the_time('F jS, Y'));
+	} elseif (is_month()) { /* If this is a monthly archive */
+		$finalTitle=sprintf(__("Archive for %s",'theme'),get_the_time('F, Y'));
+	} elseif (is_year()) { /* If this is a yearly archive */
+		$finalTitle=sprintf(__("Archive for %s",'theme'),get_the_time('Y'));
+	} elseif (is_author()) {
+		$finalTitle=sprintf(__("Archive for author %s",'theme'),$author);
+	} elseif (is_single()) {
+		$finalTitle="";
+	} else {
+		$finalTitle=__("Recently at the Blog",'theme');
+	}
+
+	if (!empty($finalTitle))
+		echo($before_title . $finalTitle . $after_title . "\n");
+
+	if (!empty($finalSubTitle1)) echo($finalSubTitle1 . "\n");
+	if (!empty($finalSubTitle2)) echo($finalSubTitle2 . "\n");
 
 	$options=array();
 	$options['wrapped']=true;
