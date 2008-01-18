@@ -23,10 +23,19 @@ add_action('init', $SinglePost['methodInit'], 1);
  * header, CSS classes, and DIVs only. Actual content, title, category etc
  * rendering is done by SinglePost_renderPost() method bellow.
  *
- * The $args['content'] parameter can be:
+ * The $args['content'] parameter is a rendering profile and can be:
  * - no: Do not render content. Only header will be rendered.
- * - excerpt: Render only the excerpt, no content.
- * - [empty]: Render the full content of post.
+ * - excerpt: Render only the header and excerpt, no content.
+ * - full: Render header, excerpt and content.
+ * - [empty]: The default, render header and content of post.
+ *
+ * The SinglePost widget code is reused also, wrapped inside, these places:
+ * - MultiPost as the "Recently in the Blog" at homepage, with
+ *   profile $args['content']="excerpt".
+ * - MultiPost as a regular archive for category, tag, date, search etc with
+ *   profiles "excerpt", "full" or default.
+ * - FeaturedPost, usualy in the home page, with profile "excerpt".
+ * - BestPosts, usualy in the home page, with profile "no".
  *
  */
 function SinglePost_render($args,$instance) {
@@ -49,6 +58,9 @@ function SinglePost_render($args,$instance) {
 			break;
 		case "excerpt":
 			$cssClasses.=" postexcerpt";
+			break;
+		case "full":
+			$cssClasses.=" postfull";
 			break;
 		default:
 			$cssClasses.=" postdefault";
@@ -155,6 +167,9 @@ $MultiPost['methodInit']       = "MultiPost_init";
 $MultiPost['methodSetup']      = "MultiPost_setup";
 $MultiPost['methodRegister']   = "MultiPost_register";
 $MultiPost['methodAdminSetup'] = "MultiPost_adminSetup";
+$MultiPost['controlCallback']  = "MultiPost_control";
+$MultiPost['controlSize']      = array('width' => 380, 'height' => 150);
+
 
 add_action('init', $MultiPost['methodInit'], 1);
 
@@ -192,7 +207,7 @@ function MultiPost_render($args,$instance) {
 
 	extract($args);
 
-	//query_posts(0);
+	query_posts(0);
 
 	$multi=get_option($MultiPost['wpOptions']);
 	echo(Panel_insert_widget_style($before_widget,$multi[$instance]) . "\n");
@@ -236,15 +251,73 @@ function MultiPost_render($args,$instance) {
 	$options=array();
 	$options['wrapped']=true;
 
-	if (is_home() || is_search())
-		$options['content']='excerpt';
+	$cssclass="headerstyle1";
 
+	switch ($multi[$instance]['renderprofile']) {
+		case "full":
+			$options['content']='full';
+		break;
+		case "excerptaside":
+			$cssclass="headerstyle2";
+			$options['content']='excerpt';
+		break;
+		case "excerpt":
+			$options['content']='excerpt';
+		break;
+	}
+
+	echo("<div class=\"$cssclass\">\n");
 	while (have_posts()) {
 		the_post();
 		SinglePost_render($options,0);
 	}
+	echo("</div>");
 
 	echo($after_widget . "\n");
+}
+
+
+/**
+ * MultiPost Rendering Profiles:
+ * - "default": Regular posts headers and content.
+ * - "full": Regular posts headers, excerpt and content.
+ * - "excerpt": Regular posts header and excerpt only.
+ * - "excerptaside": The post header in a different fashion and excerpt
+ *
+ */
+function MultiPost_control($id) {
+	global $MultiPost;
+
+	$options = get_option($MultiPost['wpOptions']);
+
+	if (! is_array($options))
+		$options = array();
+
+	if (!is_array($options[$id]))
+		$options[$id]=array();
+
+	$newoptions=$options[$id];
+
+	$newoptions['renderprofile']=$_POST["$id-profile"];
+
+	if ($options[$id] != $newoptions) {
+		$options[$id]=$newoptions;
+		update_option($MultiPost['wpOptions'], $options);
+	}
+
+	$profiles=array("default"=>"Regular posts headers and content",
+		"full"=>"Regular posts headers, excerpt and content",
+		"excerpt"=>"Regular posts headers and excerpt only",
+		"excerptaside"=>"The post header in a different fashion and excerpt");
+?>
+How to render posts:<br/>
+<select name="<?php echo($id); ?>-profile" style="width: 90%"><?php
+	foreach ($profiles as $pid => $desc) {
+		if ($pid==$options[$id]['renderprofile']) $selected='selected="selected"';
+		else $selected="";
+		printf('<option %1$s value="%2$s">%3$s</option>\n', $selected, $pid, $desc);
+	}?>
+</select><?php
 }
 
 

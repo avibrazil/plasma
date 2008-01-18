@@ -91,6 +91,10 @@ body {
 
 
 
+
+
+
+
 /*********************************************
  *********************************************
  **
@@ -106,7 +110,8 @@ body {
 	margin-bottom: 4em;
 }
 
-.post .header {
+.headerstyle1 .post .header,
+.widgetSinglePost .post .header {
 	clear: both;
 	width: 100%;
 	overflow: hidden;
@@ -115,13 +120,15 @@ body {
 	padding-bottom: 2em;
 }
 
-.post .header .categories {
+.headerstyle1 .post .header .categories,
+.widgetSinglePost .post .header .categories {
 	left: 0em;
 	top: 0em;
 	position: absolute;
 }
 
-.post .header .categories a {
+.headerstyle1 .post .header .categories a,
+.widgetSinglePost .post .header .categories a {
 	font-family: Verdana;
 	font-weight: bold;
 	font-variant: small-caps;
@@ -129,14 +136,17 @@ body {
 	color: brown;
 }
 
-.post .header .categories a:hover {
+.headerstyle1 .post .header .categories a:hover,
+.widgetSinglePost .post .header .categories a:hover {
 	text-decoration: underline;
 	background-color: yellow;
 	-moz-border-radius-topright: 10px;
 	-moz-border-radius-bottomleft: 10px;
 }
 
-.post .header .comments {
+
+.headerstyle1 .post .header .comments,
+.widgetSinglePost .post .header .comments {
 	text-align: center;
 	color: brown;
 	text-decoration: none;
@@ -153,17 +163,21 @@ body {
 	-moz-border-radius-bottomleft: 15px;
 }
 
-.post .header .comments .word {
+.headerstyle1 .post .header .comments .word,
+.widgetSinglePost .post .header .comments .word {
 	font-size: .8em;
 }
 
-.post .header .comments .number {
+.headerstyle1 .post .header .comments .number,
+.widgetSinglePost .post .header .comments .number {
 	font-size: 2em;
 	font-weight: bold;
 	display: block;
 }
 
-.post .header .title {
+
+.headerstyle1 .post .header .title,
+.widgetSinglePost .post .header .title {
 	color: orange;
 	font-size: 1.8em;
 	font-family: Arial;
@@ -176,7 +190,9 @@ body {
 	top: .7em;
 }
 
-.post .header .date {
+
+.headerstyle1 .post .header .date,
+.widgetSinglePost .post .header .date {
 	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
@@ -185,7 +201,8 @@ body {
 	top: 1.3em;
 }
 
-.post .header .date-modified {
+.headerstyle1 .post .header .date-modified,
+.widgetSinglePost .post .header .date-modified {
 	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
@@ -193,14 +210,17 @@ body {
 	top: 1.3em;
 }
 
-.post .header .short,
-.post .header .default {
+.headerstyle1 .post .header .short,
+.headerstyle1 .post .header .default,
+.widgetSinglePost .post .header .short,
+.widgetSinglePost .post .header .default {
 	display: none;
 }
 
 
 
-.post .header .author {
+.headerstyle1 .post .header .author,
+.widgetSinglePost .post .header .author {
 	color: rgb(128,128,128);
 	font-family: Arial, Tahoma;
 	font-size: .9em;
@@ -210,8 +230,8 @@ body {
 	top: 1.3em;
 }
 
-
-.post .header .admin {
+.headerstyle1 .post .header .admin,
+.widgetSinglePost .post .header .admin {
 	position: absolute;
 	right: 0;
 	top: 1.3em;
@@ -244,6 +264,11 @@ body {
 .adm-trackback {
 	background-image: url(blogicons/trackback.png);
 }
+
+
+/**************************************************
+**** End of header styles
+***************************************************/
 
 
 .post .content {
@@ -363,7 +388,6 @@ body {
 
 
 
-
 /*********************************************
  *********************************************
  **
@@ -371,14 +395,14 @@ body {
  **
  **/
 
-body.home .post .header {
+.headerstyle2 .post .header {
 	clear: both;
 	width: 100%;
 	position: relative;
 	margin-bottom: .5em;
 }
 
-body.home .post .header .title {
+.headerstyle2  .post .header .title {
 	color: orange;
 	font-size: 1.4em;
 	font-family: Arial;
@@ -389,9 +413,9 @@ body.home .post .header .title {
 }
 
 
-body.home .post .header .author,
-body.home .post .header .comments,
-body.home .post .header .date {
+.headerstyle2  .post .header .author,
+.headerstyle2  .post .header .comments,
+.headerstyle2  .post .header .date {
 	color: rgb(128,128,128);
 	font-family: Tahoma, Arial;
 	font-size: .9em;
@@ -399,20 +423,20 @@ body.home .post .header .date {
 	top: .1em;
 }
 
-body.home .post .header .comments,
-body.home .post .header .date {
+.headerstyle2  .post .header .comments,
+.headerstyle2  .post .header .date {
 	margin-left: 1em;
 }
 
-body.home .post .header .long,
-body.home .post .header .default,
-body.home .post .header .date-modified,
-body.home .post .header .admin,
-body.home .post .header .categories {
+.headerstyle2  .post .header .long,
+.headerstyle2  .post .header .default,
+.headerstyle2  .post .header .date-modified,
+.headerstyle2  .post .header .admin,
+.headerstyle2  .post .header .categories {
 	display: none;
 }
 
-body.home .post .content {
+.headerstyle2  .post .content {
 	clear: both;
 	margin-bottom: 2em;
 	font-family: Tahoma, Arial;
@@ -420,12 +444,12 @@ body.home .post .content {
 }
 
 
-body.home .post .content p {
+.headerstyle2  .post .content p {
 	margin-top: .5em;
 	margin-bottom: .5em;
 }
 
-body.home .post .readmore {
+.headerstyle2  .post .readmore {
 	font-weight: bold;
 }
 
@@ -434,7 +458,6 @@ body.home .post .readmore {
  **
  *********************************************
  *********************************************/
-
 
 
 
@@ -501,14 +524,14 @@ body.home .post .readmore {
 
 
 .widgetBestPosts .post .header {
-	margin-bottom: 0 !important;
-	padding-bottom: 1em !important;
-	border-bottom: 1px dotted rgb(213,213,213) !important;
+	margin-bottom: 0;
+	padding-bottom: 1em;
+	border-bottom: 1px dotted rgb(213,213,213);
 }
 
 .widgetBestPosts .post .header {
-	width: 95% !important;
-	margin-left: .5em !important;
+	width: 95%;
+	margin-left: .5em;
 }
 
 .widgetBestPosts .post .header:hover {
@@ -520,7 +543,7 @@ body.home .post .readmore {
 .widgetBestPosts .post .header .date-modified,
 .widgetBestPosts .post .header .admin,
 .widgetBestPosts .lists .unselected {
-	display: none !important;
+	display: none;
 }
 
 
@@ -528,18 +551,39 @@ body.home .post .readmore {
 .widgetBestPosts .post .header .author,
 .widgetBestPosts .post .header .comments,
 .widgetBestPosts .post .header .date {
-	top: .6em !important;
+	top: .6em;
+	color: rgb(128,128,128);
+	font-family: Tahoma, Arial;
+	font-size: .9em;
+	position: relative;
+}
+
+
+.widgetBestPosts  .post .header .comments,
+.widgetBestPosts  .post .header .date {
+	margin-left: 1em;
+}
+
+
+.widgetBestPosts .post .header .long,
+.widgetBestPosts .post .header .default,
+.widgetBestPosts .post .header .date-modified,
+.widgetBestPosts .post .header .admin,
+.widgetBestPosts .post .header .categories {
+	display: none;
 }
 
 .widgetBestPosts .post .header .title {
-	font-family: Arial !important;
-	font-size: 1em !important;
-	color: navy !important;
+	font-family: Arial;
+	font-size: 1em;
+	font-weight: bold;
+	color: navy;
+	display: block;
 }
 
 .widgetBestPosts .post .header .title:hover {
-	color: rgb(0, 0, 238) !important;
-	text-decoration: underline !important;
+	color: rgb(0, 0, 238);
+	text-decoration: underline;
 }
 
 /**
@@ -547,6 +591,9 @@ body.home .post .readmore {
  **
  *********************************************
  *********************************************/
+
+
+
 
 
 /*********************************************
@@ -671,16 +718,16 @@ input, textarea {
 }
 
 .widgetFeaturedPost .post .header {
-	top: 0 !important;
-	margin-bottom: 0 !important;
+	top: 0;
+	margin-bottom: 0;
 }
 
 .widgetFeaturedPost .post .header .title {
-	top: 0 !important;
-	font-size: 1.2em !important;
-	font-weight: bold !important;
-	text-decoration: underline !important;
-	color: orange !important;
+	top: 0;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-decoration: underline;
+	color: orange;
 }
 
 .widgetFeaturedPost .post .header .categories {
@@ -688,17 +735,17 @@ input, textarea {
 }
 
 .widgetFeaturedPost .post .header .short {
-	position: absolute !important;
-	left: -42.5% !important;
-	top: 3em !important;
-	margin-left: 0 !important;
+	position: absolute;
+	left: -42.5%;
+	top: 3em;
+	margin-left: 0;
 }
 
 .widgetFeaturedPost .post .header .comments {
-	position: absolute !important;
-	left: -30% !important;
-	top: 3em !important;
-	margin-left: 0 !important;
+	position: absolute;
+	left: -30%;
+	top: 3em ;
+	margin-left: 0 ;
 	background-repeat: no-repeat;
 	background-image: url('famfam/icons/comment.png');
 	padding-left: 18px;
@@ -709,25 +756,25 @@ input, textarea {
 }
 
 .widgetFeaturedPost .post .header .author {
-	position: absolute !important;
-	left: -42.5% !important;
-	top: 5em !important;
-	margin-left: 0 !important;
+	position: absolute ;
+	left: -42.5% ;
+	top: 5em ;
+	margin-left: 0 ;
 }
 
 .widgetFeaturedPost .post .header .admin {
-	display: none !important; /*
-	position: absolute !important;
-	left: -42.5% !important;
-	top: 2em !important;
-	margin-left: 0 !important;
+	display: none ; /*
+	position: absolute ;
+	left: -42.5% ;
+	top: 2em ;
+	margin-left: 0 ;
 	padding-right: 5px;
 	width: 17px;
 	border-right: 1px solid black; */
 }
 
 .widgetFeaturedPost .post .content {
-	margin-bottom: 0 !important;
+	margin-bottom: 0 ;
 }
 
 /**
