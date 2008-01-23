@@ -207,8 +207,6 @@ function MultiPost_render($args,$instance) {
 
 	extract($args);
 
-	query_posts(0);
-
 	$multi=get_option($MultiPost['wpOptions']);
 	echo(Panel_insert_widget_style($before_widget,$multi[$instance]) . "\n");
 
@@ -355,6 +353,8 @@ function FeaturedPost_render($args,$instance) {
 	SinglePost_render($params,0);
 
 	echo($after_widget . "\n");
+
+	wp_reset_query();
 }
 
 
@@ -370,23 +370,39 @@ function SinglePost_renderPostHeader($args,$instance) {
 	$posted=get_the_time('r');
 	$modified=get_the_modified_time('r');
 
-	echo("<span class=\"date long\">$posted</span>\n");
-	if ($modified != $posted)
-		echo("<span class=\"date-modified long\">($modified)</span>\n");
+	echo("<span class=\"date long\">");
+	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
+	echo("$posted</span>\n");
+	if ($modified != $posted) {
+		echo("<span class=\"date-updated long\">");
+		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
+		echo("$modified</span>\n");
+	}
 
 	$posted=get_the_time('j M Y');
 	$modified=get_the_modified_time('j M Y');
 
-	echo("<span class=\"date short\">$posted</span>\n");
-	if ($modified != $posted)
-		echo("<span class=\"date-modified short\">($modified)</span>\n");
+
+	echo("<span class=\"date short\">");
+	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
+	echo("$posted</span>\n");
+	if ($modified != $posted) {
+		echo("<span class=\"date-updated short\">");
+		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
+		echo("$modified</span>\n");
+	}
 
 	$posted=get_the_time();
 	$modified=get_the_modified_time();
 
-	echo("<span class=\"date default\">$posted</span>\n");
-	if ($modified != $posted)
-		echo("<span class=\"date-modified default\">($modified)</span>\n");?>
+	echo("<span class=\"date default\">");
+	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
+	echo("$posted</span>\n");
+	if ($modified != $posted) {
+		echo("<span class=\"date-updated default\">");
+		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
+		echo("$modified</span>\n");
+	}?>
 
 	<a class="comments" href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>">
 		<span class="number"><?php comments_number('0','1','%'); ?></span>
@@ -421,11 +437,9 @@ function SinglePost_renderPost($args,$instance) {
 		if (function_exists('the_excerpt_reloaded')) {
 			the_excerpt_reloaded(50,'<a><p><i>','excerpt', false);
 		} else the_excerpt();?>
-		<span class="readmore">
-			<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>">
-				<?php _e("Click here to continue reading…",'theme'); ?>
-			</a>
-		</span><?php
+		<a class="readmore" href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>">
+			<?php _e("Click here to continue reading…",'theme'); ?>
+		</a><?php
 	} else if ($content!="no") {
 		the_content();
 		echo("<!--");

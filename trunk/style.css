@@ -111,10 +111,10 @@ body {
 .widgetSinglePost .post .header {
 	clear: both;
 	width: 100%;
-	overflow: hidden;
+	height: 4.5em;
 	position: relative;
-/*	border-bottom: 1px solid rgb(128,128,128); */
 	padding-bottom: 2em;
+	display: block;
 }
 
 .headerstyle1 .post .header .categories,
@@ -122,13 +122,12 @@ body {
 	left: 0em;
 	top: 0em;
 	position: absolute;
+	font-family: Calibri, Arial, Bitstream Vera Sans
 }
 
 .headerstyle1 .post .header .categories a,
 .widgetSinglePost .post .header .categories a {
-	font-family: Verdana;
 	font-weight: bold;
-	font-variant: small-caps;
 	text-decoration: none;
 	color: brown;
 }
@@ -136,9 +135,6 @@ body {
 .headerstyle1 .post .header .categories a:hover,
 .widgetSinglePost .post .header .categories a:hover {
 	text-decoration: underline;
-	background-color: yellow;
-	-moz-border-radius-topright: 10px;
-	-moz-border-radius-bottomleft: 10px;
 }
 
 
@@ -147,13 +143,14 @@ body {
 	text-align: center;
 	color: brown;
 	text-decoration: none;
-	width: 80px;
-	/*height: 100%; */
+	width: 6.5em;
+	height: 3.5em;
 	position: absolute;
 	left: 0;
 	top: 1.5em;
 	background-color: #ffcc66;
-	padding-bottom: 5px;
+	padding-bottom: .5em;
+	padding-top: .5em;
 	border: 3px solid #663300;
 	margin-right: 5px;
 	-moz-border-radius-topright: 15px;
@@ -189,22 +186,17 @@ body {
 
 
 .headerstyle1 .post .header .date,
-.widgetSinglePost .post .header .date {
+.widgetSinglePost .post .header .date,
+.headerstyle1 .post .header .date-updated,
+.widgetSinglePost .post .header .date-updated {
 	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
 	position: relative;
-	margin-left: 100px;
+	margin-left: 95px;
 	top: 1.3em;
-}
-
-.headerstyle1 .post .header .date-modified,
-.widgetSinglePost .post .header .date-modified {
-	color: rgb(128,128,128);
-	font-size: .9em;
-	font-family: Arial, Tahoma;
-	position: relative;
-	top: 1.3em;
+	clear: left;
+	float: left;
 }
 
 .headerstyle1 .post .header .short,
@@ -221,9 +213,10 @@ body {
 	color: rgb(128,128,128);
 	font-family: Arial, Tahoma;
 	font-size: .9em;
-	display: block;
+	clear: left;
+	float: left;
 	position: relative;
-	left: 100px;
+	left: 95px;
 	top: 1.3em;
 }
 
@@ -270,8 +263,8 @@ body {
 
 .post .content {
 	clear: both;
-	display: table-cell;
 	font-family: Verdana, Helvetica, Arial, Bitstream Vera Sans;
+	overflow-x: auto;
 }
 
 
@@ -399,6 +392,13 @@ body {
 	margin-bottom: .5em;
 }
 
+.headerstyle2 .post {
+	padding-bottom: .6em;
+	border-bottom: 1px dotted grey;
+	margin-bottom: .6em;
+}
+
+
 .headerstyle2  .post .header .title {
 	color: orange;
 	font-size: 1.4em;
@@ -427,7 +427,7 @@ body {
 
 .headerstyle2  .post .header .long,
 .headerstyle2  .post .header .default,
-.headerstyle2  .post .header .date-modified,
+.headerstyle2  .post .header .date-updated,
 .headerstyle2  .post .header .admin,
 .headerstyle2  .post .header .categories {
 	display: none;
@@ -448,6 +448,7 @@ body {
 
 .headerstyle2  .post .readmore {
 	font-weight: bold;
+	color: rgb(113,113,213);
 }
 
 /**
@@ -537,7 +538,7 @@ body {
 
 .widgetBestPosts .post .header .categories,
 .widgetBestPosts .post .header .default,
-.widgetBestPosts .post .header .date-modified,
+.widgetBestPosts .post .header .date-updated,
 .widgetBestPosts .post .header .admin,
 .widgetBestPosts .lists .unselected {
 	display: none;
@@ -564,7 +565,7 @@ body {
 
 .widgetBestPosts .post .header .long,
 .widgetBestPosts .post .header .default,
-.widgetBestPosts .post .header .date-modified,
+.widgetBestPosts .post .header .date-updated,
 .widgetBestPosts .post .header .admin,
 .widgetBestPosts .post .header .categories {
 	display: none;
@@ -705,7 +706,7 @@ input, textarea {
  **/
 
 .widgetFeaturedPost {
-	border-bottom: 1px solid black;
+	border-bottom: 5px dotted #FFF0D0;
 }
 
 .widgetFeaturedPost .widgettitle {
@@ -726,7 +727,7 @@ input, textarea {
 
 
 .widgetFeaturedPost .meta .date,
-.widgetFeaturedPost .meta .date-modified,
+.widgetFeaturedPost .meta .date-updated,
 .widgetFeaturedPost .meta .title {
 	display: none;
 }
@@ -998,7 +999,9 @@ input, textarea {
  *********************************************
  *********************************************/
 
-
+body {
+	margin: .8em;
+}
 
 
 .widgetMain {
