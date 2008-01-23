@@ -336,25 +336,74 @@ function FeaturedPost_render($args,$instance) {
 	query_posts($query);
 
 	if (! have_posts()) return;
+	the_post();
 
-	echo(Panel_insert_widget_style($before_widget,$myoptions[$instance]) . "\n");
+	echo(Panel_insert_widget_style($before_widget,$myoptions[$instance]) . "\n");?>
 
-	echo($before_title);
-	echo($current['baseName']);
-	echo($after_title . "\n");
+	<div class="meta"><?php
+		echo($before_title);
+		echo($current['baseName']);
+		echo($after_title . "\n");
+
+		SinglePost_renderPostHeader($args,$instance);?>
+	</div><?php
 
 	$params=array();
 	$params['wrapped']=true;
 	$params['content']='excerpt';
 
-	while (have_posts()) {
-		the_post();
-		SinglePost_render($params,0);
-	}
+	SinglePost_render($params,0);
 
 	echo($after_widget . "\n");
 }
 
+
+function SinglePost_renderPostHeader($args,$instance) {
+	global $SinglePost;
+	$current=$SinglePost;
+	extract($args);?>
+
+	<a class="title" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',false)); ?>"><?php the_title(); ?></a>
+
+	<span class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></span><?php
+
+	$posted=get_the_time('r');
+	$modified=get_the_modified_time('r');
+
+	echo("<span class=\"date long\">$posted</span>\n");
+	if ($modified != $posted)
+		echo("<span class=\"date-modified long\">($modified)</span>\n");
+
+	$posted=get_the_time('j M Y');
+	$modified=get_the_modified_time('j M Y');
+
+	echo("<span class=\"date short\">$posted</span>\n");
+	if ($modified != $posted)
+		echo("<span class=\"date-modified short\">($modified)</span>\n");
+
+	$posted=get_the_time();
+	$modified=get_the_modified_time();
+
+	echo("<span class=\"date default\">$posted</span>\n");
+	if ($modified != $posted)
+		echo("<span class=\"date-modified default\">($modified)</span>\n");?>
+
+	<a class="comments" href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>">
+		<span class="number"><?php comments_number('0','1','%'); ?></span>
+		<span class="word"><?php
+			if (get_comments_number() == "1") _e('comment','theme');
+			else _e('comments','theme');?></span></a>
+
+	<span class="categories"><?php the_category(' &bull; '); ?></span>
+
+	<div class="admin">
+		<a class="adm-permalink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>">&nbsp;</a>
+		<a class="adm-trackback" href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>">&nbsp;</a>
+		<a class="adm-comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>">&nbsp;</a>
+		<a class="adm-commentsfeed" href="<?php echo(get_post_comments_feed_link()); ?>" title="<?php _e('Subscribe comments to this post','theme')?>">&nbsp;</a>
+		<?php edit_post_link('<span class="adm-editpost">&nbsp;</span>'); ?>
+	</div> <!-- class=admin --><?php
+}
 
 
 function SinglePost_renderPost($args,$instance) {
@@ -362,49 +411,8 @@ function SinglePost_renderPost($args,$instance) {
 	$current=$SinglePost;
 	extract($args);?>
 
-	<div class="header">
-
-		<a class="title" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',false)); ?>"><?php the_title(); ?></a>
-
-		<span class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></span><?php
-
-		$posted=get_the_time('r');
-		$modified=get_the_modified_time('r');
-
-		echo("<span class=\"date long\">$posted</span>\n");
-		if ($modified != $posted)
-			echo("<span class=\"date-modified long\">($modified)</span>\n");
-
-		$posted=get_the_time('j M Y');
-		$modified=get_the_modified_time('j M Y');
-
-		echo("<span class=\"date short\">$posted</span>\n");
-		if ($modified != $posted)
-			echo("<span class=\"date-modified short\">($modified)</span>\n");
-
-		$posted=get_the_time();
-		$modified=get_the_modified_time();
-
-		echo("<span class=\"date default\">$posted</span>\n");
-		if ($modified != $posted)
-			echo("<span class=\"date-modified default\">($modified)</span>\n");?>
-
-		<a class="comments" href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>">
-			<span class="number"><?php comments_number('0','1','%'); ?></span>
-			<span class="word"><?php
-				if (get_comments_number() == "1") _e('comment','theme');
-				else _e('comments','theme');?></span></a>
-
-		<span class="categories"><?php the_category(' &bull; '); ?></span>
-
-		<div class="admin">
-			<a class="adm-permalink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>">&nbsp;</a>
-			<a class="adm-trackback" href="<?php trackback_url(display); ?>" title="<?php _e('Trackback URL: use this to comment on your own blog','theme'); ?>">&nbsp;</a>
-			<a class="adm-comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write comments to this post','theme'); ?>">&nbsp;</a>
-			<a class="adm-commentsfeed" href="<?php echo(get_post_comments_feed_link()); ?>" title="<?php _e('Subscribe comments to this post','theme')?>">&nbsp;</a>
-			<?php edit_post_link('<span class="adm-editpost">&nbsp;</span>'); ?>
-		</div> <!-- class=admin -->
-
+	<div class="header"><?php
+		SinglePost_renderPostHeader($args,$instance);?>
 	</div> <!-- class=header --><?php
 
 	if ($content!="no") echo("<div class=\"content\">");

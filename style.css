@@ -102,9 +102,6 @@ body {
  **
  **/
 
-.post {
-	border-bottom: 1px dotted rgb(204, 204, 204);
-}
 
 .archive .post {
 	margin-bottom: 4em;
@@ -707,8 +704,11 @@ input, textarea {
  **
  **/
 
+.widgetFeaturedPost {
+	border-bottom: 1px solid black;
+}
+
 .widgetFeaturedPost .widgettitle {
-	float: left;
 	margin-top: 0;
 }
 
@@ -717,64 +717,64 @@ input, textarea {
 	width: 70%;
 }
 
-.widgetFeaturedPost .post .header {
-	top: 0;
-	margin-bottom: 0;
+.widgetFeaturedPost .meta {
+	float: left;
+	clear: left;
+	display: block;
+	width: 28%;
 }
+
+
+.widgetFeaturedPost .meta .date,
+.widgetFeaturedPost .meta .date-modified,
+.widgetFeaturedPost .meta .title {
+	display: none;
+}
+
+.widgetFeaturedPost .meta .date .short,
+.widgetFeaturedPost .meta .comments,
+.widgetFeaturedPost .meta .categories,
+.widgetFeaturedPost .meta .admin,
+.widgetFeaturedPost .meta .author {
+	display: block;
+	clear: right;
+	font-family: Tahoma, Arial;
+	font-size: .9em;
+	margin-bottom: .4em;
+	color: rgb(128,128,128);
+}
+
+.widgetFeaturedPost .meta .categories a {
+	color: brown;
+}
+
+.widgetFeaturedPost .meta a:hover {
+	text-decoration: none;
+}
+
 
 .widgetFeaturedPost .post .header .title {
 	top: 0;
+	margin-bottom: 0;
 	font-size: 1.2em;
 	font-weight: bold;
 	text-decoration: underline;
 	color: orange;
+	display: block;
 }
 
+.widgetFeaturedPost .post .header .date,
+.widgetFeaturedPost .post .header .admin,
+.widgetFeaturedPost .post .header .comments,
+.widgetFeaturedPost .post .header .author,
 .widgetFeaturedPost .post .header .categories {
 	display: none;
 }
 
-.widgetFeaturedPost .post .header .short {
-	position: absolute;
-	left: -42.5%;
-	top: 3em;
-	margin-left: 0;
-}
-
-.widgetFeaturedPost .post .header .comments {
-	position: absolute;
-	left: -30%;
-	top: 3em ;
-	margin-left: 0 ;
-	background-repeat: no-repeat;
-	background-image: url('famfam/icons/comment.png');
-	padding-left: 18px;
-}
-
-.widgetFeaturedPost .post .header .comments .word {
-	display: none;
-}
-
-.widgetFeaturedPost .post .header .author {
-	position: absolute ;
-	left: -42.5% ;
-	top: 5em ;
-	margin-left: 0 ;
-}
-
-.widgetFeaturedPost .post .header .admin {
-	display: none ; /*
-	position: absolute ;
-	left: -42.5% ;
-	top: 2em ;
-	margin-left: 0 ;
-	padding-right: 5px;
-	width: 17px;
-	border-right: 1px solid black; */
-}
-
 .widgetFeaturedPost .post .content {
 	margin-bottom: 0 ;
+	font-family: Tahoma, Arial;
+	font-size: .9em;
 }
 
 /**
