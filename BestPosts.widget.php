@@ -200,6 +200,8 @@ function selectTab(widgetID,tabIndex) {
 	echo("</div></div>\n");
 
 	echo($after_widget . "\n");
+
+	wp_reset_query();
 }
 
 
