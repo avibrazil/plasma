@@ -204,6 +204,7 @@ function MultiPost_init() {
 
 function MultiPost_render($args,$instance) {
 	global $MultiPost;
+	global $s; // search terms
 
 	extract($args);
 
@@ -217,14 +218,13 @@ function MultiPost_render($args,$instance) {
 		$myCategory=get_category($tmpcat);
 
 		if ($myCategory->category_description) {
-			$finalSubTitle1='<h3 class="archive-subtitle">';
+			$finalSubTitle1='<h3 class="widgetsubtitle">';
 			$finalSubTitle1.=__($myCategory->category_description,'personal');
 			$finalSubTitle1.='</h3>';
 		}
 
-		$finalSubTitle2='<h3 class="archive-subscribe">';
-		$finalSubTitle2.='<a href="' . get_category_rss_link(0, $myCategory->cat_ID, '') . '">' .
-					__('Subscribe to this tag or category','theme') . '</a></h3>';
+		$finalSubTitle2='<a class="subscribe" href="' . get_category_rss_link(0, $myCategory->cat_ID, '') . '">' .
+					__('Subscribe to this tag or category','theme') . '</a>';
 
 	} elseif (is_day()) { /* If this is a daily archive */
 		$finalTitle=sprintf(__("Archive for %s",'theme'),get_the_time('F jS, Y'));
@@ -234,6 +234,11 @@ function MultiPost_render($args,$instance) {
 		$finalTitle=sprintf(__("Archive for %s",'theme'),get_the_time('Y'));
 	} elseif (is_author()) {
 		$finalTitle=sprintf(__("Archive for author %s",'theme'),$author);
+	} elseif (is_search()) {
+		$finalTitle=sprintf(__("Search results for &#8220;%s&#8221",'theme'),wp_specialchars($s));
+		$finalSubTitle1='<h3 class="archive-subtitle">';
+		$finalSubTitle1.=__("More recent first",'theme');
+		$finalSubTitle1.='</h3>';
 	} elseif (is_single()) {
 		$finalTitle="";
 	} else {
@@ -296,7 +301,8 @@ function MultiPost_control($id) {
 
 	$newoptions=$options[$id];
 
-	$newoptions['renderprofile']=$_POST["$id-profile"];
+	if ($_POST["$id-profile"])
+		$newoptions['renderprofile']=$_POST["$id-profile"];
 
 	if ($options[$id] != $newoptions) {
 		$options[$id]=$newoptions;
