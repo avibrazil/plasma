@@ -36,13 +36,14 @@ function Main_register($id,$name) {
 	// The "true" means they are horizontal Panels.
 	// See also http://codex.wordpress.org/Templates_Hierarchy
 	Panel_register("panel-home","Main panel on Home Page",true);
-//	PanelWidget_register("widget-panel-home","Panel Home main","panel-home","Home main");
 
 	Panel_register("panel-single", "Main panel on Single Page",true);
-//	PanelWidget_register("widget-panel-single","Panel Single main","panel-single","Single main");
+
+	Panel_register("panel-category", "Main panel on Category Page",true);
 
 	Panel_register("panel-archive", "Main panel on Archive Page",true);
-//	PanelWidget_register("widget-panel-archive","Panel Archive main","panel-archive","Archive main");
+
+	Panel_register("panel-search", "Main panel on Search Page",true);
 }
 
 
@@ -65,7 +66,9 @@ echo("</pre>\n");
 
 	if (is_single()) $realid='panel-single';
 	else if (is_home()) $realid='panel-home';
+	else if (is_category()) $realid='panel-category';
 	else if (is_archive()) $realid='panel-archive';
+	else if (is_search()) $realid='panel-search';
 	else {
 		echo("<b>no match</b>\n");
 		return;

@@ -13,9 +13,9 @@ $Id$
 body {
 	font-size: 9pt;
 	font-family: Helvetica, Arial, Verdana, Bitstream Vera Sans;
-	background-color: #FFF0D0;
+	/* background-color: #FFF0D0; */
 
-/*	background: url(img/content_bg.gif) */
+	background: url(img/content_bg.gif);
 }
 
 
@@ -378,12 +378,84 @@ body {
 
 
 
+
+/*********************************************
+ *********************************************
+ **
+ ** Multipost widget related classes
+ **
+ **/
+
+
+
+.category .widgetMultiPost .widgettitle,
+.date .widgetMultiPost .widgettitle,
+.search .widgetMultiPost .widgettitle {
+	color: orange;
+	font-size: 2em !important;
+	/*font-family: Verdana, "Bitstream Vera Sansa", sans-serif;*/
+	margin-top: .5em;
+	margin-bottom: .1em;
+}
+
+
+.widgetMultiPost .widgetsubtitle p,
+.widgetMultiPost .widgetsubtitle {
+	color: orange;
+	font-size: 1.1em;
+	font-family: Verdana, "Bitstream Vera Sansa", sans-serif;
+	font-weight: bold;
+	font-style: italic;
+	margin: 0;
+	padding: 0;
+	margin-bottom: .5em;
+}
+
+
+.widgetMultiPost .subscribe {
+	background-color: transparent;
+	background-image: url(img/feed.png);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	margin-top: .8em;
+	margin-bottom: 1.5em;
+	text-decoration: none !important;
+	font-weight: bold;
+/*	font-size: 11px; */
+	font-family: Verdana, "Bitstream Vera Sansa", sans-serif;
+	color: green !important;
+	display: block;
+}
+
+
+
+.search .post {
+	width: 45%;
+	float: left;
+	border: none;
+	margin-right: 1em;
+}
+
+
+
+
+/**
+ ** End of Multipost (single page) related classes
+ **
+ *********************************************
+ *********************************************/
+
+
+
+
+
 /*********************************************
  *********************************************
  **
  ** Single Post (multipost page) related classes
  **
  **/
+
 
 .headerstyle2 .post .header {
 	clear: both;
@@ -418,6 +490,10 @@ body {
 	font-size: .9em;
 	position: relative;
 	top: .1em;
+}
+
+.headerstyle2 .header .label {
+	display: none;
 }
 
 .headerstyle2  .post .header .comments,
@@ -462,6 +538,40 @@ body {
 
 
 
+/*********************************************
+ *********************************************
+ **
+ ** Navigation links related classes
+ **
+ **/
+
+.widgetNavigation a {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: orange;
+	text-decoration: none
+}
+
+.widgetNavigation a:hover {
+	text-decoration: underline;
+}
+
+.widgetNavigation .next a {
+	float: right;
+}
+
+.widgetNavigation .prev a {
+	float: left;
+}
+
+
+
+/**
+ ** End of navigation links related classes
+ **
+ *********************************************
+ *********************************************/
+
 
 
 
@@ -495,12 +605,12 @@ body {
 	font-size: .9em;
 	color: rgb(102,102,102);
 	background: rgb(246,246,246);
-	padding: 5px;
-	padding-bottom: 1px;
+	padding: .5em;
+	padding-bottom: .2em;
 	border: 1px solid rgb(213,213,213);
-	border-bottom: 0px;
-	margin-left: 0px;
-	margin-right: 5px;
+	border-bottom: 0;
+	margin-left: 0;
+	margin-right: .5em;
 	display: inline;
 	cursor: pointer;
 }
@@ -508,7 +618,11 @@ body {
 .widgetBestPosts .tabs .selected {
 	background: white;
 	color: navy;
+	border-bottom: 0;
+	padding-top: .6em;
+	border-top: 2px solid brown;
 }
+
 
 .widgetBestPosts .lists .selected {
 	padding-left: 3px;
@@ -523,9 +637,12 @@ body {
 
 .widgetBestPosts .post .header {
 	margin-bottom: 0;
+	padding-top: .5em;
 	padding-bottom: 1em;
 	border-bottom: 1px dotted rgb(213,213,213);
 }
+
+
 
 .widgetBestPosts .post .header {
 	width: 95%;
@@ -837,6 +954,9 @@ input, textarea {
 	border: 0;
 }
 
+#footer-1 {
+	background-color: #FFF0D0;
+}
 
 /**
  ** End of general definitions for the footer

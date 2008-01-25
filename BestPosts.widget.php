@@ -132,7 +132,12 @@ function BestPosts_render($args,$instance) {
 
 	$options = get_option($BestPosts['wpOptions']);
 
-	if (empty($options[$instance]['tabs'])) return;
+	if (empty($options[$instance]['tabs'])) {
+		$options[$instance]['tabs']=array(
+			array('tag'=>'best','title'=>__("Best",'theme')),
+			array('tag'=>'featured','title'=>__("Featured",'theme'))
+		);
+	}
 
 	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");
 	echo($before_title);
@@ -184,10 +189,17 @@ function selectTab(widgetID,tabIndex) {
 	$params=array('wrapped'=>1,'content'=>'no');
 	echo("<div id=\"$instance-lists\" class=\"lists\">\n");
 	foreach ($options[$instance]['tabs'] as $tab) {
+		$myquery="";
 		if ($index==0) $class="selected";
 		else $class="unselected";
-		query_posts("tag=" . $tab['tag'] . "&order=DESC&showposts=15");
+
+		// Build WordPress query...
+		if (is_category()) $myquery="cat=" . get_query_var('cat') . "&";
+		$myquery.="tag=" . $tab['tag'] . "&order=DESC&showposts=15";
+		query_posts($myquery);
+
 		echo("<div class=\"$class\" id=\"$instance" . "-list-" . "$index\">\n");
+		echo("<!-- query_posts($myquery) -->\n");
 		if (have_posts()) {
 			while (have_posts()) {
 				the_post();
@@ -196,12 +208,13 @@ function selectTab(widgetID,tabIndex) {
 		}
 		echo("</div>\n\n");
 		$index++;
+
+		// Go back to the original URL state
+		wp_reset_query();
 	}
 	echo("</div></div>\n");
 
 	echo($after_widget . "\n");
-
-	wp_reset_query();
 }
 
 
@@ -236,7 +249,10 @@ function BestPosts_control($id) {
 //<![CDATA[
 
 // This array is filled by tabsUnserialize()
-var BestPosts_tabs=new Array();
+var BestPosts_tabs;
+
+if (BestPosts_tabs==undefined) BestPosts_tabs=new Array();
+
 BestPosts_tabs['<?php echo("$id"); ?>']=new Array();
 
 

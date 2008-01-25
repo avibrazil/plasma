@@ -127,20 +127,28 @@ function NavigationLinks_render($args,$id) {
 			'before' => '<p><strong>'.__("Pages:",'theme') . '</strong> ',
 			'after' => '</p>',
 			'next_or_number' => 'number'));
-		echo('</div>');
+		echo('</div>');?>
 
-		echo('<div class="posts">');
-		previous_post_link('%link','&laquo; %title');
-		echo(" | ");
-		next_post_link('%link','%title &raquo;');
-		echo('</div>');
+		<div class="posts">
+			<span class="prev">
+				<?php previous_post_link('%link','&laquo; %title'); ?>
+			</span>
+			<span class="next">
+				<?php next_post_link('%link','%title &raquo;'); ?>
+			</span>
+		</div><?php
 	}
 
-	if (is_archive()) {
-		echo('<div class="navigation">');
-		posts_nav_link(' | ', __('&laquo; Previous Entries','theme'), __('Next Entries &raquo;','theme'));
-		echo('</div>');
-	} else echo("Not archive");
+	if (is_archive() || is_search()) {?>
+		<div class="navigation">
+			<span class="prev">
+				<?php next_posts_link(__('&laquo; Older Entries','theme')); ?>
+			</span>
+			<span class="next">
+				<?php previous_posts_link(__('Newer Entries &raquo;','theme')); ?>
+			</span>
+		</div><?php
+	}
 
 	echo($args['after_widget'] . "<!-- id=$id -->\n");
 }
