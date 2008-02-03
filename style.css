@@ -788,11 +788,13 @@ input, textarea {
 .widgetComments .pingback,
 .widgetComments .trackback,
 .widgetComments .comment  {
-	border-bottom: 1px solid rgb(221, 221, 221);
-	padding-bottom: .5em;
-	margin-bottom: .5em;
-	float: left;
+	display: table;
 	width: 100%;
+
+	margin-bottom: .5em;
+	padding-bottom: .5em;
+
+	border-bottom: 1px solid rgb(221, 221, 221);
 }
 
 
@@ -801,24 +803,22 @@ input, textarea {
 }
 
 .widgetComments .index {
-	display: block;
-	float: left;
-	width: 29%;
+	display: table-cell;
+	width: 3%;
+	text-align: right;
+	padding-right: 2em;
 }
 
 
 .widgetComments .metadata {
-	float: left;
-	width: 29%;
-	clear: left;
-
-	margin-top: 1em;
+	display: table-cell;
+	width: 15%;
+	margin-right: 1em;
 }
 
 .widgetComments .content {
-	float: right;
+	display: table-cell;
 	width: 69%;
-	margin-top: -1em;
 }
 
 .widgetComments .metadata .author,
@@ -831,6 +831,7 @@ input, textarea {
 .widgetComments .metadata .author {
 	font-weight: bold;
 	font-family: Helvetica, Arial, Verdana;
+	font-size: 1.3em;
 }
 
 .widgetComments .metadata .author a {
