@@ -107,22 +107,23 @@ body {
 	margin-bottom: 4em;
 }
 
+
+
 .headerstyle1 .post .header,
 .widgetSinglePost .post .header {
-	clear: both;
 	width: 100%;
-	height: 4.5em;
 	position: relative;
-	padding-bottom: 2em;
-	display: block;
+	float: left;
+	padding-bottom: 1em;
+	border-bottom: 1px dotted grey;
 }
 
 .headerstyle1 .post .header .categories,
 .widgetSinglePost .post .header .categories {
-	left: 0em;
-	top: 0em;
+	left: 0;
+	top: 0;
 	position: absolute;
-	font-family: Calibri, Arial, Bitstream Vera Sans
+	font-family: Calibri, Verdana, Arial, Bitstream Vera Sans
 }
 
 .headerstyle1 .post .header .categories a,
@@ -137,24 +138,33 @@ body {
 	text-decoration: underline;
 }
 
+.headerstyle1 .post .header .categories .label,
+.widgetSinglePost .post .header .categories .label {
+	display: none;
+}
 
 .headerstyle1 .post .header .comments,
 .widgetSinglePost .post .header .comments {
+	display: block;
+/*	width: 6.5em;
+	height: 3.5em; */
+/*	position: relative; */
+	float: left;
+
+	padding: .5em;
+	margin-right: .5em;
+	margin-bottom: .2em;
+
 	text-align: center;
-	color: brown;
 	text-decoration: none;
-	width: 6.5em;
-	height: 3.5em;
-	position: absolute;
-	left: 0;
-	top: 1.5em;
-	background-color: #ffcc66;
-	padding-bottom: .5em;
-	padding-top: .5em;
-	border: 3px solid #663300;
-	margin-right: 5px;
-	-moz-border-radius-topright: 15px;
-	-moz-border-radius-bottomleft: 15px;
+
+	color: brown;
+	background-color: #fef19f;
+	border: 2px solid #afa66e;
+	border-left-color: #e2d797;
+	border-top-color: #e2d797;
+	-moz-border-radius: 1.1em;
+	-moz-border-radius-bottomright: 0;
 }
 
 .headerstyle1 .post .header .comments .word,
@@ -172,16 +182,28 @@ body {
 
 .headerstyle1 .post .header .title,
 .widgetSinglePost .post .header .title {
+	display: block;
+	position: relative;
+
+	padding-top: .4em;
+	margin-right: 45px;
+
 	color: orange;
-	font-size: 1.8em;
+	font-size: 2.8em;
 	font-family: Arial;
 	font-weight: bold;
 	text-decoration: none;
-	display: block;
+}
+
+
+.headerstyle1 .post .header .author,
+.widgetSinglePost .post .header .author {
 	position: relative;
-	margin-left: 90px;
-	margin-right: 50px;
-	top: .7em;
+	display: block;
+
+	color: rgb(128,128,128);
+	font-family: Arial, Tahoma;
+	font-size: .9em;
 }
 
 
@@ -189,15 +211,14 @@ body {
 .widgetSinglePost .post .header .date,
 .headerstyle1 .post .header .date-updated,
 .widgetSinglePost .post .header .date-updated {
+	position: relative;
+	display: block;
+
 	color: rgb(128,128,128);
 	font-size: .9em;
 	font-family: Arial, Tahoma;
-	position: relative;
-	margin-left: 95px;
-	top: 1.3em;
-	clear: left;
-	float: left;
 }
+
 
 .headerstyle1 .post .header .short,
 .headerstyle1 .post .header .default,
@@ -207,18 +228,28 @@ body {
 }
 
 
+.headerstyle1 .post .header .tags,
+.widgetSinglePost .post .header .tags {
+	position: relative;
+	display: block;
+	margin-top: .5em;
 
-.headerstyle1 .post .header .author,
-.widgetSinglePost .post .header .author {
+	word-spacing: .5em;
 	color: rgb(128,128,128);
 	font-family: Arial, Tahoma;
-	font-size: .9em;
-	clear: left;
-	float: left;
-	position: relative;
-	left: 95px;
-	top: 1.3em;
+	font-size: .8em;
 }
+
+.headerstyle1 .post .header .tags a,
+.widgetSinglePost .post .header .tags a {
+	color: brown;
+}
+
+.headerstyle1 .post .header .tags a:hover,
+.widgetSinglePost .post .header .tags a:hover {
+	text-decoration: none;
+}
+
 
 .headerstyle1 .post .header .admin,
 .widgetSinglePost .post .header .admin {
@@ -490,21 +521,18 @@ body {
 	font-size: .9em;
 	position: relative;
 	top: .1em;
+	margin-right: 1em;
 }
 
 .headerstyle2 .header .label {
 	display: none;
 }
 
-.headerstyle2  .post .header .comments,
-.headerstyle2  .post .header .date {
-	margin-left: 1em;
-}
-
 .headerstyle2  .post .header .long,
 .headerstyle2  .post .header .default,
 .headerstyle2  .post .header .date-updated,
 .headerstyle2  .post .header .admin,
+.headerstyle2  .post .header .tags,
 .headerstyle2  .post .header .categories {
 	display: none;
 }
@@ -666,24 +694,22 @@ body {
 .widgetBestPosts .post .header .author,
 .widgetBestPosts .post .header .comments,
 .widgetBestPosts .post .header .date {
+	position: relative;
 	top: .6em;
+	margin-right: 1em;
+
 	color: rgb(128,128,128);
 	font-family: Tahoma, Arial;
 	font-size: .9em;
-	position: relative;
 }
 
 
-.widgetBestPosts  .post .header .comments,
-.widgetBestPosts  .post .header .date {
-	margin-left: 1em;
-}
-
-
+.widgetBestPosts .post .header .label,
 .widgetBestPosts .post .header .long,
 .widgetBestPosts .post .header .default,
 .widgetBestPosts .post .header .date-updated,
 .widgetBestPosts .post .header .admin,
+.widgetBestPosts .post .header .tags,
 .widgetBestPosts .post .header .categories {
 	display: none;
 }
@@ -748,57 +774,77 @@ input, textarea {
  **
  **/
 
-.widgetComments .commentlist {
-	padding-left: 2em;
-}
-
-.widgetComments .commentlist li {
+/*
+.widgetComments .commentlist  {
 	margin-bottom: 3em;
 	padding-bottom: 2em;
 	border-bottom: 1px solid rgb(221, 221, 221);
 	clear: both;
 	float: left;
-	/* border: 1px solid brown; */
 	width: 95%;
 }
+*/
 
-.widgetComments li .metadata {
-	float: right;
-	margin-top: 1em;
-	width: 29%;
-/*	border: 1px solid red; */
+.widgetComments .pingback,
+.widgetComments .trackback,
+.widgetComments .comment  {
+	border-bottom: 1px solid rgb(221, 221, 221);
+	padding-bottom: .5em;
+	margin-bottom: .5em;
+	float: left;
+	width: 100%;
 }
 
-.widgetComments li .metadata .author,
-.widgetComments li .metadata .date,
-.widgetComments li .metadata .control {
+
+.widgetComments .byuser {
+	background-color: #e5e5e5;
+}
+
+.widgetComments .index {
+	display: block;
+	float: left;
+	width: 29%;
+}
+
+
+.widgetComments .metadata {
+	float: left;
+	width: 29%;
+	clear: left;
+
+	margin-top: 1em;
+}
+
+.widgetComments .content {
+	float: right;
+	width: 69%;
+	margin-top: -1em;
+}
+
+.widgetComments .metadata .author,
+.widgetComments .metadata .date,
+.widgetComments .metadata .control {
 	display: block;
 }
 
 
-.widgetComments li .metadata .author {
+.widgetComments .metadata .author {
 	font-weight: bold;
 	font-family: Helvetica, Arial, Verdana;
 }
 
-.widgetComments li .metadata .author a {
+.widgetComments .metadata .author a {
 	color: rgb(52, 107, 164);
 }
 
-.widgetComments li .metadata .date {
+.widgetComments .metadata .date {
 	margin-top: 1em;
 	margin-bottom: .3em;
 	font-size: .9em;
 	color: rgb(128,128,128);
 }
 
-.widgetComments li .content {
-	width: 69%;
-	margin-top: 1em;
-	/* border: 1px solid yellow; */
-}
-
-.widgetComments li .content p {
+.widgetComments .content p {
 	margin-top: 0;
 	font-family: Helvetica, Verdana, Arial;
 	font-size: .9em;
@@ -843,8 +889,11 @@ input, textarea {
 }
 
 
-.widgetFeaturedPost .meta .date,
+.widgetFeaturedPost .meta .date .default,
+.widgetFeaturedPost .meta .date .long,
 .widgetFeaturedPost .meta .date-updated,
+.widgetFeaturedPost .meta .label,
+.widgetFeaturedPost .meta .tags,
 .widgetFeaturedPost .meta .title {
 	display: none;
 }
@@ -882,9 +931,11 @@ input, textarea {
 }
 
 .widgetFeaturedPost .post .header .date,
+.widgetFeaturedPost .post .header .date-updated,
 .widgetFeaturedPost .post .header .admin,
 .widgetFeaturedPost .post .header .comments,
 .widgetFeaturedPost .post .header .author,
+.widgetFeaturedPost .post .header .tags,
 .widgetFeaturedPost .post .header .categories {
 	display: none;
 }

@@ -140,19 +140,25 @@ function Comments_render($args,$instance) {
 	}
 
 
-	echo("<ol class=\"commentlist\">");
+	echo("<div class=\"commentlist\">");
 
+	$cindex=0;
 	foreach ($wp_query->comments as $comment) {
+		$cindex++;
 		$text="";
 		$type=get_comment_type();
 		if ( $type=='trackback' || $type=='pingback' ) {
 			$text=__("Via $type",'theme');
 		}?>
 
-		<li class="<?php sandbox_comment_class(); ?>" id="comment-<?php comment_ID() ?>">
+		<div class="<?php sandbox_comment_class(); ?>" id="comment-<?php comment_ID() ?>">
+			<a href="<?php get_comment_link() ?>" class="index"><?php printf(__("# %d",'theme'),$cindex);?></a>
+
 			<div class="metadata">
-				<a rel="external" class="author" href="<?php comment_author_url(); ?>"><?php comment_author(); ?> <?php
-					if (!empty($text)) echo('<span class="adm-trackback" title="' . $text . '">&nbsp;</span>');?></a>
+				<span class="author"><?php
+				comment_author_link();
+				if (!empty($text)) echo(' <span class="adm-trackback" title="' . $text . '">&nbsp;</span>');
+				echo("</span> <!-- class=\"author\" -->");?>
 				<span class="date"><?php comment_date() ?></span>
 				<span class="admin">
 					<a class="adm-permalink" href="<?php get_comment_link() ?>" rel="bookmark" title="<?php _e('Comment permalink','theme'); ?>">&nbsp;</a>
@@ -167,10 +173,10 @@ function Comments_render($args,$instance) {
 					echo("</p>");
 				} else comment_text();?>
 			</div>
-		</li><?php
+		</div><?php
 	}
 
-	echo("</ol>");
+	echo("</div>");
 	echo($after_widget . "\n");
 }
 
