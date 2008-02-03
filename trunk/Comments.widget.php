@@ -152,7 +152,7 @@ function Comments_render($args,$instance) {
 		}?>
 
 		<div class="<?php sandbox_comment_class(); ?>" id="comment-<?php comment_ID() ?>">
-			<a href="<?php get_comment_link() ?>" class="index"><?php printf(__("# %d",'theme'),$cindex);?></a>
+			<a href="<?php get_comment_link() ?>" class="index"><?php printf(__("#%d",'theme'),$cindex);?></a>
 
 			<div class="metadata">
 				<span class="author"><?php
