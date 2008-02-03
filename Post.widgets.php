@@ -334,7 +334,7 @@ function FeaturedPost_render($args,$instance) {
 
 	$myoptions=get_option($current['wpOptions']);
 
-	$query='posts_per_page=1&orderby=date&tag=en';
+	$query='posts_per_page=1&orderby=date&tag=featured';
 	if (is_category()) $query.='&cat='.get_the_category();
 
 	query_posts($query);
@@ -371,52 +371,53 @@ function SinglePost_renderPostHeader($args,$instance) {
 
 	<a class="title" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',false)); ?>"><?php the_title(); ?></a>
 
-	<span class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></span><?php
-
-	$posted=get_the_time('r');
-	$modified=get_the_modified_time('r');
-
-	echo("<span class=\"date long\">");
-	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
-	echo("$posted</span>\n");
-	if ($modified != $posted) {
-		echo("<span class=\"date-updated long\">");
-		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
-		echo("$modified</span>\n");
-	}
-
-	$posted=get_the_time('j M Y');
-	$modified=get_the_modified_time('j M Y');
-
-
-	echo("<span class=\"date short\">");
-	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
-	echo("$posted</span>\n");
-	if ($modified != $posted) {
-		echo("<span class=\"date-updated short\">");
-		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
-		echo("$modified</span>\n");
-	}
-
-	$posted=get_the_time();
-	$modified=get_the_modified_time();
-
-	echo("<span class=\"date default\">");
-	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
-	echo("$posted</span>\n");
-	if ($modified != $posted) {
-		echo("<span class=\"date-updated default\">");
-		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
-		echo("$modified</span>\n");
-	}?>
-
 	<a class="comments" href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>">
 		<span class="number"><?php comments_number('0','1','%'); ?></span>
 		<span class="word"><?php
 			if (get_comments_number() == "1") _e('comment','theme');
 			else _e('comments','theme');?></span></a>
 
-	<span class="categories"><?php the_category(' &bull; '); ?></span>
+	<span class="author"><?php printf(__('By %s','theme'),__(get_the_author(),'personal')); ?></span><?php
+
+	$posted=get_the_time('r');
+	$modified=get_the_modified_time('r');
+
+	echo("<span class=\"date\"><span class=\"long\">");
+	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
+	echo("$posted</span></span>\n");
+	if ($modified != $posted) {
+		echo("<span class=\"date-updated\"><span class=\"long\">");
+		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
+		echo("$modified</span></span>\n");
+	}
+
+	$posted=get_the_time('j M Y');
+	$modified=get_the_modified_time('j M Y');
+
+
+	echo("<span class=\"date\"><span class=\"short\">");
+	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
+	echo("$posted</span></span>\n");
+	if ($modified != $posted) {
+		echo("<span class=\"date-updated\"><span class=\"short\">");
+		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
+		echo("$modified</span></span>\n");
+	}
+
+	$posted=get_the_time();
+	$modified=get_the_modified_time();
+
+	echo("<span class=\"date\"><span class=\"default\">");
+	echo("<span class=\"label\">" . __("Published: ",'theme') . "</span>\n");
+	echo("$posted</span></span>\n");
+	if ($modified != $posted) {
+		echo("<span class=\"date-updated\"><span class=\"default\">");
+		echo("<span class=\"label\">".__("Updated: ",'theme')."</span>\n");
+		echo("$modified</span></span>\n");
+	}?>
+
+	<span class="categories"><span class="label"><?php _e("Categories: ",'theme')?></span><?php the_category(' &bull; '); ?></span>
+	<span class="tags"><span class="label"><?php _e("Tags: ",'theme')?></span><?php the_tags('',' '); ?></span>
 
 	<div class="admin">
 		<a class="adm-permalink" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',0)); ?>">&nbsp;</a>
