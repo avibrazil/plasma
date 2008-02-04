@@ -143,6 +143,13 @@ body {
 	display: none;
 }
 
+
+
+.headerstyle1 .post .header .comments:hover,
+.widgetSinglePost .post .header .comments:hover {
+	background-color: #f0e290;
+}
+
 .headerstyle1 .post .header .comments,
 .widgetSinglePost .post .header .comments {
 	display: block;
@@ -198,7 +205,6 @@ body {
 
 .headerstyle1 .post .header .author,
 .widgetSinglePost .post .header .author {
-	position: relative;
 	display: block;
 
 	color: rgb(128,128,128);
@@ -211,7 +217,6 @@ body {
 .widgetSinglePost .post .header .date,
 .headerstyle1 .post .header .date-updated,
 .widgetSinglePost .post .header .date-updated {
-	position: relative;
 	display: block;
 
 	color: rgb(128,128,128);
@@ -230,7 +235,6 @@ body {
 
 .headerstyle1 .post .header .tags,
 .widgetSinglePost .post .header .tags {
-	position: relative;
 	display: block;
 	margin-top: .5em;
 
@@ -727,6 +731,10 @@ body {
 	text-decoration: underline;
 }
 
+.widgetBestPosts .post  {
+	margin-bottom: 0 !important;
+}
+
 /**
  ** End of Widget Best Posts related classes
  **
@@ -831,7 +839,7 @@ input, textarea {
 .widgetComments .metadata .author {
 	font-weight: bold;
 	font-family: Helvetica, Arial, Verdana;
-	font-size: 1.3em;
+	/*font-size: 1.3em; */
 }
 
 .widgetComments .metadata .author a {
@@ -880,6 +888,7 @@ input, textarea {
 .widgetFeaturedPost .post {
 	float: right;
 	width: 70%;
+	margin-bottom: 0 !important;
 }
 
 .widgetFeaturedPost .meta {
