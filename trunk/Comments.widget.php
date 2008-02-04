@@ -152,7 +152,7 @@ function Comments_render($args,$instance) {
 		}?>
 
 		<div class="<?php sandbox_comment_class(); ?>" id="comment-<?php comment_ID() ?>">
-			<a href="<?php get_comment_link() ?>" class="index"><?php printf(__("#%d",'theme'),$cindex);?></a>
+			<a href="<?php echo(get_comment_link()); ?>" class="index"><?php printf(__("#%d",'theme'),$cindex);?></a>
 
 			<div class="metadata">
 				<span class="author"><?php
@@ -161,7 +161,6 @@ function Comments_render($args,$instance) {
 				echo("</span> <!-- class=\"author\" -->");?>
 				<span class="date"><?php comment_date() ?></span>
 				<span class="admin">
-					<a class="adm-permalink" href="<?php get_comment_link() ?>" rel="bookmark" title="<?php _e('Comment permalink','theme'); ?>">&nbsp;</a>
 					<?php edit_comment_link('<span class="adm-editpost">&nbsp;</span>'); ?>
 				</span>
 			</div>

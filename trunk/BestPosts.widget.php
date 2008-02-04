@@ -194,12 +194,22 @@ function selectTab(widgetID,tabIndex) {
 		else $class="unselected";
 
 		// Build WordPress query...
-		if (is_category()) $myquery="cat=" . get_query_var('cat') . "&";
-		$myquery.="tag=" . $tab['tag'] . "&order=DESC&showposts=15";
+		$myquery=array();
+		$myquery['showposts']=15;
+		$myquery['order']='DESC';
+		
+		// Workaround for a bug at http://trac.wordpress.org/ticket/5433
+		$myquery['tag_slug__and']=array($tab['tag'],$tab['tag']);
+
+		if (is_category()) {
+			$myquery['category__in']=get_term_children(get_query_var('cat'), 'category');
+			$myquery['category__in'][]=get_query_var('cat');
+		}
+
 		query_posts($myquery);
 
 		echo("<div class=\"$class\" id=\"$instance" . "-list-" . "$index\">\n");
-		echo("<!-- query_posts($myquery) -->\n");
+		echo("<!-- Query is: "); print_r($myquery); echo("-->\n");
 		if (have_posts()) {
 			while (have_posts()) {
 				the_post();

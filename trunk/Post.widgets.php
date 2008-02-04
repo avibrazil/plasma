@@ -326,6 +326,9 @@ How to render posts:<br/>
 
 
 
+
+
+
 function FeaturedPost_render($args,$instance) {
 	global $FeaturedPost;
 	$current=$FeaturedPost;
@@ -334,16 +337,28 @@ function FeaturedPost_render($args,$instance) {
 
 	$myoptions=get_option($current['wpOptions']);
 
-	$query='posts_per_page=1&orderby=date&tag=featured';
-	if (is_category()) $query.='&cat='.get_the_category();
+	$query=array();
+	$query['showposts']=1;
+	$query['orderby']='date';
+
+	// Workaround for a bug at http://trac.wordpress.org/ticket/5433
+	$query['tag_slug__and']=array('featured','featured');
+
+	if (is_category()) {
+		$query['category__in']=get_term_children(get_query_var('cat'), 'category');
+		$query['category__in'][]=get_query_var('cat');
+	}
 
 	query_posts($query);
 
-	if (! have_posts()) return;
+	if (! have_posts()) {
+		wp_reset_query();
+		return;
+	}
+
 	the_post();
 
 	echo(Panel_insert_widget_style($before_widget,$myoptions[$instance]) . "\n");?>
-
 	<div class="meta"><?php
 		echo($before_title);
 		echo($current['baseName']);
@@ -371,7 +386,7 @@ function SinglePost_renderPostHeader($args,$instance) {
 
 	<a class="title" href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link: %s','theme'), the_title('','',false)); ?>"><?php the_title(); ?></a>
 
-	<a class="comments" href="<?php comments_link(); ?>" title="<?php echo __('Comments to:','theme') . ' '; the_title(); ?>">
+	<a class="comments" href="<?php comments_link(); ?>" title="<?php _e('Read and write opinions about this post','theme'); ?>">
 		<span class="number"><?php comments_number('0','1','%'); ?></span>
 		<span class="word"><?php
 			if (get_comments_number() == "1") _e('comment','theme');
