@@ -167,11 +167,29 @@ body {
 
 	color: brown;
 	background-color: #fef19f;
-	border: 2px solid #afa66e;
+	border: .16em solid #afa66e;
 	border-left-color: #e2d797;
 	border-top-color: #e2d797;
+
+	border-radius: 1.1em;
+	border-bottom-right-radius: 0;
+	border-top-left-radius: 0;
+
 	-moz-border-radius: 1.1em;
 	-moz-border-radius-bottomright: 0;
+	-moz-border-radius-topleft: 0;
+
+	-webkit-border-radius: 1.1em;
+	-webkit-border-bottom-right-radius: 0;
+	-webkit-border-top-left-radius: 0;
+
+	-khtml-border-radius: 1.1em;
+	-khtml-border-bottom-right-radius: 0;
+	-khtml-border-top-left-radius: 0;
+
+	-opera-border-radius: 1.1em;
+	-opera-border-radius-bottomright: 0;
+	-opera-border-radius-topleft: 0;
 }
 
 .headerstyle1 .post .header .comments .word,
@@ -423,6 +441,7 @@ body {
 
 
 
+.tag .widgetMultiPost .widgettitle,
 .category .widgetMultiPost .widgettitle,
 .date .widgetMultiPost .widgettitle,
 .search .widgetMultiPost .widgettitle {
@@ -543,7 +562,6 @@ body {
 
 .headerstyle2  .post .content {
 	clear: both;
-	margin-bottom: 2em;
 	font-family: Tahoma, Arial;
 	font-size: .9em;
 }

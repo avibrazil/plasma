@@ -204,6 +204,7 @@ function MultiPost_init() {
 
 function MultiPost_render($args,$instance) {
 	global $MultiPost;
+	global $wp_query; // to fine grained control over the query
 	global $s; // search terms
 
 	extract($args);
@@ -211,8 +212,17 @@ function MultiPost_render($args,$instance) {
 	$multi=get_option($MultiPost['wpOptions']);
 	echo(Panel_insert_widget_style($before_widget,$multi[$instance]) . "\n");
 
+	if ($multi[$instance]['numposts'] && $multi[$instance]['numposts']>0 &&
+			$multi[$instance]['numposts']!=get_query_var('posts_per_page')) {
+		set_query_var('posts_per_page',$multi[$instance]['numposts']);
+		$wp_query->get_posts();
+	}
+
 	if (is_category() || is_tag()) {
-		$finalTitle=sprintf(__("Archive for %s",'theme'),__(single_cat_title('',false),'personal'));
+		if (is_tag()) $label="tag";
+		else $label="category";
+
+		$finalTitle=sprintf(__("Archive for $label &#8220;%s&#8221",'theme'),__(single_cat_title('',false),'personal'));
 
 		$tmpcat=get_query_var('cat');
 		$myCategory=get_category($tmpcat);
@@ -276,6 +286,16 @@ function MultiPost_render($args,$instance) {
 	}
 	echo("</div>");
 
+	if (!$_GET['pagedmode'] && !get_query_var('paged')) {?>
+		<div class="paged"><?php
+			if (strpos($_SERVER['REQUEST_URI'],'?')===false) $pg=$_SERVER['REQUEST_URI'] . "?pagedmode=1";
+			else $pg=$_SERVER['REQUEST_URI'] . "&pagedmode=1";
+
+			printf(__("Want more? <a href=\"%s\">Switch to paged mode.</a>",'theme'),$pg); ?>
+		</div><?php
+	}
+
+
 	echo($after_widget . "\n");
 }
 
@@ -304,6 +324,8 @@ function MultiPost_control($id) {
 	if ($_POST["$id-profile"])
 		$newoptions['renderprofile']=$_POST["$id-profile"];
 
+	if ($_POST["$id-numposts"]) $newoptions['numposts']=$_POST["$id-numposts"];
+
 	if ($options[$id] != $newoptions) {
 		$options[$id]=$newoptions;
 		update_option($MultiPost['wpOptions'], $options);
@@ -314,6 +336,9 @@ function MultiPost_control($id) {
 		"excerpt"=>"Regular posts headers and excerpt only",
 		"excerptaside"=>"The post header in a different fashion and excerpt");
 ?>
+Number of posts to render (0 uses <a href="<?php bloginfo('wpurl'); ?>/wp-admin/options-reading.php#posts_per_page">default</a>):<br/>
+<input type="text" name="<?php echo($id); ?>-numposts" value="<?php echo($newoptions['numposts']); ?>" style="width: 50%"/>
+<br/>
 How to render posts:<br/>
 <select name="<?php echo($id); ?>-profile" style="width: 90%"><?php
 	foreach ($profiles as $pid => $desc) {

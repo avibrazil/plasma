@@ -121,13 +121,13 @@ function NavigationLinks_render($args,$id) {
 
 	echo(Panel_insert_widget_style($args['before_widget'],$config[$id]) . "\n");
 
-	if (is_single()) {
-		echo('<div class="pages">');
-		wp_link_pages(array(
-			'before' => '<p><strong>'.__("Pages:",'theme') . '</strong> ',
-			'after' => '</p>',
-			'next_or_number' => 'number'));
-		echo('</div>');?>
+	if (is_single()) {?>
+		<div class="pages"><?php
+			wp_link_pages(array(
+				'before' => '<p><strong>'.__("Pages:",'theme') . '</strong> ',
+				'after' => '</p>',
+				'next_or_number' => 'number'));?>
+		</div>
 
 		<div class="posts">
 			<span class="prev">
@@ -139,7 +139,7 @@ function NavigationLinks_render($args,$id) {
 		</div><?php
 	}
 
-	if (is_archive() || is_search()) {?>
+	if (is_archive() || is_search() || is_home()) {?>
 		<div class="navigation">
 			<span class="prev">
 				<?php next_posts_link(__('&laquo; Older Entries','theme')); ?>

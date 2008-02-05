@@ -41,9 +41,9 @@ function Main_register($id,$name) {
 
 	Panel_register("panel-category", "Main panel on Category Page",true);
 
-	Panel_register("panel-archive", "Main panel on Archive Page",true);
-
 	Panel_register("panel-search", "Main panel on Search Page",true);
+
+	Panel_register("panel-archive", "Main panel on Archive Page",true);
 }
 
 
@@ -67,12 +67,10 @@ echo("</pre>\n");
 	if (is_single()) $realid='panel-single';
 	else if (is_home()) $realid='panel-home';
 	else if (is_category()) $realid='panel-category';
-	else if (is_archive()) $realid='panel-archive';
 	else if (is_search()) $realid='panel-search';
-	else {
-		echo("<b>no match</b>\n");
-		return;
-	}
+	else if (is_archive()) $realid='panel-archive';
+
+	if (!is_single() && (get_query_var('paged') || $_GET['pagedmode']!=0)) $realid='panel-archive';
 
 	//$args['before_widget']=str_replace("id=\"$id\"","id=\"$realid\"",$args['before_widget']);
 	$args['before_widget']=str_replace($Main['cssClassName'],$Main['cssClassName'] . " " . $PanelWidget['cssClassName'],$args['before_widget']);
@@ -89,7 +87,7 @@ echo("</pre>");
 */
 
 	Panel_render($realid);
-
+	
 	echo($args['after_widget'] . "<!-- id=$id -->\n");
 }
 
