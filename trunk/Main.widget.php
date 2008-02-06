@@ -35,6 +35,7 @@ function Main_register($id,$name) {
 	// Main WP pages are now Panels (a.k.a. sidebars).
 	// The "true" means they are horizontal Panels.
 	// See also http://codex.wordpress.org/Templates_Hierarchy
+
 	Panel_register("panel-home","Main panel on Home Page",true);
 
 	Panel_register("panel-single", "Main panel on Single Page",true);
