@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<!-- $Id$ -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2979.9211"
+   height="4212.9922"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   sodipodi:docbase="/home/aviram/src/plasma/img"
+   sodipodi:docname="soleil.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   sodipodi:modified="true">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="20.722729"
+     inkscape:cx="134.24176"
+     inkscape:cy="3860.7877"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1024"
+     inkscape:window-height="702"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     width="2979.9213px"
+     height="4212.9921px"
+     showgrid="true"
+     gridempspacing="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs">
+    <linearGradient
+       id="gradientOrange"
+       y1="1"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         style="stop-color:#fe9d08;stop-opacity:1"
+         offset="0"
+         id="stop5242" />
+      <stop
+         style="stop-color:#f5dd97;stop-opacity:1;"
+         offset="1"
+         id="stop5244" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y1="1"
+       id="gradientBlue">
+      <stop
+         id="stop2170"
+         offset="0"
+         style="stop-color:#5ab1f1;stop-opacity:1" />
+      <stop
+         id="stop2172"
+         offset="1"
+         style="stop-color:#addfff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#gradientOrange"
+       id="gradientOrangeBig"
+       gradientUnits="userSpaceOnUse"
+       y1="146" />
+    <linearGradient
+       y1="40"
+       gradientUnits="userSpaceOnUse"
+       id="gradientOrangeSmall"
+       xlink:href="#gradientOrange" />
+    <linearGradient
+       y1="146"
+       gradientUnits="userSpaceOnUse"
+       id="gradientBlueBig"
+       xlink:href="#gradientBlue" />
+    <linearGradient
+       xlink:href="#gradientBlue"
+       id="gradientBlueSmall"
+       gradientUnits="userSpaceOnUse"
+       y1="40"
+       x1="0"
+       x2="0" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="bannerStarClipperBig">
+      <rect
+         id="rect8082"
+         width="430"
+         height="177"
+         x="0"
+         y="0" />
+    </clipPath>
+    <clipPath
+       id="bannerBackgroundClipperBig"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="0"
+         x="430"
+         height="177"
+         width="2300"
+         id="rect8091" />
+    </clipPath>
+    <clipPath
+       id="bannerStartClipperSmall"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="0"
+         x="0"
+         height="53"
+         width="170"
+         id="rect2228" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="bannerBackgroundClipperSmall">
+      <rect
+         id="rect2232"
+         width="2450"
+         height="55"
+         x="170"
+         y="0" />
+    </clipPath>
+    <g
+       id="bannerBig">
+      <rect
+         style="opacity:1;fill:url(#gradientOrangeBig);stroke:#ec9521;stroke-width:1"
+         id="rectOrange"
+         width="315"
+         height="146"
+         x="0.5"
+         y="0.5" />
+      <rect
+         x="319.5"
+         height="146"
+         width="2300"
+         id="rectBlue"
+         style="fill:url(#gradientBlueBig);stroke:#72a6bc;stroke-width:1"
+         y="0.5" />
+      <rect
+         y="150.5"
+         x="0.5"
+         height="26"
+         width="2619"
+         id="rectGreen1"
+         style="fill:#aee66b;stroke:#afcf83;stroke-width:1" />
+      <g
+         id="starTranslateWraper"
+         transform="translate(317.5,75.5)">
+        <g
+           id="starScaleWraper"
+           transform="scale(0.9,0.9)">
+          <path
+             sodipodi:type="star"
+             style="opacity:1;fill:#ffffff;fill-opacity:0.41530056;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="star"
+             sodipodi:sides="10"
+             sodipodi:r1="100"
+             inkscape:flatsided="false"
+             inkscape:rounded="0"
+             inkscape:randomized="0"
+             d="M 95.105651,-30.9017 L 52.573109,0 L 95.105652,30.901699 L 42.532538,30.901698 L 58.778526,80.901699 L 16.245984,49.999998 L 4.6410207e-07,100 L -16.245984,49.999998 L -58.778525,80.9017 L -42.532538,30.901698 L -95.105651,30.9017 L -52.573109,6.4381363e-15 L -95.105652,-30.901699 L -42.532538,-30.901698 L -58.778526,-80.901699 L -16.245984,-49.999998 L -4.6410211e-07,-100 L 16.245984,-49.999998 L 58.778525,-80.9017 L 42.532538,-30.901698 L 95.105651,-30.9017 z "
+             sodipodi:cx="0"
+             sodipodi:cy="0"
+             sodipodi:arg1="-0.31415927"
+             sodipodi:r2="52.573109"
+             sodipodi:arg2="0" />
+        </g>
+      </g>
+    </g>
+    <g
+       id="bannerSmall">
+      <rect
+         y="0"
+         x="0"
+         height="51"
+         width="2619"
+         id="background2"
+         style="fill:#ffffff" />
+      <rect
+         y="0.5"
+         x="0.5"
+         height="40"
+         width="130"
+         id="rectOrange2"
+         style="opacity:1;fill:url(#gradientOrangeSmall);stroke:#ec9521;stroke-width:1" />
+      <rect
+         y="0.5"
+         style="fill:url(#gradientBlueSmall);stroke:#72a6bc;stroke-width:1"
+         id="rectBlue2"
+         width="2485"
+         height="40"
+         x="134.5" />
+      <rect
+         style="fill:#aee66b;stroke:#afcf83;stroke-width:1"
+         id="rectGreen2"
+         width="2619"
+         height="7"
+         x="0.5"
+         y="43.5" />
+      <g
+         transform="translate(132.5,23)"
+         id="g2187">
+        <g
+           transform="scale(0.27,0.27)"
+           id="g2189">
+          <path
+             sodipodi:arg2="0"
+             sodipodi:r2="52.573109"
+             sodipodi:arg1="-0.31415927"
+             sodipodi:cy="0"
+             sodipodi:cx="0"
+             d="M 95.105651,-30.9017 L 52.573109,0 L 95.105652,30.901699 L 42.532538,30.901698 L 58.778526,80.901699 L 16.245984,49.999998 L 4.6410207e-07,100 L -16.245984,49.999998 L -58.778525,80.9017 L -42.532538,30.901698 L -95.105651,30.9017 L -52.573109,6.4381363e-15 L -95.105652,-30.901699 L -42.532538,-30.901698 L -58.778526,-80.901699 L -16.245984,-49.999998 L -4.6410211e-07,-100 L 16.245984,-49.999998 L 58.778525,-80.9017 L 42.532538,-30.901698 L 95.105651,-30.9017 z "
+             inkscape:randomized="0"
+             inkscape:rounded="0"
+             inkscape:flatsided="false"
+             sodipodi:r1="100"
+             sodipodi:sides="10"
+             id="path2191"
+             style="opacity:1;fill:#ffffff;fill-opacity:0.41530056;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             sodipodi:type="star" />
+        </g>
+      </g>
+    </g>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <use
+       x="0"
+       clip-path="url(#bannerStarClipperBig)"
+       width="1"
+       height="1"
+       y="0"
+       id="bannerBigStar"
+       xlink:href="#bannerBig" />
+    <use
+       xlink:href="#bannerBig"
+       id="bannerBigBackground"
+       y="0"
+       height="1"
+       width="1"
+       clip-path="url(#bannerBackgroundClipperBig)"
+       x="0" />
+    <use
+       xlink:href="#bannerSmall"
+       id="bannerSmallStar"
+       y="0"
+       width="1"
+       x="0"
+       height="1"
+       clip-path="url(#bannerStartClipperSmall)"
+       transform="translate(0,300)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <use
+       transform="translate(0,371.99219)"
+       clip-path="url(#bannerBackgroundClipperSmall)"
+       height="1"
+       x="0"
+       width="1"
+       y="0"
+       id="bannerSmallBackground"
+       xlink:href="#bannerSmall"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>

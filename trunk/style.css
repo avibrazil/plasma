@@ -36,8 +36,8 @@ body {
 	/* The nice and exapandable blue and green bar */
 	
 	position: relative;
-	height: 177px;
-	background: url(img/banner-background.png) no-repeat top right;
+	height: 51px;
+	background: url(img/bannerSmallBackground.png) no-repeat top right;
 }
 
 
@@ -45,10 +45,9 @@ body {
 .widgetExpandableBanner .inner {
 	/* The nice and fixed orange, blue an green banner, with star */
 	
-	height: 177px;
-	background: url(img/banner-header.png) no-repeat;
+	height: 51px;
+	background: url(img/bannerSmallStar.png) no-repeat;
 	overflow: hidden;
-	position: static;
 }
 
 
@@ -56,14 +55,14 @@ body {
 	/* Blog title */
 	
 	position: absolute;
-	left: 430px;
-	top: .5em;
-	font-size: 5em;
+	left: 170px;
+	top: .15em;
+
 	font-family: Arial Black, Helvetica, Bitstream Vera Sans;
 	font-variant:small-caps;
+	font-size: 2em;
 	font-weight: bold;
 	text-decoration: none;
-	text-align: left;
 	color: white;
 }
 
@@ -71,12 +70,13 @@ body {
 .widgetExpandableBanner .description {
 	/* Blog subtitle or description */
 	
-	position: absolute;
-	bottom: 0;
-	right: 1em;
-	font-family: Arial, Helvetica, Bitstream Vera Sans;
-	font-weight: normal !important;
-	font-size: 2em;
+	float: right;
+	margin-top: 1.2em;
+	margin-right: 1em;
+
+	font-family: Calibri,Verdana,Helvetica,Bitstream Vera Sans;
+	font-weight: bold;
+	font-style: italic;
 	color: white;
 	/*letter-spacing:1px;*/
 	/* font-variant:small-caps; */
@@ -103,10 +103,14 @@ body {
  **/
 
 
-.archive .post {
+#panel-archive .post {
 	margin-bottom: 4em;
 }
 
+.widgetSinglePost .post {
+	padding-bottom: 1em;
+	border-bottom: 1px dotted grey;
+}
 
 
 .headerstyle1 .post .header,
@@ -790,6 +794,11 @@ input, textarea {
 }
 
 
+.widgetCommentForm .widgettitle {
+	font-size: 1.7em !important;
+	color: orange;
+}
+
 
 /**
  ** End of Comment Input Form related classes
@@ -815,6 +824,12 @@ input, textarea {
 	width: 95%;
 }
 */
+
+.widgetComments .widgettitle {
+	font-size: 1.7em !important;
+	color: orange;
+}
+
 
 .widgetComments .pingback,
 .widgetComments .trackback,
@@ -1115,6 +1130,11 @@ input, textarea {
  **
  **/
 
+.widgetRelated .widgettitle {
+	font-size: 1.7em !important;
+	color: orange;
+}
+
 .widgetRelated ul {
 	padding-left: 1.3em;
 }
@@ -1221,12 +1241,12 @@ input, textarea {
  *********************************************/
 
 body {
-	margin: .8em;
+	margin: .4em;
 }
 
 
 .widgetMain {
-	background-color: #f2f2f2;
+	background-color: white;
 	padding-bottom: 1em;
 }
 
