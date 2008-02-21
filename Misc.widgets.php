@@ -74,6 +74,9 @@ function RelatedLinks_render($args,$id) {
 
 
 
+
+
+
 $NavigationLinks=array();
 $NavigationLinks['baseID']           = "navigation";
 $NavigationLinks['baseName']         = __("Navigation Links",'theme');
@@ -287,6 +290,9 @@ name="<?php echo("$id-text")?>"><?php echo(format_to_edit($config[$id]['text']))
 
 
 
+
+
+
 $ExpandableBanner=array();
 $ExpandableBanner['baseID']           = "expandablebanner";
 $ExpandableBanner['baseName']         = __("Expandable Banner",'theme');
@@ -349,6 +355,61 @@ function ExpandableBanner_adminSetup() {
 	global $ExpandableBanner;
 	Widget_adminSetup($ExpandableBanner);
 }
+
+
+
+
+
+
+
+$ClosingInfo=array();
+$ClosingInfo['baseID']           = "closinginfo";
+$ClosingInfo['baseName']         = __("Closing Info",'theme');
+$ClosingInfo['wpOptions']        = "widget_closinginfo";
+$ClosingInfo['cssClassName']     = "widgetClosingInfo";
+$ClosingInfo['renderCallback']   = "ClosingInfo_render";
+$ClosingInfo['methodInit']       = "ClosingInfo_init";
+$ClosingInfo['methodSetup']      = "ClosingInfo_setup";
+$ClosingInfo['methodRegister']   = "ClosingInfo_register";
+$ClosingInfo['methodAdminSetup'] = "ClosingInfo_adminSetup";
+
+
+add_action('init', $ClosingInfo['methodInit'], 1);
+
+
+
+
+function ClosingInfo_render($args,$instance) {
+	global $ClosingInfo;
+	global $wpdb;
+
+	extract($args);
+	$options = get_option($ClosingInfo['wpOptions']);
+
+	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");
+
+	echo("<p>");
+	printf(__("%s is powered by <a href=\"http://WordPress.org\">WordPress %s</a> and delivered to you in %g seconds using %d queries.",'theme'),
+		"<a href=\"" . bloginfo('url') . "\" title=\"" . __(get_bloginfo('name'),'personal') . "\">" . __(get_bloginfo('name'),'personal') . "</a>",
+		bloginfo('version'),
+		timer_stop(1),
+		$wpdb->num_queries);
+	echo("</p>");
+
+	echo("<p>");
+	_e("Theme: <a href=\"http://avi.alkalay.net/2006/11/soleil-theme-for-wordpress.html\" title=\"Powered by Soleil for WordPress\">Soleil for WordPress</a> by <a href=\"http://avi.alkalay.net\" title=\"Visit Avi's Blog\">Avi Alkalay</a>.",'theme');
+	echo("</p>");
+
+	echo("<p>");
+	_e("Icons by the <a href=\"http://avi.alkalay.net/2007/05/blog-icons.html\">Blog Icons Project</a>.",'theme');
+	echo("</p>");
+
+	echo("$after_widget <!-- id=$instance -->\n");
+}
+
+
+
+
 
 
 
