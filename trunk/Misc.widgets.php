@@ -390,14 +390,14 @@ function ClosingInfo_render($args,$instance) {
 
 	echo("<p>");
 	printf(__("%s is powered by <a href=\"http://WordPress.org\">WordPress %s</a> and delivered to you in %g seconds using %d queries.",'theme'),
-		"<a href=\"" . bloginfo('url') . "\" title=\"" . __(get_bloginfo('name'),'personal') . "\">" . __(get_bloginfo('name'),'personal') . "</a>",
-		bloginfo('version'),
-		timer_stop(1),
+		"<a href=\"" . get_bloginfo('url') . "\" title=\"" . __(get_bloginfo('name'),'personal') . "\">" . __(get_bloginfo('name'),'personal') . "</a>",
+		get_bloginfo('version'),
+		timer_stop(0),
 		$wpdb->num_queries);
 	echo("</p>");
 
 	echo("<p>");
-	_e("Theme: <a href=\"http://avi.alkalay.net/2006/11/soleil-theme-for-wordpress.html\" title=\"Powered by Soleil for WordPress\">Soleil for WordPress</a> by <a href=\"http://avi.alkalay.net\" title=\"Visit Avi's Blog\">Avi Alkalay</a>.",'theme');
+	_e("Theme: <a href=\"http://avi.alkalay.net/2006/11/soleil-theme-for-wordpress.html\" title=\"Powered by Plasma, your last WordPress theme\">Plasma, your last WordPress theme</a> by <a href=\"http://avi.alkalay.net\" title=\"Visit Avi's Blog\">Avi Alkalay</a>.",'theme');
 	echo("</p>");
 
 	echo("<p>");
@@ -408,6 +408,32 @@ function ClosingInfo_render($args,$instance) {
 }
 
 
+
+
+function ClosingInfo_register($instance, $name) {
+	global $ClosingInfo;
+	Widget_register($ClosingInfo,$instance,$name);
+}
+
+
+function ClosingInfo_init() {
+	global $ClosingInfo;
+	Widget_init($ClosingInfo);
+}
+
+
+
+function ClosingInfo_setup() {
+	global $ClosingInfo;
+	Widget_setup($ClosingInfo);
+}
+
+
+
+function ClosingInfo_adminSetup() {
+	global $ClosingInfo;
+	Widget_adminSetup($ClosingInfo);
+}
 
 
 
