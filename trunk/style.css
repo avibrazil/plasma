@@ -103,18 +103,18 @@ body {
  **/
 
 
-#panel-archive .post {
+#panel-archive .hentry {
 	margin-bottom: 4em;
 }
 
-.widgetSinglePost .post {
+.widgetSinglePost .hentry {
 	padding-bottom: 1em;
 	border-bottom: 1px dotted grey;
 }
 
 
-.headerstyle1 .post .header,
-.widgetSinglePost .post .header {
+.headerstyle1 .hentry .header,
+.widgetSinglePost .hentry .header {
 	width: 100%;
 	position: relative;
 	float: left;
@@ -122,40 +122,42 @@ body {
 	border-bottom: 1px dotted grey;
 }
 
-.headerstyle1 .post .header .categories,
-.widgetSinglePost .post .header .categories {
+.headerstyle1 .hentry .header .categories,
+.widgetSinglePost .hentry .header .categories {
 	left: 0;
 	top: 0;
 	position: absolute;
 	font-family: Calibri, Verdana, Arial, Bitstream Vera Sans
 }
 
-.headerstyle1 .post .header .categories a,
-.widgetSinglePost .post .header .categories a {
+.headerstyle1 .hentry .header .categories a,
+.widgetSinglePost .hentry .header .categories a {
 	font-weight: bold;
 	text-decoration: none;
 	color: brown;
 }
 
-.headerstyle1 .post .header .categories a:hover,
-.widgetSinglePost .post .header .categories a:hover {
+.headerstyle1 .hentry .header .categories a:hover,
+.widgetSinglePost .hentry .header .categories a:hover {
 	text-decoration: underline;
 }
 
-.headerstyle1 .post .header .categories .label,
-.widgetSinglePost .post .header .categories .label {
+.headerstyle1 .hentry .header .categories .label,
+.widgetSinglePost .hentry .header .categories .label {
 	display: none;
 }
 
-
-
-.headerstyle1 .post .header .comments:hover,
-.widgetSinglePost .post .header .comments:hover {
+.headerstyle1 .hentry .header .comments:hover,
+.widgetSinglePost .hentry .header .comments:hover {
 	background-color: #f0e290;
 }
 
-.headerstyle1 .post .header .comments,
-.widgetSinglePost .post .header .comments {
+.page .categories {
+	display: none;
+}
+
+.headerstyle1 .hentry .header .comments,
+.widgetSinglePost .hentry .header .comments {
 	display: block;
 /*	width: 6.5em;
 	height: 3.5em; */
@@ -196,21 +198,21 @@ body {
 	-opera-border-radius-topleft: 0;
 }
 
-.headerstyle1 .post .header .comments .word,
-.widgetSinglePost .post .header .comments .word {
+.headerstyle1 .hentry .header .comments .word,
+.widgetSinglePost .hentry .header .comments .word {
 	font-size: .8em;
 }
 
-.headerstyle1 .post .header .comments .number,
-.widgetSinglePost .post .header .comments .number {
+.headerstyle1 .hentry .header .comments .number,
+.widgetSinglePost .hentry .header .comments .number {
 	font-size: 2em;
 	font-weight: bold;
 	display: block;
 }
 
 
-.headerstyle1 .post .header .title,
-.widgetSinglePost .post .header .title {
+.headerstyle1 .hentry .header .title,
+.widgetSinglePost .hentry .header .title {
 	display: block;
 	position: relative;
 
@@ -225,8 +227,8 @@ body {
 }
 
 
-.headerstyle1 .post .header .author,
-.widgetSinglePost .post .header .author {
+.headerstyle1 .hentry .header .author,
+.widgetSinglePost .hentry .header .author {
 	display: block;
 
 	color: rgb(128,128,128);
@@ -235,10 +237,10 @@ body {
 }
 
 
-.headerstyle1 .post .header .date,
-.widgetSinglePost .post .header .date,
-.headerstyle1 .post .header .date-updated,
-.widgetSinglePost .post .header .date-updated {
+.headerstyle1 .hentry .header .date,
+.widgetSinglePost .hentry .header .date,
+.headerstyle1 .hentry .header .date-updated,
+.widgetSinglePost .hentry .header .date-updated {
 	display: block;
 
 	color: rgb(128,128,128);
@@ -247,16 +249,16 @@ body {
 }
 
 
-.headerstyle1 .post .header .short,
-.headerstyle1 .post .header .default,
-.widgetSinglePost .post .header .short,
-.widgetSinglePost .post .header .default {
+.headerstyle1 .hentry .header .short,
+.headerstyle1 .hentry .header .default,
+.widgetSinglePost .hentry .header .short,
+.widgetSinglePost .hentry .header .default {
 	display: none;
 }
 
 
-.headerstyle1 .post .header .tags,
-.widgetSinglePost .post .header .tags {
+.headerstyle1 .hentry .header .tags,
+.widgetSinglePost .hentry .header .tags {
 	display: block;
 	margin-top: .5em;
 
@@ -266,19 +268,23 @@ body {
 	font-size: .8em;
 }
 
-.headerstyle1 .post .header .tags a,
-.widgetSinglePost .post .header .tags a {
+.headerstyle1 .hentry .header .tags a,
+.widgetSinglePost .hentry .header .tags a {
 	color: brown;
 }
 
-.headerstyle1 .post .header .tags a:hover,
-.widgetSinglePost .post .header .tags a:hover {
+.headerstyle1 .hentry .header .tags a:hover,
+.widgetSinglePost .hentry .header .tags a:hover {
 	text-decoration: none;
 }
 
 
-.headerstyle1 .post .header .admin,
-.widgetSinglePost .post .header .admin {
+.page .tags {
+	display: none !important;
+}
+
+.headerstyle1 .hentry .header .admin,
+.widgetSinglePost .hentry .header .admin {
 	position: absolute;
 	right: 0;
 	top: 1.3em;
@@ -318,7 +324,7 @@ body {
 ***************************************************/
 
 
-.post .content {
+.hentry .content {
 	clear: both;
 	font-family: Verdana, Helvetica, Arial, Bitstream Vera Sans;
 	overflow-x: auto;
@@ -493,7 +499,7 @@ body {
 }
 
 
-#panel-search .post {
+#panel-search .hentry {
 	width: 45%;
 	float: left;
 	clear: left;
@@ -523,21 +529,21 @@ body {
  **/
 
 
-.headerstyle2 .post .header {
+.headerstyle2 .hentry .header {
 	clear: both;
 	width: 100%;
 	position: relative;
 	margin-bottom: .5em;
 }
 
-.headerstyle2 .post {
+.headerstyle2 .hentry {
 	padding-bottom: .6em;
 	border-bottom: 1px dotted grey;
 	margin-bottom: .6em;
 }
 
 
-.headerstyle2  .post .header .title {
+.headerstyle2  .hentry .header .title {
 	color: orange;
 	font-size: 1.4em;
 	font-family: Arial;
@@ -548,9 +554,9 @@ body {
 }
 
 
-.headerstyle2  .post .header .author,
-.headerstyle2  .post .header .comments,
-.headerstyle2  .post .header .date {
+.headerstyle2  .hentry .header .author,
+.headerstyle2  .hentry .header .comments,
+.headerstyle2  .hentry .header .date {
 	color: rgb(128,128,128);
 	font-family: Tahoma, Arial;
 	font-size: .9em;
@@ -563,28 +569,28 @@ body {
 	display: none;
 }
 
-.headerstyle2  .post .header .long,
-.headerstyle2  .post .header .default,
-.headerstyle2  .post .header .date-updated,
-.headerstyle2  .post .header .admin,
-.headerstyle2  .post .header .tags,
-.headerstyle2  .post .header .categories {
+.headerstyle2  .hentry .header .long,
+.headerstyle2  .hentry .header .default,
+.headerstyle2  .hentry .header .date-updated,
+.headerstyle2  .hentry .header .admin,
+.headerstyle2  .hentry .header .tags,
+.headerstyle2  .hentry .header .categories {
 	display: none;
 }
 
-.headerstyle2  .post .content {
+.headerstyle2  .hentry .content {
 	clear: both;
 	font-family: Tahoma, Arial;
 	font-size: .9em;
 }
 
 
-.headerstyle2  .post .content p {
+.headerstyle2  .hentry .content p {
 	margin-top: .5em;
 	margin-bottom: .5em;
 }
 
-.headerstyle2  .post .readmore {
+.headerstyle2  .hentry .readmore {
 	font-weight: bold;
 	color: rgb(113,113,213);
 }
@@ -697,7 +703,7 @@ body {
 }
 
 
-.widgetBestPosts .post .header {
+.widgetBestPosts .hentry .header {
 	margin-bottom: 0;
 	padding-top: .5em;
 	padding-bottom: 1em;
@@ -706,28 +712,28 @@ body {
 
 
 
-.widgetBestPosts .post .header {
+.widgetBestPosts .hentry .header {
 	width: 95%;
 	margin-left: .5em;
 }
 
-.widgetBestPosts .post .header:hover {
+.widgetBestPosts .hentry .header:hover {
 	background-color: rgb(248,241,248);
 }
 
-.widgetBestPosts .post .header .categories,
-.widgetBestPosts .post .header .default,
-.widgetBestPosts .post .header .date-updated,
-.widgetBestPosts .post .header .admin,
+.widgetBestPosts .hentry .header .categories,
+.widgetBestPosts .hentry .header .default,
+.widgetBestPosts .hentry .header .date-updated,
+.widgetBestPosts .hentry .header .admin,
 .widgetBestPosts .lists .unselected {
 	display: none;
 }
 
 
 
-.widgetBestPosts .post .header .author,
-.widgetBestPosts .post .header .comments,
-.widgetBestPosts .post .header .date {
+.widgetBestPosts .hentry .header .author,
+.widgetBestPosts .hentry .header .comments,
+.widgetBestPosts .hentry .header .date {
 	position: relative;
 	top: .6em;
 	margin-right: 1em;
@@ -738,17 +744,17 @@ body {
 }
 
 
-.widgetBestPosts .post .header .label,
-.widgetBestPosts .post .header .long,
-.widgetBestPosts .post .header .default,
-.widgetBestPosts .post .header .date-updated,
-.widgetBestPosts .post .header .admin,
-.widgetBestPosts .post .header .tags,
-.widgetBestPosts .post .header .categories {
+.widgetBestPosts .hentry .header .label,
+.widgetBestPosts .hentry .header .long,
+.widgetBestPosts .hentry .header .default,
+.widgetBestPosts .hentry .header .date-updated,
+.widgetBestPosts .hentry .header .admin,
+.widgetBestPosts .hentry .header .tags,
+.widgetBestPosts .hentry .header .categories {
 	display: none;
 }
 
-.widgetBestPosts .post .header .title {
+.widgetBestPosts .hentry .header .title {
 	font-family: Arial;
 	font-size: 1em;
 	font-weight: bold;
@@ -756,12 +762,12 @@ body {
 	display: block;
 }
 
-.widgetBestPosts .post .header .title:hover {
+.widgetBestPosts .hentry .header .title:hover {
 	color: rgb(0, 0, 238);
 	text-decoration: underline;
 }
 
-.widgetBestPosts .post  {
+.widgetBestPosts .hentry  {
 	margin-bottom: 0 !important;
 }
 
@@ -929,7 +935,7 @@ body {
 	margin-top: 0;
 }
 
-.widgetFeaturedPost .post {
+.widgetFeaturedPost .hentry {
 	float: right;
 	width: 70%;
 	margin-bottom: 0 !important;
@@ -974,7 +980,7 @@ body {
 }
 
 
-.widgetFeaturedPost .post .header .title {
+.widgetFeaturedPost .hentry .header .title {
 	top: 0;
 	margin-bottom: 0;
 	font-size: 1.2em;
@@ -984,17 +990,17 @@ body {
 	display: block;
 }
 
-.widgetFeaturedPost .post .header .date,
-.widgetFeaturedPost .post .header .date-updated,
-.widgetFeaturedPost .post .header .admin,
-.widgetFeaturedPost .post .header .comments,
-.widgetFeaturedPost .post .header .author,
-.widgetFeaturedPost .post .header .tags,
-.widgetFeaturedPost .post .header .categories {
+.widgetFeaturedPost .hentry .header .date,
+.widgetFeaturedPost .hentry .header .date-updated,
+.widgetFeaturedPost .hentry .header .admin,
+.widgetFeaturedPost .hentry .header .comments,
+.widgetFeaturedPost .hentry .header .author,
+.widgetFeaturedPost .hentry .header .tags,
+.widgetFeaturedPost .hentry .header .categories {
 	display: none;
 }
 
-.widgetFeaturedPost .post .content {
+.widgetFeaturedPost .hentry .content {
 	margin-bottom: 0 ;
 	font-family: Tahoma, Arial;
 	font-size: .9em;
