@@ -807,6 +807,9 @@ input, textarea {
  *********************************************/
 
 
+
+
+
 /*********************************************
  *********************************************
  **
@@ -916,7 +919,7 @@ input, textarea {
  **/
 
 .widgetFeaturedPost {
-	/* border-bottom: 5px dotted #FFF0D0; */
+	border-bottom: 5px dotted #FFF0D0;
 }
 
 .widgetFeaturedPost .widgettitle {
@@ -1014,8 +1017,7 @@ input, textarea {
 #footer-1 .widget {
 	font-family: Verdana,Helvetica,Bitstream Vera Sans;
 	font-size: .9em;
-	margin-right: 1em;
-	margin-bottom: 1em;
+	margin: .7em;
 
 	max-width: 25%;
 
@@ -1036,8 +1038,7 @@ input, textarea {
 }
 
 #footer-1 .widget li {
-	list-style-type: none;
-	list-style-image: url(img/bullet_blue.png);
+	color: orange;
 }
 
 #footer-1 .widget a {
@@ -1068,6 +1069,42 @@ input, textarea {
 
 
 
+
+
+
+/*********************************************
+ *********************************************
+ **
+ ** Closing Info related classes
+ **
+ **/
+
+.widgetClosingInfo {
+	width: 100%;
+	background-color: #FFF0D0;
+	margin-top: 0;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+}
+
+
+.widgetClosingInfo p {
+	text-align: center;
+	font-size: .8em;
+	color: grey;
+	margin: 0;
+	padding: 0;
+}
+
+.widgetClosingInfo a {
+	color: green;
+}
+
+/**
+ ** End of Closing Info related classes
+ **
+ *********************************************
+ *********************************************/
 
 
 
