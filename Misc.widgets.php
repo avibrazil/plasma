@@ -362,6 +362,123 @@ function ExpandableBanner_adminSetup() {
 
 
 
+$Search=array();
+$Search['baseID']           = "compactsearch";
+$Search['baseName']         = __("Compact Search",'theme');
+$Search['wpOptions']        = "widget_compactsearch";
+$Search['cssClassName']     = "widgetCompactSearch";
+$Search['renderCallback']   = "Search_render";
+$Search['methodInit']       = "Search_init";
+$Search['methodSetup']      = "Search_setup";
+$Search['methodRegister']   = "Search_register";
+$Search['methodAdminSetup'] = "Search_adminSetup";
+
+
+add_action('init', $Search['methodInit'], 1);
+
+
+
+
+function Search_render($args,$instance) {
+	global $Search;
+
+	extract($args);
+	$options = get_option($Search['wpOptions']);
+
+	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");?>
+
+	<form id="searchform" method="get" action="<?php bloginfo('home'); ?>">
+		<input type="text" name="s" id="s" value="<?php _e('Type and hit enter to search','theme'); ?>" onfocus="if (this.value == '<?php _e('Type and hit enter to search','theme'); ?>') {this.value = '';}" onblur="if (this.value == '') {this.value = '<?php _e('Type and hit enter to search','theme'); ?>';}" />
+	</form><?php
+
+	echo("$after_widget <!-- id=$instance -->\n");
+}
+
+
+
+
+function Search_register($instance, $name) {
+	global $Search;
+	Widget_register($Search,$instance,$name);
+}
+
+
+function Search_init() {
+	global $Search;
+	Widget_init($Search);
+}
+
+
+
+function Search_setup() {
+	global $Search;
+	Widget_setup($Search);
+}
+
+
+
+function Search_adminSetup() {
+	global $Search;
+	Widget_adminSetup($Search);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $ClosingInfo=array();
 $ClosingInfo['baseID']           = "closinginfo";
 $ClosingInfo['baseName']         = __("Closing Info",'theme');

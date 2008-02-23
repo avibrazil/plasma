@@ -249,6 +249,11 @@ function MultiPost_render($args,$instance) {
 		$finalSubTitle1='<h3 class="archive-subtitle">';
 		$finalSubTitle1.=__("More recent first",'theme');
 		$finalSubTitle1.='</h3>';
+
+		$finalSubTitle2=sprintf('<a class="subscribe" href="%s&feed=rss2">%s</a>',
+					$_SERVER['REQUEST_URI'],
+					__('Subscribe to this search terms','theme'));
+
 	} elseif (is_single()) {
 		$finalTitle="";
 	} else {
@@ -280,9 +285,12 @@ function MultiPost_render($args,$instance) {
 	}
 
 	echo("<div class=\"$cssclass\">\n");
+//	$options['alt']=1;
 	while (have_posts()) {
 		the_post();
 		SinglePost_render($options,0);
+//		if ($options['alt']==1) $options['alt']=0;
+//		else $options['alt']=1;
 	}
 	echo("</div>");
 
