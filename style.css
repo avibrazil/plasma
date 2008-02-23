@@ -109,7 +109,9 @@ body {
 
 .widgetSinglePost .hentry {
 	padding-bottom: 1em;
-	border-bottom: 1px dotted grey;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: lightgrey;
 }
 
 
@@ -117,9 +119,10 @@ body {
 .widgetSinglePost .hentry .header {
 	width: 100%;
 	position: relative;
-	float: left;
 	padding-bottom: 1em;
-	border-bottom: 1px dotted grey;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: lightgrey;
 }
 
 .headerstyle1 .hentry .header .categories,
@@ -613,6 +616,13 @@ body {
  **
  **/
 
+.widgetNavigation {
+	text-align: center;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: lightgrey;
+}
+
 .widgetNavigation a {
 	font-size: 1.2em;
 	font-weight: bold;
@@ -862,21 +872,25 @@ body {
 
 .widgetComments .index {
 	display: table-cell;
-	width: 3%;
+	float: left;
+	width: 4%;
 	text-align: right;
-	padding-right: 2em;
+	border-right: 1em solid white;
 }
 
 
 .widgetComments .metadata {
 	display: table-cell;
-	width: 15%;
-	margin-right: 1em;
+	float: left;
+	width: 24%;
+	border-right: 1em solid white;
 }
 
 .widgetComments .content {
 	display: table-cell;
-	width: 69%;
+	float: left;
+	width: 65%;
+	overflow-x: auto;
 }
 
 .widgetComments .metadata .author,
@@ -1043,7 +1057,7 @@ body {
 }
 
 #footer-1 .widget ul {
-	padding-left: 1.5em;
+/*	padding-left: 1.5em; */
 }
 
 #footer-1 .widget li {
@@ -1156,6 +1170,9 @@ body {
  **
  **/
 
+li {
+	padding-left: 0;
+}
 
 .widget_categories {
 	font-family: Verdana, Helvetica, Bitstream Vera Sans;
@@ -1166,7 +1183,7 @@ body {
 }
 
 .widget_categories ul {
-	padding-left: 1em;
+/*	padding-left: 1em; */
 }
 
 .widget_categories a {
@@ -1206,6 +1223,9 @@ body {
  **
  **/
 
+.widgetRelated {
+}
+
 .widgetRelated .widgettitle {
 	font-size: 1.7em !important;
 	color: orange;
@@ -1229,28 +1249,6 @@ body {
 
 /**
  ** End of widget_related related classes
- **
- *********************************************
- *********************************************/
-
-
-
-
-
-/*********************************************
- *********************************************
- **
- ** widget_navigation related classes
- **
- **/
-
-.widgetNavigation {
-	text-align: center;
-}
-
-
-/**
- ** End of widget_navigation related classes
  **
  *********************************************
  *********************************************/
@@ -1320,6 +1318,10 @@ body {
 	margin: .4em;
 }
 
+ul {
+	margin-left: 0;
+	padding-left: 1.5em;
+}
 
 .widgetMain {
 	background-color: white;
@@ -1368,4 +1370,9 @@ body {
 	font-family: Helvetica, Arial;
 	font-size: 1.2em;
 	font-weight: bold;
+
+	/* The values were copied from firefox' default to H2, to make
+	   them look the same on IE */
+	margin-top: .83em;
+	margin-bottom: .83em;
 }
