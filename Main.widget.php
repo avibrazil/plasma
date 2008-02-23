@@ -65,7 +65,7 @@ echo("</pre>\n");
 	$main=get_option($Main['wpOptions']);
 
 
-	if (is_single()) $realid='panel-single';
+	if (is_single() || is_page()) $realid='panel-single';
 	else if (is_home()) $realid='panel-home';
 	else if (is_category()) $realid='panel-category';
 	else if (is_search()) $realid='panel-search';
