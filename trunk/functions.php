@@ -30,6 +30,9 @@ function plasma_categoryDescription_translate($cat_desc) {
 add_filter('category_description','plasma_categoryDescription_translate');
 
 
+
+
+
 /**
  * General single widget registration logic.
  *
