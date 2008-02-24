@@ -180,7 +180,7 @@ function selectTab(widgetID,tabIndex) {
 	foreach ($options[$instance]['tabs'] as $tab) {
 		if ($index==0) $class="selected";
 		else $class="unselected";
-		echo("<li class=\"$class\" id=\"$instance" . "-tab-" . $index . "\" onclick=\"selectTab('$instance',$index);\">" . $tab['title'] . "</li>\n");
+		echo("<li class=\"$class\" id=\"$instance" . "-tab-" . $index . "\" onclick=\"selectTab('$instance',$index);\">" . __($tab['title'],'personal') . "</li>\n");
 		$index++;
 	}
 	echo("</div>\n");

@@ -15,11 +15,19 @@ $Id$
 // various points of your WP blog
 
 // Initialize internationalization and localization (a.k.a. tropicalization)
-load_plugin_textdomain('theme','wp-content/themes/soleilpro/languages');
-load_plugin_textdomain('personal','wp-content/themes/soleilpro/languages');
+load_plugin_textdomain('theme','wp-content/themes/plasma/languages');
+load_plugin_textdomain('personal','wp-content/themes/plasma/languages');
 
 
 
+/**
+ * A filter for category description translation.
+ */
+function plasma_categoryDescription_translate($cat_desc) {
+	return __($cat_desc,'personal');
+}
+
+add_filter('category_description','plasma_categoryDescription_translate');
 
 
 /**
