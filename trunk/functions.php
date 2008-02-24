@@ -77,6 +77,21 @@ function Widget_setup(array $current) {
 }
 
 
+function Widget_exportOptionsUnfiltered(array $current) {
+	return var_export($current['wpOptions'],true);
+}
+
+
+function Widget_exportOptions(array $current) {
+	if ($current['methodExportOptions']) return call_user_func_array($current['methodExportOptions']);
+	else return Widget_exportOptionsUnfiltered($current,true);
+}
+
+
+
+
+
+
 
 /**
  * General logic to register widgets based on their parameters fetched from DB.
