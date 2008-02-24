@@ -78,8 +78,8 @@ msgstr "Lugares que visitei ou quero ir."
 msgid "Food, drink, wine, recipes, places to eat."
 msgstr "Comida, bebida, vinho, receitas, lugares para comer."
 
-msgid "Blogging experiences, plugins, templates, etc."
-msgstr "Experiências com blogs, plugins, temas, etc."
+msgid "Blogging experiences, Web 2.0, blogging software, etc."
+msgstr "Experiências com blogs, Web 2.0, software para blog, etc."
 
 msgid "Misc"
 msgstr "Miscelânea"
@@ -136,4 +136,13 @@ msgstr "Combata o Aquecimento Global"
 
 msgid "Hi-Fi Music Podcasts"
 msgstr "Podcasts Hi-Fi"
+
+
+# Best Posts widget tabs
+msgid "Best of Best"
+msgstr "Melhor do Melhor"
+
+msgid "Technology"
+msgstr "Tecnologia"
+
 
