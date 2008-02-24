@@ -1,5 +1,5 @@
 
-CATALOGS=theme-pt.po theme-fr.po theme-de.po personal-pt.po
+CATALOGS=theme-pt.po personal-pt.po
 
 .SUFFIXES: .po .mo
 
@@ -7,6 +7,9 @@ CATALOGS=theme-pt.po theme-fr.po theme-de.po personal-pt.po
 	msgfmt -c -v -o $@ $<
 
 all: ${CATALOGS:.po=.mo}
+
+po:
+	xgettext -j --keyword=__ --keyword=_e -L PHP --output=theme-pt.po ../*php
 
 clean:
 	-rm *.mo

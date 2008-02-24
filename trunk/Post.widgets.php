@@ -219,10 +219,11 @@ function MultiPost_render($args,$instance) {
 	}
 
 	if (is_category() || is_tag()) {
-		if (is_tag()) $label="tag";
-		else $label="category";
+		if (is_tag())
+			$finalTitle=sprintf(__("Archive for tag &#8220;%s&#8221;",'theme'),__(single_cat_title('',false),'personal'));
+		else
+			$finalTitle=sprintf(__("Archive for category &#8220;%s&#8221;",'theme'),__(single_cat_title('',false),'personal'));
 
-		$finalTitle=sprintf(__("Archive for $label &#8220;%s&#8221",'theme'),__(single_cat_title('',false),'personal'));
 
 		$tmpcat=get_query_var('cat');
 		$myCategory=get_category($tmpcat);
@@ -245,7 +246,7 @@ function MultiPost_render($args,$instance) {
 	} elseif (is_author()) {
 		$finalTitle=sprintf(__("Archive for author %s",'theme'),$author);
 	} elseif (is_search()) {
-		$finalTitle=sprintf(__("Search results for &#8220;%s&#8221",'theme'),wp_specialchars($s));
+		$finalTitle=sprintf(__("Search results for &#8220;%s&#8221;",'theme'),wp_specialchars($s));
 		$finalSubTitle1='<h3 class="archive-subtitle">';
 		$finalSubTitle1.=__("More recent first",'theme');
 		$finalSubTitle1.='</h3>';
@@ -364,11 +365,10 @@ How to render posts:<br/>
 
 function FeaturedPost_render($args,$instance) {
 	global $FeaturedPost;
-	$current=$FeaturedPost;
 
 	extract($args);
 
-	$myoptions=get_option($current['wpOptions']);
+	$myoptions=get_option($FeaturedPost['wpOptions']);
 
 	$query=array();
 	$query['showposts']=1;
@@ -394,7 +394,7 @@ function FeaturedPost_render($args,$instance) {
 	echo(Panel_insert_widget_style($before_widget,$myoptions[$instance]) . "\n");?>
 	<div class="meta"><?php
 		echo($before_title);
-		echo($current['baseName']);
+		echo($FeaturedPost['baseName']);
 		echo($after_title . "\n");
 
 		SinglePost_renderPostHeader($args,$instance);?>
@@ -493,7 +493,7 @@ function SinglePost_renderPost($args,$instance) {
 			the_excerpt_reloaded(50,'<a><p><i>','excerpt', false);
 		} else the_excerpt();?>
 		<a class="readmore" href="<?php the_permalink() ?>" rel="bookmark" title="<?php echo sprintf(__('%s: read full post','theme'), get_the_title()); ?>">
-			<?php _e("Click here to continue reading…",'theme'); ?>
+			<?php _e("Click here to continue reading&#8230;",'theme'); ?>
 		</a><?php
 	} else if ($content!="no") {
 		the_content();

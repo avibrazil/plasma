@@ -44,7 +44,7 @@ function CommentForm_render($args,$instance) {
 		<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
 		<?php if ( $user_ID ) {
 			echo("<p>");
-			printf(__("Logged in as <a href=\"%s\">%s</a>. <a href=\"%s\">Logout »</a>",'theme'),
+			printf(__("Logged in as <a href=\"%s\">%s</a>. <a href=\"%s\">Logout &#187;</a>",'theme'),
 				get_option('siteurl')."/wp-admin/profile.php",
 				__($user_identity,'personal'),
 				get_option('siteurl')."/wp-login.php?action=logout");
