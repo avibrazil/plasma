@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: theme-pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-24 08:40-0300\n"
-"PO-Revision-Date: 2008-02-24 08:41-0300\n"
+"POT-Creation-Date: 2008-02-24 09:35-0300\n"
+"PO-Revision-Date: 2008-02-24 09:40-0300\n"
 "Last-Translator: Avi Alkalay <avibrazil@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,11 +28,6 @@ msgstr "Melhor"
 #: ../BestPosts.widget.php:138
 msgid "Featured"
 msgstr "Especial"
-
-#: ../BestPosts.widget.php:144
-#, php-format
-msgid "Best of %s"
-msgstr "O Melhor de %s "
 
 #: ../Comments.widget.php:10
 msgid "Comment Form"
@@ -74,7 +69,7 @@ msgstr "Você pode usar esses tags:"
 
 #: ../Comments.widget.php:75
 msgid "Submit Comment"
-msgstr "Mandar Comentário"
+msgstr "Enviar Comentário"
 
 #: ../Comments.widget.php:97
 msgid "Flow of Comments"
@@ -181,7 +176,7 @@ msgid ""
 msgstr ""
 "Tema: <a href=\"http://avi.alkalay.net/2006/11/soleil-theme-for-wordpress."
 "html\" title=\"Movido a Plasma, seu último tema do WordPress\">Plasma, seu "
-"último thema do WordPress</a> by <a href=\"http://avi.alkalay.net\" title="
+"último thema do WordPress</a> por <a href=\"http://avi.alkalay.net\" title="
 "\"Visite o Blógue do Avi\">Avi Alkalay</a>."
 
 #: ../Misc.widgets.php:521
@@ -218,7 +213,7 @@ msgstr "Fluxo de Posts"
 
 #: ../Post.widgets.php:237 ../Post.widgets.php:238
 msgid "Subscribe to this tag or category"
-msgstr "Assine este tag ou categoria"
+msgstr "Assine esta tag ou categoria"
 
 #: ../Post.widgets.php:240 ../Post.widgets.php:242 ../Post.widgets.php:244
 #: ../Post.widgets.php:241 ../Post.widgets.php:243 ../Post.widgets.php:245
@@ -340,4 +335,12 @@ msgstr "Arquivo para a categoria &#8220;%s&#8221;"
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Resultados de busca por &#8220;%s&#8221;"
+
+#: ../BestPosts.widget.php:144
+msgid "The Best Content Under This Category"
+msgstr "O Melhor Conteúdo Nesta Categoria"
+
+#: ../BestPosts.widget.php:145
+msgid "The Best Content on This Site"
+msgstr "O Melhor Conteúdo Deste Site"
 
