@@ -163,32 +163,6 @@ function NavigationLinks_render($args,$id) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $ExtendedText=array();
 $ExtendedText['baseID']           = "etext";
 $ExtendedText['baseName']         = __("Extended Text",'theme');
@@ -421,54 +395,6 @@ function Search_adminSetup() {
 	global $Search;
 	Widget_adminSetup($Search);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
