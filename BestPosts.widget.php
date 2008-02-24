@@ -141,7 +141,8 @@ function BestPosts_render($args,$instance) {
 
 	echo(Panel_insert_widget_style($before_widget,$options[$instance]) . "\n");
 	echo($before_title);
-	printf(__("Best of %s",'theme'),__(get_bloginfo('name'),'personal'));
+	if (is_category() || is_tag()) _e("The Best Content Under This Category",'theme');
+	else _e("The Best Content on This Site",'theme');
 	echo($after_title . "\n");?>
 
 
