@@ -83,8 +83,9 @@ function Widget_exportOptionsUnfiltered(array $current) {
 
 
 function Widget_exportOptions(array $current) {
-	if ($current['methodExportOptions']) return call_user_func_array($current['methodExportOptions']);
-	else return Widget_exportOptionsUnfiltered($current,true);
+	if ($current['methodExportOptions'])
+		return call_user_func_array($current['methodExportOptions']);
+	else return Widget_exportOptionsUnfiltered($current);
 }
 
 
