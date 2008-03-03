@@ -5,7 +5,7 @@
  * Will generate a sort of PHP dump of the Widget admin page.
  *
  *
- * $Id: BestPosts.widget.php 66 2008-02-24 13:25:03Z aviram $
+ * $Id$
  */
 
 $options=array('widget_bestposts',
