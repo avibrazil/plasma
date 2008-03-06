@@ -4,9 +4,35 @@
  * positioned in Plasma.
  * Will generate a sort of PHP dump of the Widget admin page.
  *
+ * Incomplete logic, structure and functioanlity.
+ *
  *
  * $Id$
  */
+
+/*
+
+shell> mysqldump -q -t -u blog -p -h floripa.local wordpress wp_options \
+	--where="option_name in (
+	'widget_bestposts',
+	'widget_commentblock',
+	'widget_commentform',
+	'widget_comments',
+	'widget_compactsearch',
+	'widget_closinginfo',
+	'widget_etext',
+	'widget_expandablebanner',
+	'widget_featuredpost',
+	'widget_multipost',
+	'widget_main',
+	'widget_navigation',
+	'widget_panel',
+	'widget_related',
+	'widget_singlepost',
+	'widget_wpinspector',
+	'sidebars_widgets')"
+*/
+
 
 $options=array('widget_bestposts',
 	"widget_singlepost",
