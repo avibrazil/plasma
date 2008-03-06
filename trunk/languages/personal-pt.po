@@ -62,6 +62,16 @@ msgstr "Metafísica"
 msgid "Spirituality and the limits of science."
 msgstr "Espiritualidade e limites da ciência."
 
+msgid "Multimedia"
+msgstr "Multimídia"
+
+msgid "Multimedia is the last frontier of human art and inspiration related to computers. These are my technical findings about it."
+msgstr "Multimídia é a última fronteira da arte e inspiração humana relacionada a computadores. Essas são as minhas descobertas técnicas sobre isso."
+
+msgid "Ecology & Environment"
+msgstr "Ecologia e Meio Ambiente"
+
+
 
 msgid "Music & Podcasts"
 msgstr "Música & Podcasts"
@@ -87,8 +97,29 @@ msgstr "Miscelânea"
 msgid "Posts that fit nowhere."
 msgstr "Coisas que não cabem em lugar nenhum."
 
+msgid "Info & Biz Technology"
+msgstr "Technologia da Informação e de Negócios"
+
 msgid "Information Technology for business."
 msgstr "Tecnologia da Informação para negócio."
+
+msgid "Linux Journal Index"
+msgstr "Índice Linux Journal"
+
+msgid "Portuguese translation of the LJ Index section on Linux Journal Magazine, by Doc Searls."
+msgstr "Traduções da sessão LJ Index da revista Linux Journal, por Doc Searls."
+
+msgid "Mobility"
+msgstr "Mobilidade"
+
+msgid "Experiences in a digital mobile life."
+msgstr "Experiências de um vida digital móvel."
+
+msgid "OpenDocument Format"
+msgstr "Formato OpenDocument"
+
+msgid "All about OpenDocument Format, its ecosystem and competition."
+msgstr "Tudo sobre o Formato OpenDocument, seu ecossistema e concorrência."
 
 msgid "Ramblings, essays and tips about Linux and the Open Source universe."
 msgstr "Pensamentos, artigos e dicas sobre Linux e o universo Open Source."
@@ -104,6 +135,19 @@ msgstr "Podcast: geral"
 
 msgid "General wonderful music, all styles, from all parts of the world."
 msgstr "Músicas maravilhosas, todos os estilos, de todas as partes do mundo."
+
+msgid "Central Asia 2007"
+msgstr "Ásia Central 2007"
+
+msgid "All I could collect from a trip to Uzbekistan, Kyrgystan and Kashgar in 2007."
+msgstr "Tudo que pude coletar em uma viagem para o Uzbequistão, Kirguistão e Kashgar em 2007."
+
+msgid "Vegetarianism"
+msgstr "Vegetarianismo"
+
+msgid "My experiences being a vegetarian."
+msgstr "Minhas experiências como vegetariano."
+
 
 # About the author
 msgid "Avi Alkalay is an Open Standards, Open Source and Linux consultant at IBM Brazil."
