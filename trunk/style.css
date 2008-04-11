@@ -857,17 +857,17 @@ body {
 .widgetComments .trackback,
 .widgetComments .comment  {
 	display: table;
-	width: 100%;
+	width: 95%;
 
 	margin-bottom: .5em;
 	padding-bottom: .5em;
 
-	border-bottom: 1px solid rgb(221, 221, 221);
+	border: 2px solid rgb(221, 221, 221);
 }
 
 
 .widgetComments .byuser {
-	background-color: #e5e5e5;
+	border-color: orange;
 }
 
 .widgetComments .index {
@@ -919,8 +919,7 @@ body {
 
 .widgetComments .content p {
 	margin-top: 0;
-	font-family: Helvetica, Verdana, Arial;
-	font-size: .9em;
+	font-family: Calibri, Helvetica, Verdana, Arial;
 }
 
 
