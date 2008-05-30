@@ -130,7 +130,7 @@ body {
 	left: 0;
 	top: 0;
 	position: absolute;
-	font-family: Calibri, Verdana, Arial, Bitstream Vera Sans
+	font-family: Verdana, Arial, Bitstream Vera Sans
 }
 
 .headerstyle1 .hentry .header .categories a,
@@ -919,7 +919,7 @@ body {
 
 .widgetComments .content p {
 	margin-top: 0;
-	font-family: Calibri, Helvetica, Verdana, Arial;
+	font-family: Helvetica, Verdana, Arial;
 }
 
 
