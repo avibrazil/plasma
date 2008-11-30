@@ -42,7 +42,10 @@ function CommentForm_render($args,$instance) {
 		echo("</p>");
 	} else {?>
 		<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
+		<?php if (class_exists('Yawasp')) { Yawasp::getName('blank'); } ?>
 		<?php if ( $user_ID ) {
+			// To prevent spam, name of fields are dynamic now with the help of Yawasp plugin.
+			// http://www.svenkubiak.de/yawasp-en/ & http://wordpress.org/extend/plugins/yawasp/
 			echo("<p>");
 			printf(__("Logged in as <a href=\"%s\">%s</a>. <a href=\"%s\">Logout &#187;</a>",'theme'),
 				get_option('siteurl')."/wp-admin/profile.php",
@@ -51,25 +54,25 @@ function CommentForm_render($args,$instance) {
 			echo("</p>");
 		} else { ?>
 			<p>
-				<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="22" tabindex="1" />
-				<label for="author"><small><?php _e('Name','theme');
+				<input type="text" name="<?php if (class_exists('Yawasp')) { Yawasp::getName('author'); } else { echo "author"; } ?>" id="author" value="<?php echo $comment_author; ?>" size="22" tabindex="1" />
+				<label for="<?php if (class_exists('Yawasp')) { Yawasp::getName('author'); } else { echo "author"; } ?>"><small><?php _e('Name','theme');
 					if ($req) _e('(required)','theme'); ?>
 				</small></label>
 			</p>
 			<p>
-				<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="22" tabindex="2" />
-				<label for="email"><small><?php _e('E-mail (will not be published)','theme');
+				<input type="text" name="<?php if (class_exists('Yawasp')) { Yawasp::getName('email'); } else { echo "email"; } ?>" id="email" value="<?php echo $comment_author_email; ?>" size="22" tabindex="2" />
+				<label for="<?php if (class_exists('Yawasp')) { Yawasp::getName('email'); } else { echo "email"; } ?>"><small><?php _e('E-mail (will not be published)','theme');
 					if ($req) _e('(required)','theme'); ?>
 				</small></label>
 			</p>
 			<p>
-				<input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="22" tabindex="3" />
-				<label for="url"><small><?php _e('Website','theme'); ?></small></label>
+				<input type="text" name="<?php if (class_exists('Yawasp')) { Yawasp::getName('url'); } else { echo "url"; } ?>" id="url" value="<?php echo $comment_author_url; ?>" size="22" tabindex="3" />
+				<label for="<?php if (class_exists('Yawasp')) { Yawasp::getName('url'); } else { echo "url"; } ?>"><small><?php _e('Website','theme'); ?></small></label>
 			</p>
 		<?php } ?>
 			<p><small><strong>XHTML:</strong> <?php _e('You can use these tags:','theme');  echo allowed_tags(); ?></small></p>
 			<p>
-				<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
+				<textarea name="<?php if (class_exists('Yawasp')) { Yawasp::getName('comment'); } else { echo "comment"; } ?>" id="comment" rows="10" tabindex="4"></textarea>
 			</p>
 			<p>
 				<input name="submit" type="submit" id="submit" tabindex="5" value="<?php _e('Submit Comment','theme'); ?>" />

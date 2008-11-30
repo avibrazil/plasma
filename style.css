@@ -1044,6 +1044,9 @@ body {
 	max-width: 25%;
 	width: 20%;
 
+	float: left;
+/*	clear: left; */
+
 	background-color: #FFF7E7;
 	padding-left: 1em;
 	padding-right: 1em;

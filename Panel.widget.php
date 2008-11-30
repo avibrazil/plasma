@@ -174,7 +174,7 @@ function Panel_register($id,$name,$horizontal=true) {
 	if ($horizontal) $params['horizontal']=1;
 
 
-	// Creates a widget wrapper than can receive embedded style.
+	// Creates a widget wrapper that can receive embedded style.
 	// The empty style="" will be subtituted by what user configures
 	// in the widgets admin interface.
 	$params['before_widget']='<div id="%1$s" class="widget %2$s" style="">';
