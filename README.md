@@ -1,6 +1,8 @@
-# plasma
+# Plasma
 
 This a successful attempt to make a WordPress theme that duplicates the http://ProBlogger.net front page information architecture.
+
+![Screenhot of Plasma](http://avi.alkalay.net/wp-content/themes/plasma/screenshot.png "Screenhot of Plasma")
 
 Key features for the front page are:
 
