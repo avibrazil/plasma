@@ -1,4 +1,4 @@
-# Plasma
+# Plasma “best of your blog” WordPress theme
 
 This a successful attempt to make a WordPress theme that duplicates the http://ProBlogger.net front page information architecture.
 
